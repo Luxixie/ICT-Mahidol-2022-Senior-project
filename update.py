@@ -1,6 +1,6 @@
 import mysql.connector
 import yfinance as yf
-
+#update from list
 li = [ '2S', '3K-BAT', '7UP', 'A', 'AAI', 'AAV', 'ACC', 'ACE', 'ACG', 'ADVANC', 
 'AEONTS', 'AFC', 'AGE', 'AH', 'AHC', 'AI', 'AIE', 'AIMCG', 'AIMIRT', 'AIT',
 'AJ', 'AJA', 'AKR', 'ALLA', 'ALLY', 'ALT', 'ALUCON', 'AMANAH', 'AMARIN', 'AMATA', 

@@ -1,6 +1,6 @@
 import mysql.connector
 import yfinance as yf
-
+#update one by one data 
 li = [ 'BTG']
 
 mydb = mysql.connector.connect(
