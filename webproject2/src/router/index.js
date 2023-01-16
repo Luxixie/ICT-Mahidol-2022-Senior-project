@@ -26,9 +26,22 @@ const router = new Router({
       }
       ,
       {
+        path:'/sendemail',
+        component:()=>import('../pages/login/sendemailpage.vue')
+      },
+      {
           path:'/newpassword',
           component:()=>import('../pages/login/newpasswordPage.vue')
-      }
+      },
+      {
+        path:'/completeresetpassword',
+        component:()=>import('../pages/login/completeresetpassword.vue')
+      },
+      {
+        path:'/home2',
+        component:()=>import('../pages/home/homePage2.vue')
+      },
+
 
     ]
 

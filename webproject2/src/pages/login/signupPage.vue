@@ -60,6 +60,7 @@ export default {
     methods: {
         TryLogin() {
             console.log('submit!');
+            this.$router.push('/home2')
         },
         GoRegisterPage() {
             console.log('submit!');

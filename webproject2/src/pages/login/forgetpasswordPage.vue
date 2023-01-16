@@ -40,6 +40,7 @@ export default {
     methods: {
         Tryforgetpassword() {
             console.log('submit!');
+            this.$router.push('/sendemail')
         },
         GoRegisterPage() {
             console.log('submit!');

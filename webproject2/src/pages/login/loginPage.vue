@@ -13,7 +13,7 @@
                 <el-input id="login-input" placeholder="Password" show-password v-model="form.password" ></el-input>
             </el-form-item>
             <el-form-item style="margin: 0px; padding: 0px;">
-                <router-link  to='./signup' style="float: right; color: white;">Forget Password?</router-link>
+                <router-link  to='/forgetpassword' style="float: right; color: white;">Forget Password?</router-link>
             </el-form-item>
             <el-form-item>
                 <el-button round type="warning" @click="TryLogin" style="width: 45%; float: left;">Login</el-button>
@@ -35,10 +35,11 @@ export default {
     },
     methods: {
         TryLogin() {
-            this.$router.push("/")
+            this.$router.push("./home2")
         },
         GoRegisterPage() {
             console.log('submit!');
+            this.$router.push("./signup")
         }
     }
 }
