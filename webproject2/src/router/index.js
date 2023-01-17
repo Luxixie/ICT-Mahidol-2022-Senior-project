@@ -41,6 +41,14 @@ const router = new Router({
         path:'/home2',
         component:()=>import('../pages/home/homePage2.vue')
       },
+      {
+        path:'/opentest',
+        component:()=>import('../pages/knowledge/opentest.vue')
+      },
+      {
+        path:'/test',
+        component:()=>import('../pages/knowledge/test.vue')
+      },
 
 
     ]
