@@ -13,7 +13,7 @@
         </el-row>
         <el-row id="home-bt-row">
             <el-col class="home-bts" :span="6" :offset="6">
-                <el-button class="homebt" type="warning" round>Market Infomation</el-button>
+                <el-button class="homebt" type="warning" round @click="GoMarket">Market Infomation</el-button>
             </el-col>
             <el-col class="home-bts" :span="6">
                 <el-button class="homebt" type="warning" round>Stock knowledge</el-button>
@@ -24,6 +24,14 @@
 </template>
 
 <script>
+export default {
+    methods: {
+        GoMarket(){
+            this.$router.push('/markethome')
+        }
+
+    }
+}
 </script>
 
 <style>

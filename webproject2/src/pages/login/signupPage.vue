@@ -2,7 +2,7 @@
     <div style="margin-top: 5%;">
         <el-row>
             <el-col :span="12" :offset="10">
-                <h1 style="color: #f5efe0;">Regist your Account</h1>
+                <h1 style="color: #f5efe0;">Register an account</h1>
             </el-col>
         </el-row>
         <el-form id="regist-form" ref="form" :model="form">
@@ -31,20 +31,20 @@
             <el-form-item>
 
             </el-form-item>
-            <el-form-item>
+            <el-form-item width="500px">
                 <el-popover placement="bottom" title="Opening test" width="800" trigger="click" >
-                <el-button slot="reference" round type="warning" style="width: 45%; margin-left: 25%;">Create User</el-button>
-                <en-row>
+                <el-button slot="reference" round type="warning" style="width: 100%; margin-left: 25%;">Create User</el-button>
+                <el-row>
                     <span>Do you want to learn some stock knowledge first?</span>
-                </en-row>
-                <en-row>
-                    <en-col>
+                </el-row>
+                <el-row>
+                    <el-col>
                         <el-button @click = "Tryopentest">YES</el-button>
-                    </en-col>
-                    <en-col>
+                    </el-col>
+                    <el-col>
                         <el-button  @click = "TryLogin">NO</el-button>
-                    </en-col>
-                </en-row>
+                    </el-col>
+                </el-row>
                 
                 </el-popover>
             </el-form-item>

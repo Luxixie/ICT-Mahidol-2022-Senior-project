@@ -49,6 +49,10 @@ const router = new Router({
         path:'/test',
         component:()=>import('../pages/knowledge/test.vue')
       },
+      {
+        path:'/markethome',
+        component:()=>import('../pages/marketinform/markethome.vue')
+      },
 
 
     ]
