@@ -11,10 +11,10 @@
             </el-col>
         </el-row>
         <el-form id="newpassword-form" ref="form" :model="form">
-            <el-form-item>
+            <el-form-item label="Password" style="font-weight: bold; color: aliceblue;">
                 <el-input id="newpassword-input" placeholder="Password" v-model="form.password"></el-input>
             </el-form-item>
-            <el-form-item>   
+            <el-form-item  label="Confirm Password" style="font-weight: bold; color: aliceblue;">   
                 <el-input id="newpassword-input" placeholder="Confirm Password" v-model="form.password2"/>
             </el-form-item>
             <el-form-item>

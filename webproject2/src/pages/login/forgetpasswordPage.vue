@@ -11,7 +11,7 @@
             </el-col>
         </el-row>
         <el-form id="forgetpassword-form" ref="form" :model="form">
-            <el-form-item>
+            <el-form-item label="Email Address" style="font-weight: bold; color: aliceblue;">
                 <el-input id="forgetpassword-input" placeholder="Email Address" v-model="form.name"></el-input>
             </el-form-item>
             <el-form-item>

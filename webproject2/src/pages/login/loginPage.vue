@@ -5,50 +5,76 @@
                 <h1 id="login-title">Log in</h1>
             </el-col>
         </el-row>
-        <el-form id="login-form" ref="form" :model="form">
-            <el-form-item>
-                <el-input id="login-input" placeholder="User Name or User ID" v-model="form.username"></el-input>
+        <el-form  :label-position="left" id="login-form" ref="loginform" :model="loginform">
+            
+            <el-form-item label="Email" style="font-weight: bold; color: aliceblue;">
+               
+                <el-input  id="login-input" placeholder="Email" v-model="loginform.username"></el-input>
             </el-form-item>
-            <el-form-item style="margin-bottom: 0px;">
-                <el-input id="login-input" placeholder="Password" show-password v-model="form.password" ></el-input>
+            <el-form-item style="margin-bottom: 0px;font-weight: bold; color: aliceblue;" label="Password" >
+                <el-input id="login-input" placeholder="Password" show-password v-model="loginform.password"></el-input>
             </el-form-item>
             <el-form-item style="margin: 0px; padding: 0px;">
-                <router-link  to='/forgetpassword' style="float: right; color: white;">Forget Password?</router-link>
+                <router-link to='./signup' style="float: right; color: white;">Forget Password?</router-link>
             </el-form-item>
             <el-form-item>
                 <el-button round type="warning" @click="TryLogin" style="width: 45%; float: left;">Login</el-button>
-                <el-button class="login-bt" round @click="GoRegisterPage" style="width: 45%; float:right;">Register</el-button>
+                <el-button class="login-bt" round @click="GoRegisterPage"
+                    style="width: 45%; float:right;">Register</el-button>
             </el-form-item>
         </el-form>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
-            form: {
+            loginform: {
                 username: '',
                 password: '',
-    
             }
         }
     },
     methods: {
         TryLogin() {
-            this.$router.push("./home2")
+            this.$refs.loginform.validate((valid) => {
+                if (valid) { //valid成功为true，失败为false
+                    //去后台验证用户名密码，并返回token
+                    axios.post('http://127.0.0.1:8088/login', this.loginform).then(res => {
+                        console.log(res.data)
+                        if (res.data.state == 1) {
+                            //存储token到本地
+                            this.$store.commit("SET_TOKEN", res.data.vData.token);
+                            this.$store.commit("SET_UserName", res.data.vData.name);
+                            //跳转到主页
+                            this.$router.replace('/home');
+                        } else {
+                            alert('Incorrect user name or password!');
+                            return false;
+                        }
+                    });
+                } else {
+                    console.log('Check failure');
+                    return false;
+                }
+            });
+
         },
         GoRegisterPage() {
-            console.log('submit!');
-            this.$router.push("./signup")
+            this.$router.push("/signup");
         }
-    }
+    },
+
 }
+
 </script>
 
 <style>
-.login-bt{
- margin-left: 30px;
+.login-bt {
+    margin-left: 30px;
 }
+
 #login-input {
     background: #1f3d70;
     border-color: #1f3d70;
@@ -61,7 +87,7 @@ export default {
 
 #login-form {
     margin-left: 38%;
-    margin-right:38%;
+    margin-right: 38%;
 }
 
 #login-div {

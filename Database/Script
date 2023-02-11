@@ -1,0 +1,13 @@
+CREATE DATABASE `stockproject` ;
+CREATE TABLE `stockproject`.`accounts` (
+  `AccountId` INT NULL AUTO_INCREMENT,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Region` VARCHAR(45) NOT NULL,
+  `Bod` DATETIME NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  `LoginToken` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`AccountId`));
+  
+INSERT INTO `stockproject`.`accounts` (`AccountId`, `FirstName`, `LastName`, `Region`, `Bod`, `Email`, `Password`, `LoginToken`) VALUES ('0', 'admin', 'admin', 'test', '2023/2/6', 'test@hotmail.com', 'admin123', 'zxcvbnmasdfghjklqwertyuiop');

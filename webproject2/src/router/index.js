@@ -38,8 +38,8 @@ const router = new Router({
         component:()=>import('../pages/login/completeresetpassword.vue')
       },
       {
-        path:'/home2',
-        component:()=>import('../pages/home/homePage2.vue')
+        path: '/wishlist',
+        component: () => import('../pages/stock/wishlistPage.vue')
       },
       {
         path:'/opentest',
@@ -47,12 +47,29 @@ const router = new Router({
       },
       {
         path:'/test',
-        component:()=>import('../pages/knowledge/test.vue')
+        component:()=>import('../pages/test/test.vue')
       },
       {
         path:'/markethome',
         component:()=>import('../pages/marketinform/markethome.vue')
       },
+      {
+        path:'/knowledgeHome',
+        component:()=>import('../pages/knowledge/knowledgeHome.vue')
+      },
+      {
+        path:'/stockinformation',
+        component:()=>import('../pages/stock/stockInfoPage.vue')
+      },
+      {
+        path:'/chapter1',
+        component:()=>import('../pages/knowledge/Chapters/Cheapter1/cheapter1Home.vue')
+      },
+      {
+        path:'/userhome',
+        component:()=>import('../pages/userprofile/userhome.vue')
+      }
+
 
 
     ]

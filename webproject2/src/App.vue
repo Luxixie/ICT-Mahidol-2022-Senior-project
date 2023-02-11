@@ -25,5 +25,3 @@ body{
   background: #11223d;
 }
 </style>
-
-<!--write the code time: -->

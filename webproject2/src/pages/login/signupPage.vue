@@ -2,20 +2,20 @@
     <div style="margin-top: 5%;">
         <el-row>
             <el-col :span="12" :offset="10">
-                <h1 style="color: #f5efe0;">Register an account</h1>
+                <h1 style="color: #f5efe0;">Register your Account</h1>
             </el-col>
         </el-row>
         <el-form id="regist-form" ref="form" :model="form">
-            <el-form-item>
-                <el-input id="regist-input" placeholder="Firest Name" v-model="form.name"
+            <el-form-item >
+                <el-input id="regist-input" placeholder="First Name" v-model="form.firstname"
                     style="width: 40%;"></el-input>
-                <el-input id="regist-input" placeholder="Last Name" v-model="form.name2"
+                <el-input id="regist-input" placeholder="Last Name" v-model="form.lastname"
                     style="width: 40%; float: right;"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-input id="regist-input" placeholder="Region" v-model="form.region" style="width: 40%;"></el-input>
                 <!-- <el-input id="regist-input" placeholder="Birth Date" v-model="form.name" ></el-input> -->
-                <el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="value1" type="date" placeholder="Birth Date">
+                <el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="form.bod" type="date" placeholder="Birth Date">
                 </el-date-picker>
             </el-form-item>
             <el-form-item>
@@ -26,63 +26,48 @@
             </el-form-item>
 
             <el-form-item>
-                <el-input id="regist-input" placeholder="Confirm Password" v-model="form.password"></el-input>
+                <el-input id="regist-input" placeholder="Confirm Password" v-model="form.confirmpassword"></el-input>
             </el-form-item>
             <el-form-item>
 
             </el-form-item>
-            <el-form-item width="500px">
-                <el-popover placement="bottom" title="Opening test" width="800" trigger="click" >
-                <el-button slot="reference" round type="warning" style="width: 100%; margin-left: 25%;">Create User</el-button>
-                <el-row>
-                    <span>Do you want to learn some stock knowledge first?</span>
-                </el-row>
-                <el-row>
-                    <el-col>
-                        <el-button @click = "Tryopentest">YES</el-button>
-                    </el-col>
-                    <el-col>
-                        <el-button  @click = "TryLogin">NO</el-button>
-                    </el-col>
-                </el-row>
-                
-                </el-popover>
+            <el-form-item>
+                <el-button round type="warning" @click="CreateUser" style="width: 45%; margin-left: 25%;">Create User</el-button>
+
             </el-form-item>
         </el-form>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
             form: {
-                name: '',
-                name2:'',
+                firstname: '',
+                lastname: '',
                 region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: '',
-                password:''
+                bod: '',
+                email: '',
+                password: '',
+                confirmpassword: ''
             },
-            value1: '',
-            visible: false,
-
+           
         }
     },
     methods: {
-        TryLogin() {
-            console.log('submit!');
-            this.$router.push('/home2')
-        },
-        GoRegisterPage() {
-            console.log('submit!');
-        },
-        Tryopentest(){
-            console.log('sussce');
-            this.$router.push('/opentest')
+        CreateUser() {
+            axios.post('http://127.0.0.1:8088/signup', this.form).then(res => {
+                        console.log(res.data)
+                        if (res.data.state == 1) {
+                            alert('success');
+                            //跳转到主页
+                            this.$router.replace('/login');
+                        } else {
+                            alert('Incorrect user name or password!');
+                            return false;
+                        }
+                    });
         }
     }
 }
@@ -117,6 +102,4 @@ export default {
 #login-title-col {
     margin-bottom: 60px;
 }
-
-
 </style>

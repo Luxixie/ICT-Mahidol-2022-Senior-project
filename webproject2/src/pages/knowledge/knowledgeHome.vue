@@ -1,0 +1,78 @@
+<template>
+    <div>
+        <el-row id="knowledgehome-title">
+            <el-col :span="8" :offset="9" class="text">
+                <span>Stock knowledge</span>
+            </el-col>
+            <el-col :span="18" :offset="7">
+                <h3>The hard part isn’t making the decision. It’s living with it.</h3>
+            </el-col>
+        </el-row>
+
+        <el-row style="background:#F6F7E4; height: 50px;">
+            <div  :span = "8" :offset="5" style="margin-left: 2%; margin-top:1%">
+                <el-link style="font-size:20px">Basic Knowledge</el-link>
+            </div>
+        </el-row>
+        <el-row style="padding-right: 3%;">
+        <el-col :span="7" v-for="(item, index) in items" :key="o" :offset="1" style="margin-top: 1%;">
+            <el-card :body-style="{ padding: '0px' }" style="margin-top: 3%; background: #F5EFE0;">
+                <div style="padding: 14px;">
+                    <img width="60px" height="60px" style="float: ; margin-top: 5%; " src="./images/2.png"/>
+                    <div style="float:left; margin-left: 5%; width: 78%">
+                        
+                            <el-link :class="topFont" @click="Gotest">{{item.ChapterName}}</el-link>
+                    </div>
+                </div>
+            </el-card>
+        </el-col>
+
+    </el-row>
+        
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            items: [
+                { id: '1', image:"./images/1.jpeg" ,ChapterName: 'Chapter 1:Reasons to Invest',},
+                { id: '2', image:"./images/2.png",ChapterName: 'Chapter 2:Fundamentals of the Stock Market'},
+                { id: '3', image:"./images/3.png" ,ChapterName: 'Chapter 3:Types of Investments', },
+                { id: '4', image:"./images/4.png" ,ChapterName: 'Chapter 4:Building Perfect Portfolio', },
+                { id: '5',  image:"./images/4.png" ,ChapterName: 'Chapter 4:Building Perfect Portfolio',},
+                { id: '6',  image:"./images/4.png" ,ChapterName: 'Chapter 4:Building Perfect Portfolio',},
+            ],
+            
+        };
+    },
+    methods:{
+        Gotest(){
+            this.$router.push('/chapter1')
+        }
+    }
+}
+</script>
+
+<style>
+#title {
+  background: #fbf9f6;
+}
+
+#knowledgehome-title {
+  background: #fbf9f6;
+}
+
+#knowledgehome-tabs {
+  background: #f6f7e4;
+}
+
+.text{
+    font-size: 60px;
+}
+
+
+
+
+</style>
