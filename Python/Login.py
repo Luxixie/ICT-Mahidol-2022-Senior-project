@@ -28,7 +28,7 @@ def trylogin():
 
 
 
-@app.route("/newuser", methods=['POST'])
+@app.route("/signup", methods=['POST'])
 def addNewUser():
     firstname = request.json.get('firstname'),
     lastname = request.json.get('lastname'),

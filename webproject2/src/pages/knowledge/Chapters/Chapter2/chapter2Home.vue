@@ -18,7 +18,7 @@
       <el-col  :span=8> 
         <div  id="title" >
           <div style=" margin-left: 5%; ">
-            <span>Chapter 1:</span>
+            <span>Chapter 2:</span>
           </div>
           <div style=" margin-left: 5%;margin-top:10%;font-size:30px">
             <span>Fundamentals of the Stock Market</span>
@@ -49,7 +49,7 @@
 
     <el-row style="background: #F5EFE0; margin-left:2%; margin-right:18%;border-radius: 30px; height: 570px; margin-top: 2%;">
       <div style="margin-left:3%;margin-top:2%; font-size:25px ">
-        <span>Chapter 1 outline</span>
+        <span>Chapter 2 outline</span>
       </div>
       <el-row>
         <el-col :span="11" offset="1" style="margin-left:2%;">
@@ -176,8 +176,8 @@ export default {
     };
   },
   methods: {
-    Gotest() {
-      this.$router.push("/");
+    GoLearn() {
+      this.$router.push("/chapter2.1");
     },
   },
 };

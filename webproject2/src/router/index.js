@@ -53,22 +53,53 @@ const router = new Router({
         path:'/markethome',
         component:()=>import('../pages/marketinform/markethome.vue')
       },
+
       {
-        path:'/knowledgeHome',
-        component:()=>import('../pages/knowledge/knowledgeHome.vue')
+        path:'/userhome',
+        component:()=>import('../pages/userprofile/userhome.vue')
       },
+
       {
         path:'/stockinformation',
         component:()=>import('../pages/stock/stockInfoPage.vue')
       },
       {
-        path:'/chapter1',
-        component:()=>import('../pages/knowledge/Chapters/Cheapter1/cheapter1Home.vue')
+        path:'/knowledgeHome',
+        component:()=>import('../pages/knowledge/knowledgeHome.vue')
       },
       {
-        path:'/userhome',
-        component:()=>import('../pages/userprofile/userhome.vue')
+        path:'/chapter1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1Home.vue')
+      },
+      {
+        path:'/chapter2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2Home.vue')
+      },
+      {
+        path:'/chapter3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3Home.vue')
+      },
+      {
+        path:'/chapter4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4Home.vue')
+      },
+      {
+        path:'/chapter5',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5Home.vue')
+      },
+      {
+        path:'/chapter6',
+        component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6Home.vue')
+      },
+      {
+        path:'/chapter2.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.1.vue')
+      },
+      {
+        path:'/chapter2test',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/Questions/chapter2test.vue')
       }
+
 
 
 
