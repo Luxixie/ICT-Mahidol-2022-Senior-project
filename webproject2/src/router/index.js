@@ -41,6 +41,7 @@ const router = new Router({
         path: '/wishlist',
         component: () => import('../pages/stock/wishlistPage.vue')
       },
+
       {
         path:'/opentest',
         component:()=>import('../pages/knowledge/opentest.vue')
@@ -52,6 +53,10 @@ const router = new Router({
       {
         path:'/markethome',
         component:()=>import('../pages/marketinform/markethome.vue')
+      },
+      {
+        path:'/stockinform',
+        component:()=>import('../pages/stock/stockInfoPage.vue')
       },
 
       {

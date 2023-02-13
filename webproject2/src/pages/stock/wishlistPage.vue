@@ -94,5 +94,10 @@ export default {
             
         };
     },
+    methods:{
+        Goinfor(){
+            this.$router.push('/stockinform')
+        }
+    }
 }
 </script>

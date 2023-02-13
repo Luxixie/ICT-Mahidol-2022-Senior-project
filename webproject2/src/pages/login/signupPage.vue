@@ -228,6 +228,16 @@ export default {
             this.$refs.form.validate(valid => {
             if (valid) {
             this.CreateUser();
+            this.$confirm('Do you want to learn some stock knowledge first?', 'Open Test', {
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            type: 'info',
+            }).then(() => {
+            this.$router.replace('/opentest'); 
+            }).catch(() => {
+            this.$router.replace('/login');     
+            });
+
             } else {
             this.$message({
                 showClose: true,
@@ -246,8 +256,7 @@ export default {
                                 message: 'Congratulations on your registration and thank you for choosing to belong to Stock Plenty',
                                 type: 'success'
                             });
-                            //跳转到主页
-                            this.$router.replace('/login');
+                          
                         } else {
                             alert('Incorrect user name or password!');
                             return false;

@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="24">
-        <img src="./imges/backgroud.png" />
+        <img style="width:1510px" src="./imges/backgroud.png" />
       </el-col>
     </el-row>
     <el-row>
