@@ -9,11 +9,26 @@
       </div>
     </el-col>
     <el-col :span="5">
-      <div class="userInfo" style="margin-top: 8%;" v-if="username">
+      <div class="userInfo" style="margin-top: 10%;" v-if="username">
         <el-button size="medium" type="info" round @click="GoHome">Home</el-button>
-        <el-button style="margin-left: 5%;" size="medium" type="info" circle @click="Gouser">{{username.charAt(0).toUpperCase()}}</el-button>
-        <span style="margin-left: 5%;">{{ username }}</span>
+        <el-button style="margin-left: 3%;" size="medium" type="info" circle >{{username.charAt(0).toUpperCase()}}</el-button>
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link" >
+            {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item icon="el-icon-user" command="userhome">User profile</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-shopping-cart-2" command="watchlist">Watch list</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-s-finance" command="portfolio">Portfolio</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-tickets" command="quiz">Quiz review</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-refresh-left" command="logout" >Log out</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-badge :value="100" :max="1" >
+          <el-link icon="el-icon-message-solid" style="width:5%"></el-link>
+        </el-badge>
       </div>
+      
       <div class="LoginPart" v-if="!username" style="margin-top: 8%;">
         <el-button size="medium" type="info" round @click="GoLoginPage">Log In</el-button>
         <el-button id="signupbt" size="medium" type="info" @click="GoSignUpPage" round>Sign Up</el-button>
@@ -44,9 +59,23 @@ export default {
     GoHome() {
       this.$router.push("/home");
     },
-    Gouser(){
-      this.$router.push("/userhome")
+    handleCommand(command) {
+      switch (command) {
+        case "userhome":
+          window.location.href = "/userhome";
+          break;
+        case "watchlist":
+          window.location.href = "/watchlist";
+          break;
+        case "portfolio":
+          window.location.href = "/portfolio";
+          break;
+        case "quiz":
+          window.location.href = "/test";
+          break;
+      }
     }
+
 
   },
   created() {
@@ -87,4 +116,9 @@ export default {
 }
 
 .LoginPart {}
+
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
 </style>
