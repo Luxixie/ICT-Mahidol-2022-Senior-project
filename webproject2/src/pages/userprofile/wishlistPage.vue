@@ -96,7 +96,7 @@ export default {
     },
     methods:{
         Goinfor(){
-            this.$router.push('/stockinform')
+            this.$router.push('/buyandsell')
         }
     }
 }

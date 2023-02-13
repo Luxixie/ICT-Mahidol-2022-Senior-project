@@ -109,8 +109,21 @@ export default {
     console.log(this.$store.state.username);
   },
   computed: {
+
     username() {
-      return this.$store.state.username;
+      return this.$store.state.username;  
+    },
+    accountid() {
+      return this.$store.state.accountid;  
+    },
+    region() {
+      return this.$store.state.region;  
+    },
+    birthdate() {
+      return this.$store.state.birthdate;  
+    },
+    email() {
+      return this.$store.state.email;  
     },
   },
   watch: {

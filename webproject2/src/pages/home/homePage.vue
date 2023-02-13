@@ -31,11 +31,8 @@
 export default {
   name: "Home",
   methods: {
-    GoTest() {
-      this.$router.push("/test");
-    },
     GoMarket(){
-            this.$router.push('/wishlist')
+            this.$router.push('/watchlist')
     },
     Goknowledgehome(){
             this.$router.push('/knowledgeHome')
@@ -45,6 +42,7 @@ export default {
     username() {
       return this.$store.state.username;
     },
+
   },
 };
 </script>

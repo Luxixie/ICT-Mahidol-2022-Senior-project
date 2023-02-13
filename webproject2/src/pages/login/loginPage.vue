@@ -9,7 +9,7 @@
             
             <el-form-item label="Email" style="font-weight: bold; color: aliceblue;">
                
-                <el-input  id="login-input" placeholder="Email" v-model="loginform.username"></el-input>
+                <el-input  id="login-input" placeholder="Email" v-model="loginform.email"></el-input>
             </el-form-item>
             <el-form-item style="margin-bottom: 0px;font-weight: bold; color: aliceblue;" label="Password" >
                 <el-input id="login-input" placeholder="Password" show-password v-model="loginform.password"></el-input>
@@ -31,7 +31,7 @@ export default {
     data() {
         return {
             loginform: {
-                username: '',
+                email: '',
                 password: '',
             }
         }
@@ -39,15 +39,18 @@ export default {
     methods: {
         TryLogin() {
             this.$refs.loginform.validate((valid) => {
-                if (valid) { //valid成功为true，失败为false
-                    //去后台验证用户名密码，并返回token
+                if (valid) { 
+                   
                     axios.post('http://127.0.0.1:8088/login', this.loginform).then(res => {
                         console.log(res.data)
                         if (res.data.state == 1) {
-                            //存储token到本地
                             this.$store.commit("SET_TOKEN", res.data.vData.token);
-                            this.$store.commit("SET_UserName", res.data.vData.name);
-                            //跳转到主页
+                            this.$store.commit("SET_UserName", res.data.vData.username);
+                            this.$store.commit("SET_Accountid", res.data.vData.accountid);
+                            this.$store.commit("SET_Region", res.data.vData.region);
+                            this.$store.commit("SET_Birthdate", res.data.vData.birthdate);
+                            this.$store.commit("SET_Email", res.data.vData.email);
+               
                             this.$router.replace('/home');
                         } else {
                             alert('Incorrect user name or password!');

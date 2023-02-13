@@ -37,10 +37,6 @@ const router = new Router({
         path:'/completeresetpassword',
         component:()=>import('../pages/login/completeresetpassword.vue')
       },
-      {
-        path: '/wishlist',
-        component: () => import('../pages/stock/wishlistPage.vue')
-      },
 
       {
         path:'/opentest',
@@ -50,6 +46,7 @@ const router = new Router({
         path:'/test',
         component:()=>import('../pages/test/test.vue')
       },
+      
       {
         path:'/markethome',
         component:()=>import('../pages/marketinform/markethome.vue')
@@ -58,10 +55,18 @@ const router = new Router({
         path:'/stockinform',
         component:()=>import('../pages/stock/stockInfoPage.vue')
       },
+      {
+        path:'/buyandsell',
+        component:()=>import('../pages/stock/buyandsellPage.vue')
+      },
 
       {
         path:'/userhome',
         component:()=>import('../pages/userprofile/userhome.vue')
+      },
+      {
+        path: '/watchlist',
+        component: () => import('../pages/userprofile/wishlistPage.vue')
       },
 
       {
