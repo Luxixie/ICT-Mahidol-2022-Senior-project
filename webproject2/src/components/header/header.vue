@@ -11,7 +11,7 @@
     <el-col :span="5">
       <div class="userInfo" style="margin-top: 8%;" v-if="username">
         <el-button size="medium" type="info" round @click="GoHome">Home</el-button>
-        <el-button style="margin-left: 5%;" size="medium" type="info" circle @click="Gouser">{{ username.charAt(0) }}</el-button>
+        <el-button style="margin-left: 5%;" size="medium" type="info" circle @click="Gouser">{{username.charAt(0).toUpperCase()}}</el-button>
         <span style="margin-left: 5%;">{{ username }}</span>
       </div>
       <div class="LoginPart" v-if="!username" style="margin-top: 8%;">

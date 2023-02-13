@@ -2,7 +2,7 @@
     <div style="margin-top: 5%;">
         <el-row>
             <el-col :span="12" :offset="9">
-                <h1 style="color: #f5efe0;">Register your Account</h1>
+                <h1 style="color: #f5efe0;">Register Your Account</h1>
             </el-col>
         </el-row>
         <el-form id="regist-form" ref="form" :model="form" :rules="rules" >

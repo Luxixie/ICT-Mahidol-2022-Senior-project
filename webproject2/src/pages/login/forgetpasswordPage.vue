@@ -12,10 +12,10 @@
         </el-row>
         <el-form id="forgetpassword-form" ref="form" :model="form">
             <el-form-item label="Email Address" style="font-weight: bold; color: aliceblue;">
-                <el-input id="forgetpassword-input" placeholder="Email Address" v-model="form.name"></el-input>
+                <el-input id="forgetpassword-input" placeholder="Email Address" v-model="email" type="email"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button round type="warning" @click="Tryforgetpassword" style="width: 45%; margin-left: 25%; float: left;">Send Email</el-button>
+                <el-button round type="warning" style="width: 80%; margin-left: 10%; float: left;">Send Email</el-button>
              
             </el-form-item>
         </el-form>
@@ -25,26 +25,21 @@
 export default {
     data() {
         return {
-            form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-            }
+                email: '',
+
         }
     },
     methods: {
-        Tryforgetpassword() {
-            console.log('submit!');
-            this.$router.push('/sendemail')
-        },
-        GoRegisterPage() {
-            console.log('submit!');
-        }
+        async submitForm() {
+            try {
+                await this.$axios.post('/forgot-password', {
+                email: this.email
+                })
+                this.$router.push('/newpassword')
+            } catch (error) {
+                console.error(error)
+            }
+            }
     }
 }
 </script>
