@@ -49,7 +49,7 @@ const router = new Router({
       
       {
         path:'/markethome',
-        component:()=>import('../pages/marketinform/markethome.vue')
+        component:()=>import('../pages/stock/markethome.vue')
       },
       {
         path:'/stockinform',
@@ -63,6 +63,14 @@ const router = new Router({
       {
         path:'/userhome',
         component:()=>import('../pages/userprofile/userhome.vue')
+      },
+      {
+        path:'/contactus',
+        component:()=>import('../pages/userprofile/contactus.vue')
+      },
+      {
+        path:'/editprofile',
+        component:()=>import('../pages/userprofile/editprofile.vue')
       },
       {
         path: '/watchlist',

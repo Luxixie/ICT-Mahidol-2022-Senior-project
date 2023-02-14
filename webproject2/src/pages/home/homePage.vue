@@ -32,7 +32,7 @@ export default {
   name: "Home",
   methods: {
     GoMarket(){
-            this.$router.push('/watchlist')
+            this.$router.push('/markethome')
     },
     Goknowledgehome(){
             this.$router.push('/knowledgeHome')

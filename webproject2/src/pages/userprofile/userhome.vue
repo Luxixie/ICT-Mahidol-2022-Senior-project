@@ -51,7 +51,7 @@
                             margin-left:10%;
                             text-align: left;
                             font-size: 18px;" 
-                        icon = "el-icon-chat-dot-square" type="primary">Contact us</el-button>
+                        icon = "el-icon-chat-dot-square" type="primary" @click="Gocontactus">Contact us</el-button>
             <el-button style="    background: #1F3D70; 
                             border-radius: 50px;
                             width: 500px; 
@@ -59,7 +59,7 @@
                             margin-left:10%;
                             text-align: left;
                             font-size: 18px;" 
-                        icon = "el-icon-edit" type="primary">Edit profile information</el-button>
+                        icon = "el-icon-edit" type="primary" @click="Goeditprofile">Edit profile information</el-button>
             <el-button style=" background: #1F3D70; 
                             border-radius: 50px;
                             width: 500px; 
@@ -81,6 +81,15 @@ export default {
         return {
             avatar:'https://avatars0.githubusercontent.com/u/8186664?s=460&v=4',
         };
+
+  },
+    methods:{
+        Gocontactus(){
+            this.$router.push('/contactus')
+        },
+        Goeditprofile(){
+            this.$router.push('/editprofile')
+        }
 
   },
     computed: {
