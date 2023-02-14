@@ -234,15 +234,15 @@ export default {
           // 图例
           data: this.pieName,
           right: "10%",
-          top: "30%",
+          top: "90%",
           orient: "vertical"
         },
-        /*title: {
+        title: {
           // 设置饼图标题，位置设为顶部居中
-          text: "",
-          top: "0%",
+          text: "Balence Proportion",
+          top: "8%",
           left: "center"
-        },*/
+        },
         series: [
           {
             type: "pie",
