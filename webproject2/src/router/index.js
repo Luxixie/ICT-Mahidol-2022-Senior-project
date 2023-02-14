@@ -52,6 +52,11 @@ const router = new Router({
         component:()=>import('../pages/stock/markethome.vue')
       },
       {
+        path:'/submarket',
+        component:()=>import('../pages/stock/submarket.vue')
+      },
+
+      {
         path:'/stockinform',
         component:()=>import('../pages/stock/stockInfoPage.vue')
       },
@@ -69,12 +74,21 @@ const router = new Router({
         component:()=>import('../pages/userprofile/contactus.vue')
       },
       {
+        path:'/poster',
+        component:()=>import('../pages/userprofile/poster.vue')
+      },
+
+      {
         path:'/editprofile',
         component:()=>import('../pages/userprofile/editprofile.vue')
       },
       {
         path: '/watchlist',
         component: () => import('../pages/userprofile/wishlistPage.vue')
+      },
+      {
+        path:'/portfolio',
+        component:()=>import('../pages/portfolio/portfolioPage.vue')
       },
 
       {

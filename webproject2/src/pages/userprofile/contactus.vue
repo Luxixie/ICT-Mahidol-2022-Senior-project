@@ -2,7 +2,7 @@
   <div>
     <el-col :span="10" style=" background:#F5EFE0;
                     border-radius: 30px; 
-                    height: 1200px; 
+                    height: 1250px; 
                     margin-top:3%; 
                     margin-left: 3%; 
                     margin-right: 10%;
@@ -12,8 +12,8 @@
         <h3 style="margin-top:3%; margin-left: 3%; "> B.Sc.(INFORMATION AND COMMUNICATION TECHNOLOGY) </h3>
         <h3 style="margin-top:3%; margin-left: 3%; "> PROJECT ADVISOR: ASST, PROF. DR. SONGSRI TANGSRIPAIROJ  </h3>
         <h3 style="margin-top:3%; margin-left: 3%; ">ABSTRACT </h3>
-        <h4 style="margin-top:3%; margin-left: 3%;margin-right: 3%; ">As the concept of stock investment becomes more popular, it has become a common way to earn passive income through stock trading. However, many novice investors need more practical experience and knowledge to invest in the stock market safely and sensibly. With this issue in mind, the objective of this project is to provide a tool to support novice investors by creating a realistic trading environment, imparting stock knowledge, and accumulating practical experiences. Therefore, a web application for a virtual stock trading simulation platform titled “Stock Plenty” has been designed and developed. The application encompasses four significant modules, including stock market information, buy and sell, stock knowledge, and user performance evaluation. </h4>
-        <h3 style="margin-top:3%; margin-left: 3%; ">Partner</h3>
+        <h4 style="margin-top:3%; margin-left: 3%;margin-right: 3%; ">Stock is one of the common investment methods which offers a high return on investment. More and more people invest in stock to earn passive income. However, numerous novice investors are lack of knowledge and practical experiences to invest in the stock market safely and sensibly. With this issue in mind, the objective of this research project is to propose the design and development of a web application for virtual stock trading, called “Stock Plenty”. The Stock Plenty application provides several useful features for novice investors to learn and understand basic stock investment knowledge, search and view market information, practice on buy and sell stock in a simulated trading environment, and evaluate user performance. The Stock Plenty application can be beneficial for novice investors to have plenty knowledge, get familiar with stock trading process, and accumulate hands-on experiences. Therefore, they feel ready and more confident to trade stocks in the real market.
+        </h4><h3 style="margin-top:3%; margin-left: 3%; ">Partner</h3>
         <ul>
         <li v-for="partner in partners" :key="partner.id">
             <h4>{{ partner.name }}</h4>
@@ -25,11 +25,12 @@
 
     <el-col :span="5" style=" background:#F5EFE0;
                     border-radius: 30px; 
-                    height: 400px; 
+                    height: 450px; 
                     width:500px;
                     margin-top:10%; 
                     margin-right: 10%;
                     ">
+        <el-button style="margin-left:3%;margin-top:3%" @click="Goposter"> See Our Poster</el-button>
         <h3 style="margin-top:3%;margin-left:3%">Contact Us</h3>
         <h3 style="margin-top:3%;margin-left:3%">We can help. Our team will give you the beat sugesstion! Leave you idea and problem.</h3>
 
@@ -46,6 +47,8 @@
             <el-form-item>
                 <el-button type="primary" @click="submitForm">Submit</el-button>
             </el-form-item>
+
+            
         </el-form>
     </el-col>
 
@@ -89,6 +92,9 @@ export default {
             console.log('Name: ', this.name)
             console.log('Email: ', this.email)
             console.log('Message: ', this.message)
+        },
+        Goposter(){
+            this.$router.push('/poster')
         }
     }
 }

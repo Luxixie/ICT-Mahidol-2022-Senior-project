@@ -80,7 +80,7 @@
 </style>
 
 <script>
-export default {
+export default { 
     data() {
         return {
             items: [

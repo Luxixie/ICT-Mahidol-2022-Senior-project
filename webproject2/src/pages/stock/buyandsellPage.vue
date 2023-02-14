@@ -31,7 +31,7 @@
         </el-row>
         <el-row style="height: 30%;">
           <el-col :span="12" :offset="5">
-            <span style="font-size:small; color:#f5efe1;">Market Status:Pre-Open2 update 09/02/2022</span>
+            <span style="font-size:small; color:#f5efe1;">Market Status:Pre-Open2 update 14/2/2023 18:16:00{{ nowTime }}</span>
           </el-col>
         </el-row>
       </el-col>
@@ -46,7 +46,7 @@
         <div style="background: #d9d9d9; border-radius: 30px;">
           <div style="height:300px;padding-top: 3%;  padding-left: 3%;">
             <el-row>
-              <span style="font-size: x-large; padding-bottom: 2%;">DataSummary</span>
+              <span style="font-size: x-large; padding-bottom: 2%;">Data Summary</span>
             </el-row>
 
             <el-row class="dataSummaryItem">
@@ -87,6 +87,7 @@
         </div>
       </el-col>
     </el-row>
+
     <div v-if="!showInfo">
 
       <el-row style="margin-top: 2%;  height: 400px;">
@@ -319,8 +320,60 @@
       </el-row>
       <el-row style="margin-top: 2%;">
         <div style="background: #d9d9d9; border-radius: 30px;">
+          <span style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:2%">Historical Data</span>
           <div ref="candleChart" style="height:400px;"></div>
+
+          
         </div>
+      </el-row>
+      <el-row style="margin-top: 2%;background: #d9d9d9; border-radius: 30px;">
+        <span style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:2%">Company Profile</span>
+        <h2 style="margin-left:3%">Wice Logistics Public Company Limited</h2>
+        <el-row>
+            <el-col :span="10">
+              <span style="margin-left:8%">88/8 Nonsee Road</span>
+            </el-col>
+            <el-col :span="10">
+              <span>Sector(s): Industrials</span>
+            </el-col>
+            <el-col :span="10">
+              <span style="margin-left:8%">Chong-Nonsee Yannawa</span>
+            </el-col>
+            <el-col :span="10">
+              <span>Industry: Integrated Freight & Logistics</span>
+            </el-col>
+            <el-col :span="10">
+              <span style="margin-left:8%">Bangkok 10120</span>
+            </el-col>
+            <el-col :span="10">
+              <span>Full Time Employees: </span>
+            </el-col>
+        </el-row> 
+        <el-row :span="10">
+          <span style="margin-left:3%">Thailand</span>
+        </el-row>
+        <el-row :span="10">
+          <span style="margin-left:3%">66 2 681 6181</span>
+        </el-row>
+        <el-row :span="10">
+          <el-link style="margin-left:3%">https://www.wice.co.th</el-link>
+        </el-row>
+        <el-row>
+          <h3 style="font-weight: bold; margin-left:3%;margin-top:2%">Description</h3>
+        </el-row>
+        <el-row style="margin-left:3%;margin-right:4%">
+          <span >Wice Logistics Public Company Limited provides air and sea freight forwarding, customs brokerage, inland transportation, cross-border and multimodal transportation, warehousing, and various freight related services for imports and exports in Thailand and internationally. It operates through Sea Freight, Air Freight, Cross Border Service, and Service Supply Chain Solutions. The company transports sea freight comprising full container load and less than container load services for various forwarders and containers; and offers air freight services. It also provides customs clearance services, including duty intensive consultation; internal transportation services using trailer and dump trucks, lorries, or minivans from pick up point to the port; and warehouse storage and management services. The company was formerly known as Wice Freight Services (Thailand) Company Limited and changed its name to Wice Logistics Public Company Limited in April 2015. Wice Logistics Public Company Limited was founded in 1993 and is headquartered in Bangkok, Thailand.</span>
+        </el-row>
+        <el-row style="font-weight: bold; margin-left:3%;margin-top:2%">
+          <h3 >Corporate Governance</h3>
+        </el-row>
+        <el-row style="margin-left:3%;margin-right:4%">
+          <span >Wice Logistics Public Company Limited’s ISS Governance QualityScore as of N/A is N/A. The pillar scores are Audit: N/A; Board: N/A; Shareholder Rights: N/A; Compensation: N/A. </span>
+        </el-row>
+        <el-row style="margin-left:3%;margin-right:4%;margin-top:1%">
+          <span >Corporate governance scores courtesy of Institutional Shareholder Services (ISS). Scores indicate decile rank relative to index or region. A decile score of 1 indicates lower governance risk, while a 10 indicates higher governance risk.</span>
+        </el-row>
+
       </el-row>
     </div>
   </div>
@@ -379,6 +432,7 @@ import * as echarts from 'echarts';
 export default {
   data() {
     return {
+      nowTime: '',
       chart: null,
       showInfo: false,
       StockData: [{
@@ -395,7 +449,8 @@ export default {
   },
   mounted() {
     this.initChart();
-    this.createCandleChart()
+    this.createCandleChart();
+    this.getNowTime();
   },
   methods: {
     createCandleChart() {
@@ -406,7 +461,8 @@ export default {
           data: ['2022/12/19', '2022/12/19', '2022/12/19', '2022/12/19', '2022/12/19', '2022/12/19', '2022/12/19']
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+        
         },
         series: [{
           type: 'candlestick',
@@ -462,8 +518,6 @@ export default {
     ShowStockInfo(){
       this.showInfo = true;
     },
-
-    
     initChart() {
       this.chart = echarts.init(document.getElementById("chart"));
       this.chart.setOption({
@@ -475,17 +529,39 @@ export default {
           data: ["10:00", "10:05", "10:10", "10:15", "10:20", "10:25"]
         },
         yAxis: {
-          type: "value"
+          type: "value",
+          min: 0,
+          max:500,
+
+          
         },
         series: [
           {
-            data: [120, 132, 101, 134, 90, 230],
+            data: [120, 230, 300, 279, 166, 450],
             type: "line",
             smooth: false
           }
         ]
       });
-    }
+    },
+    getNowTime () {
+      let speed = 1000
+      let that = this
+      let theNowTime = function () {
+        that.nowTime = that.timeNumber()
+      }
+      setInterval(theNowTime, speed)
+    },
+    timeNumber () {
+      let today = new Date()
+      let date = today.getFullYear() + '-' + this.twoDigits(today.getMonth() + 1) + '-' + this.twoDigits(today.getDate())
+      let time = this.twoDigits(today.getHours()) + ':' + this.twoDigits(today.getMinutes()) + ':' + this.twoDigits(today.getSeconds())
+      return date + '  ' + time
+    },
+    twoDigits (val) {
+      if (val < 10) return '0' + val
+      return val
+    },
   }
 };
 </script>
