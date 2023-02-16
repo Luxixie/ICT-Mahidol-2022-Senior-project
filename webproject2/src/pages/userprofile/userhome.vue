@@ -32,12 +32,24 @@
             <el-row  class="line">
                     <span class="line-text" >Email:  </span><span style="color: yellow; font-size:20px">{{email }}</span>
             </el-row>
+            <el-row>
+                    <el-button style=" background: #1F3D70; 
+                            border-radius: 50px;
+                            width: 500px; 
+                            margin-top:2%;
+                            margin-left:10%;
+                            text-align: left;
+                            font-size: 18px;
+                            font-weight: bold;
+                            " 
+                         type="primary" icon = "el-icon-star-off"  @click="Gowatchlist">Watch list</el-button>
+            </el-row>
 
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
                 <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Balance</span>
             </el-row>
             <el-row  class="line">
-                    <span class="line-text" >20000 </span>
+                    <span class="line-text" >20,000.00 </span>
             </el-row>
 
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
@@ -89,6 +101,9 @@ export default {
         },
         Goeditprofile(){
             this.$router.push('/editprofile')
+        },
+        Gowatchlist(){
+            this.$router.push('/watchlist')
         }
 
   },

@@ -22,7 +22,7 @@
                         <span style="font-weight: bold;margin-left:46%;">Total money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:50%;">20000 {{todaymoney}}</span>
+                        <span style="font-weight: bold;margin-left:50%;">20,000 {{todaymoney}}</span>
                     </el-row>
                 </el-col>
                 <el-col :span="11">
@@ -30,7 +30,7 @@
                         <span style="font-weight: bold;margin-left:44%;">Avilable money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:50%;">18800 {{avilablemoney}}</span>
+                        <span style="font-weight: bold;margin-left:50%;">18,800.00 {{avilablemoney}}</span>
                     </el-row>
                 </el-col>
             </el-row>
@@ -239,7 +239,7 @@ export default {
         },
         title: {
           // 设置饼图标题，位置设为顶部居中
-          text: "Balence Proportion",
+          text: "Balance Proportion",
           top: "8%",
           left: "center"
         },

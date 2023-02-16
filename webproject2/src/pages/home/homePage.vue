@@ -18,10 +18,10 @@
         <el-button class="homebt" type="warning" @click="Goknowledgehome" round>Stock knowledge</el-button>
       </el-col>
       <el-col class="home-bts"  :span="5" v-if="username">
-        <el-button class="homebt" type="warning" round>Buy and Sell</el-button>
+        <el-button class="homebt" type="warning" @click="Gobuyandsell" round>Buy and Sell</el-button>
       </el-col>
       <el-col class="home-bts"  :span="5" v-if="username">
-        <el-button class="homebt" type="warning" round>Portfolio</el-button>
+        <el-button class="homebt" type="warning" @click="GoPortfolio" round>Portfolio</el-button>
       </el-col>
     </el-row>
   </div>
@@ -36,7 +36,15 @@ export default {
     },
     Goknowledgehome(){
             this.$router.push('/knowledgeHome')
+        },
+        Gobuyandsell(){
+          this.$router.push('/buyandsell')
+        },
+        GoPortfolio(){
+          this.$router.push('/portfolio')
         }
+
+        
   },
   computed: {
     username() {

@@ -102,39 +102,39 @@ var quiz = {
     user: "test",
     questions: [
         {
-            text: "This is question 1",
+            text: "How much money do I need to start investing in stocks?",
             responses: [
-                { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
+                { text: "100000$" },
+                { text: "50000$"},
+                { text: "Any",correct: true },
                 { text: "Answer 4" }
             ]
         },
         {
-            text: "This is question 2",
+            text: "Which should I buy, stocks or bonds?",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Stock " },
+                { text: "Bonds "},
+                { text: "Both of them " , correct: true },
+                { text: "None of them " }
             ]
         },
         {
-            text: "This is question 3",
+            text: "How do I know which stocks to buy?",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Value, Growth, Profitability, News, Comfort level", correct: true },
+                { text: "Value, guess, profitability, news" },
+                { text: "Value, guesswork, intuition, news" },
+                { text: "guesswork, Growth, Profitability, News, .Comfort level" }
             ]
         },
         {
-            text: "This is question 4",
+            text: "Which one is largest market around the world?",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "American Stock Exchange" },
+                { text: "Chicago Board Options Exchange (CBOE)", correct: true },
+                { text: "Chicago Mercantile Exchange (CME)" },
+                { text: "New York Stock Exchange (NYSE)" }
             ]
         },
         {
@@ -142,8 +142,7 @@ var quiz = {
             responses: [
             { text: "Answer 1" },
                 { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+    
             ]
         },
         {
@@ -157,42 +156,43 @@ var quiz = {
             ]
         },
         {
-            text: "This is question 7",
+            text: "A market in which prices are ring",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Bull market " , correct: true},
+                { text: "seller's market"},
+                { text: "Expanding market" },
+                { text: "Primary mortgage market" }
             ]
         },
         {
-            text: "This is question 8",
+            text: "Stocks that are considered highly risky. They are priced low because they have not yet proven themselves in the market",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Common stock" },
+                { text: "Penny stock", correct: true },
+                { text: "Cyclical stock" },
+                { text: "Stock split" }
             ]
         },
         {
             text:
-                "This is question 9",
+                "A sum of money from a company's profits paid regularly (typically quarterly) to its sharholders",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Stockholder" },
+                { text: "Preferred stock"},
+                { text: "Stock" },
+                { text: "Dividend" , correct: true }
             ]
         },
         {
-            text: "This is question 10",
+            text:
+                "A sum of money from a company's profits paid regularly (typically quarterly) to its sharholders",
             responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
+                { text: "Stockholder" },
+                { text: "Preferred stock"},
+                { text: "Stock" },
+                { text: "Dividend" , correct: true }
             ]
-        }
+        },
     ]
 },
     userResponseSkelaton = Array(quiz.questions.length).fill(null);
