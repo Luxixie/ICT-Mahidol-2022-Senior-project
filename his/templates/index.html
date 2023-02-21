@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time stock price chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Real-time stock price chart for {{ symbol }}</h1>
+    <div id="chart"></div>
+    <script>
+        var graphJSON = JSON.parse('{{ graphJSON|safe }}');
+        Plotly.newPlot('chart', graphJSON.data, graphJSON.layout);
+        var updateInterval = 1000;
+        var lastTimestamp = new Date();
+        Plotly.d3.json('/update', function(data) {
+            var now = new Date();
+            var timeDiff = now - lastTimestamp;
+            var timeToWait = updateInterval - timeDiff;
+            if (timeToWait < 0) {
+                timeToWait = 0;
+            }
+            setTimeout(function() {
+                Plotly.extendTraces('chart', {y: [[data.y[0]]]}, [0]);
+                lastTimestamp = now;
+                setTimeout(arguments.callee, updateInterval);
+            }, timeToWait);
+        });
+    </script>
+</body>
+</html>
