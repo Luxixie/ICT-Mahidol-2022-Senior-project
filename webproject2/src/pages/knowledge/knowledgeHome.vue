@@ -40,14 +40,10 @@ export default {
                 { id: '1', image:"./images/1.jpeg" ,ChapterName: 'Chapter 1 Reasons to Invest',path: '/chapter1' },
                 { id: '2', image:"./images/2.png",ChapterName: 'Chapter 2 Fundamentals of the Stock Market',path: '/chapter2'},
                 { id: '3', image:"./images/3.png" ,ChapterName: 'Chapter 3 Types of Investments', path: '/chapter3'},
-                { id: '4', image:"./images/4.png" ,ChapterName: 'Chapter 4 How to Pick Winners, Step 1: Valuation', path: '/chapter4'},
-                { id: '5',  image:"./images/4.png" ,ChapterName: 'Chapter 5 How to Pick Winners, Step 2: Growth',path: '/chapter5'},
-                { id: '6',  image:"./images/4.png" ,ChapterName: 'Chapter 6 How to Pick Winners, Step 3: Profitability',path: '/chapter6'},
-                { id: '7',  image:"./images/4.png" ,ChapterName: 'Chapter 7 How to Pick Winners, Step 4: Putting It All Together',},
-                { id: '8',  image:"./images/4.png" ,ChapterName: 'Chapter 8 How to Pick Winners, Step 5: Getting the News',},
-                { id: '9',  image:"./images/4.png" ,ChapterName: 'Chapter 9 The Mechanics of Buying, Selling, and Owning Stocks',},
-                { id: '10',  image:"./images/4.png" ,ChapterName: 'Chapter 10 The Power of Diversification',},
-                { id: '11',  image:"./images/4.png" ,ChapterName: 'Chapter 11 Building Your Perfect Portfolio',},
+                { id: '4', image:"./images/4.png" ,ChapterName: 'Chapter 4 Building Perfect Portfolio', path: '/chapter4'},
+                { id: '5',  image:"./images/4.png" ,ChapterName: 'Chapter 5 Charts and Analysis',path: '/chapter5'},
+                { id: '6',  image:"./images/4.png" ,ChapterName: 'Chapter 6 Stock term',path: '/chapter6'},
+
             ],
                     
         };
@@ -57,7 +53,7 @@ export default {
             this.$router.push('/chapter2')
         },
         GoLearn(){
-            this.$router.push('/chapter2')
+            this.$router.push('/chapter3')
         }
     }
 }

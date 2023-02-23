@@ -30,7 +30,7 @@
                         <span style="font-weight: bold;margin-left:44%;">Avilable money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:50%;">18,800.00 {{avilablemoney}}</span>
+                        <span style="font-weight: bold;margin-left:50%;">{{avilablemoney}}{{ 18000 | numberWithCommas }}</span>
                     </el-row>
                 </el-col>
             </el-row>
@@ -274,7 +274,21 @@ export default {
         this.myChart.resize();
       });
 
-    }
+    },
+    filters: {
+        numberWithCommas: function (value) {
+            if (!value) return ''
+            var parts = value.toString().split('.')
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            if (parts.length > 1) {
+            parts[1] = parts[1].substr(0, 2) // Only keep the first two decimal places
+            } else {
+            parts.push('00') // Add trailing zeros if the value doesn't have any decimal places
+            }
+            return parts.join('.')
+        }
+        }
+
     }
 }
 

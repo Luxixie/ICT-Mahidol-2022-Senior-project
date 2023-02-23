@@ -1,3 +1,5 @@
+from crypt import methods
+from re import A
 from flask import Flask,request,jsonify,session
 from flask_cors import *
 import db
@@ -51,6 +53,26 @@ def addNewUser():
     db.insert_or_update_data(sql)
     json_result = {"state": 1, "vData":{"token":"asdasdasdasdad","name":"admin"}}
     return jsonify(json_result)
+
+@app.route("/editprofile", methods=['POST'])
+def edituser():
+    accountid = ["AccountId"],
+    firstname = request.json.get('firstname'),
+    lastname = request.json.get('lastname'),
+    region = request.json.get('region'),
+    bod = request.json.get('bod'),
+    email = request.json.get('email'),
+    print(accountid)
+    print(firstname)
+    print(lastname)
+    print(region)
+    print(bod)
+    print(email)
+    sql = f"UPDATE stockproject SET `accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `LoginToken`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '2023-2-7', '{email[0]}', 'zxcvbnmasdfghjklqwertyuiopasd' WHERE AccountId = {accountid[0]};"
+    db.insert_or_update_data(sql)
+    json_result = {"state": 1, "vData":{"token":"asdasdasdasdad","name":"admin"}}
+    return jsonify(json_result)
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

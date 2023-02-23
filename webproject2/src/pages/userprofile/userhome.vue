@@ -49,7 +49,7 @@
                 <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Balance</span>
             </el-row>
             <el-row  class="line">
-                    <span class="line-text" >20,000.00 </span>
+                    <span class="line-text" >{{ 20000 | numberWithCommas }} BAHT</span>
             </el-row>
 
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
@@ -124,6 +124,21 @@ export default {
             return this.$store.state.email;
         },
     },
+    filters: {
+    numberWithCommas: function (value) {
+        if (!value) return ''
+        var parts = value.toString().split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        if (parts.length > 1) {
+        parts[1] = parts[1].substr(0, 2) // Only keep the first two decimal places
+        } else {
+        parts.push('00') // Add trailing zeros if the value doesn't have any decimal places
+        }
+        return parts.join('.')
+    }
+    }
+
+
 };
 </script>
 

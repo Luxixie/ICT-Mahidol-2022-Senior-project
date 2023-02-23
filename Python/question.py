@@ -1,6 +1,6 @@
 import pymysql
-import db
 
+# Connect to the database
 conn = pymysql.Connect(        
         host='localhost',
         port=3306,
@@ -11,14 +11,11 @@ conn = pymysql.Connect(
         cursorclass=pymysql.cursors.DictCursor)
 cur = conn.cursor()
 
-cur.execute("SELECT * FROM stockproject.Multiple_choice;"),
-sql_select = "SELECT * FROM stockproject.Multiple_choice;"
+# Retrieve the data
+sql = "SELECT Multiple_choiceID,chapterid,question, option_a, option_b, option_c, option_d, answer FROM stockproject.Multiple_choice"
+cur.execute(sql)
+data = cur.fetchall()
 
-data_a = cur.fetchone(),
-print(data_a),
-print("============================="),
-data_all = cur.fetchall()
-print(data_all)
 
-cur.close(),
+# Close the connection
 conn.close()

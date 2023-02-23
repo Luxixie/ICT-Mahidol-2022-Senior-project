@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -213,8 +214,41 @@ export default {
                 }
         },
         submitForm() {
-
+            this.$refs.form.validate(valid => {
+            if (valid) {
+            this.EditUser();
+            this.$router.replace('/userhome'); 
+            } else {
+            this.$message({
+                showClose: true,
+                message: 'Form is invalid',
+                type: 'warning'
+            });
+            }
+            });
+            
+            console.log(this.form.firstname),
+            console.log(this.form.lastname),
+            console.log(this.form.region),
+            console.log(this.form.bod),
+            console.log(this.form.email)
         },
+        EditUser(){
+            axios.post('http://127.0.0.1:8088/editprofile', this.form).then(res => {
+            console.log(res.data)
+            if (res.data.state == 1) {
+                this.$message({
+                showClose: true,
+                message: 'Successfully modified information',
+                type: 'success'
+                });
+                          
+                } else {
+                alert('Incorrect information');
+                return false;
+                }
+            });
+        }
     },
     computed: {
         accountid() {

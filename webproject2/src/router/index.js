@@ -90,6 +90,10 @@ const router = new Router({
         path:'/portfolio',
         component:()=>import('../pages/portfolio/portfolioPage.vue')
       },
+      {
+        path:'/quiz',
+        component:()=>import('../pages/knowledge/quiz.vue')
+      },
 
       {
         path:'/stockinformation',
@@ -104,13 +108,62 @@ const router = new Router({
         component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1Home.vue')
       },
       {
+        path:'/chapter1.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1.1.vue')
+      },
+      {
+        path:'/chapter1.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1.2.vue')
+      },
+      {
+        path:'/chapter1.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1.3.vue')
+      },
+      {
+        path:'/chapter1.4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter1/chapter1.4.vue')
+      },
+      {
         path:'/chapter2',
         component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2Home.vue')
       },
       {
+        path:'/chapter2.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.1.vue')
+      },
+      {
         path:'/chapter3',
         component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3Home.vue')
+      },      
+      {
+        path:'/chapter3.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.1.vue')
       },
+      {
+        path:'/chapter3.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.2.vue')
+      },
+      {
+        path:'/chapter3.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.3.vue')
+      },
+      {
+        path:'/chapter3.4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.4.vue')
+      },
+      {
+        path:'/chapter3.5',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.5.vue')
+      },
+      {
+        path:'/chapter3.6',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.6.vue')
+      },
+      {
+        path:'/chapter3.7',
+        component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3.7.vue')
+      },
+
       {
         path:'/chapter4',
         component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4Home.vue')
@@ -123,10 +176,7 @@ const router = new Router({
         path:'/chapter6',
         component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6Home.vue')
       },
-      {
-        path:'/chapter2.1',
-        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.1.vue')
-      },
+
       {
         path:'/chapter2test',
         component:()=>import('../pages/knowledge/Chapters/Chapter2/Questions/chapter2test.vue')

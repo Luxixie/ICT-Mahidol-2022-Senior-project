@@ -95,7 +95,7 @@ export default {
           this.$router.push("/portfolio");
           break;
         case "quiz":
-          this.$router.push("/test");
+          this.$router.push("/quiz");
           break;
         case "logout":
           window.location.href = "/home";

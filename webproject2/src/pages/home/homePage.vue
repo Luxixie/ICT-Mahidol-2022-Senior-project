@@ -35,7 +35,7 @@ export default {
             this.$router.push('/markethome')
     },
     Goknowledgehome(){
-            this.$router.push('/knowledgeHome')
+        this.$router.push('/knowledgeHome')
         },
         Gobuyandsell(){
           this.$router.push('/buyandsell')
