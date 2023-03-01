@@ -11,6 +11,31 @@
             <h4 style="margin-left: 3%; margin-right: 3%;  margin-top:1%">Most people reap the richest rewards from their investments after retirement, but the sooner you start planning, the better off you will be in the future. Making even a small commitment to a different kind of investing —the financial strategies presented in this book—can put you well on your way to a longer and stronger retirement.</h4>
         
         </el-row>
+        
+        <el-row style="background: #F5EFE0;border-radius: 30px; margin-top:1%; margin-left: 3%; margin-right: 3%;"> 
+            <h2 style="margin-left: 3%;  margin-top:2%">Video part</h2>
+            <el-card style="margin-left: 20%;margin-right: 20%;" >
+            <iframe style=" height:400px;width:800px"
+                :src="videoEmbedCode"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+            </el-card>
+            
+            <el-row class="source-text">
+            <span>Title: Why Investing is the Best Way to Get Rich | Phil Town</span>
+            </el-row>
+            <el-row class="source-text">
+            <span>Author: Phil Town's Rule #1 Investing</span>
+            </el-row>
+            <el-row class="source-text">
+                Source: <a v-bind:href="linkUrl">https://youtu.be/bOVamLc5Etc</a>
+            </el-row>
+            <el-row class="source-text">
+                <span>Investing is perhaps the greatest way to have your money work for you. With the power of compounding interest, your money can grow exponentially over the years. And the earlier you start investing, the greater affect this compounding will have on your financial freedom.</span>
+            </el-row>
+        </el-row>
         <el-row style="margin-left: 4%; margin-right: 4%;margin-top:1%">
             <el-col :span="12" >
                 <el-button  @click="Goback" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Back</el-button>
