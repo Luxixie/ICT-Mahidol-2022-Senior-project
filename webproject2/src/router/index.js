@@ -43,7 +43,8 @@ const router = new Router({
         component:()=>import('../pages/knowledge/opentest.vue')
       },
       {
-        path:'/test',
+        path: '/test/:chapter',
+        props:true,
         component:()=>import('../pages/test/test.vue')
       },
       
@@ -132,6 +133,42 @@ const router = new Router({
         component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.1.vue')
       },
       {
+        path:'/chapter2.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.2.vue')
+      },
+      {
+        path:'/chapter2.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.3.vue')
+      },
+      {
+        path:'/chapter2.4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.4.vue')
+      },
+      {
+        path:'/chapter2.5',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.5.vue')
+      },
+      {
+        path:'/chapter2.6',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.6.vue')
+      },
+      {
+        path:'/chapter2.7',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.7.vue')
+      },
+      {
+        path:'/chapter2.8',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.8.vue')
+      },
+      {
+        path:'/chapter2.9',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.9.vue')
+      },
+      {
+        path:'/chapter2.10',
+        component:()=>import('../pages/knowledge/Chapters/Chapter2/chapter2.10.vue')
+      },
+      {
         path:'/chapter3',
         component:()=>import('../pages/knowledge/Chapters/Chapter3/chapter3Home.vue')
       },      
@@ -169,18 +206,91 @@ const router = new Router({
         component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4Home.vue')
       },
       {
+        path:'/chapter4.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.1.vue')
+      },
+      {
+        path:'/chapter4.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.2.vue')
+      },
+      {
+        path:'/chapter4.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.3.vue')
+      },
+      {
+        path:'/chapter4.4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.4.vue')
+      },
+      {
+        path:'/chapter4.5',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.5.vue')
+      },
+      {
+        path:'/chapter4.6',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.6.vue')
+      },
+      {
+        path:'/chapter4.7',
+        component:()=>import('../pages/knowledge/Chapters/Chapter4/chapter4.7.vue')
+      },
+      {
         path:'/chapter5',
         component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5Home.vue')
+      },
+      {
+        path:'/chapter5.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.1.vue')
+      },
+      {
+        path:'/chapter5.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.2.vue')
+      },
+      {
+        path:'/chapter5.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.3.vue')
+      },
+      {
+        path:'/chapter5.4',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.4.vue')
+      },
+      {
+        path:'/chapter5.5',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.5.vue')
+      },
+      {
+        path:'/chapter5.6',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.6.vue')
+      },
+      {
+        path:'/chapter5.7',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.7.vue')
+      },
+      {
+        path:'/chapter5.8',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.8.vue')
+      },
+      {
+        path:'/chapter5.9',
+        component:()=>import('../pages/knowledge/Chapters/Chapter5/chapter5.9.vue')
       },
       {
         path:'/chapter6',
         component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6Home.vue')
       },
-
       {
-        path:'/chapter2test',
-        component:()=>import('../pages/knowledge/Chapters/Chapter2/Questions/chapter2test.vue')
-      }
+        path:'/chapter6.1',
+        component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6.1.vue')
+      },
+      {
+        path:'/chapter6.2',
+        component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6.2.vue')
+      },
+      {
+        path:'/chapter6.3',
+        component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6.3.vue')
+      },
+
+
 
 
 

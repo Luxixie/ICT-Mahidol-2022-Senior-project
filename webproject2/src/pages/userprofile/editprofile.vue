@@ -14,6 +14,10 @@
             <el-row  style="background: #1F3D70; border-radius: 50px;width: 150px; margin-top:5%">
                 <span style="margin-left:15%;font-size: 25px;color: #F5EFE0;">Account</span>
             </el-row>
+            <el-row label="First Name" style="font-weight: bold; color: aliceblue;" prop="firstname" >
+                <span id="regist-input"   @blur="firstnameLengthValidation"
+                    style="width: 100%;">{{accountid}}</span>
+            </el-row>
         <el-form id="regist-form" ref="form" :model="form" :rules="rules" >
             <el-form-item label="First Name" style="font-weight: bold; color: aliceblue;" prop="firstname" >
                 <el-input id="regist-input" placeholder="First Name" v-model="form.firstname" @blur="firstnameLengthValidation"
@@ -34,7 +38,7 @@
             </el-form-item>
             <el-form-item label="Birth Date" style="font-weight: bold; color: aliceblue;">
                 <!-- <el-input id="regist-input" placeholder="Birth Date" v-model="form.name" ></el-input> -->
-                <el-date-picker  id="regist-input" style="width: 100%;" v-model="form.bod" type="date" placeholder="Birth Date">
+                <el-date-picker  id="regist-input" style="width: 100%;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="Birth Date">
                 </el-date-picker>
             </el-form-item>
             <el-form-item prop="email" label="Email" style="font-weight: bold; color: aliceblue;">
@@ -175,6 +179,7 @@ export default {
                 { name: 'Turkey', code: 'TR' },
             ],
             form: {
+                accountid:'',
                 firstname: '',
                 lastname: '',
                 region: '',
@@ -226,7 +231,7 @@ export default {
             });
             }
             });
-            
+            console.log(this.form.accountid),
             console.log(this.form.firstname),
             console.log(this.form.lastname),
             console.log(this.form.region),
@@ -252,7 +257,8 @@ export default {
     },
     computed: {
         accountid() {
-            return this.$store.state.accountid;
+            this.form.accountid = this.$store.state.accountid
+            
         },
         username() {
             return this.$store.state.username;

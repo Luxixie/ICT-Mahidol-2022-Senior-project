@@ -35,7 +35,10 @@ export default {
   },
   methods:{
       Gotest(){
-          this.$router.push('/knowledgeHome')
+          this.$router.push({
+              path:"/test/"+3,
+              params:{chapter:3}
+          })
       },
       Goback(){
           this.$router.push('/chapter3')

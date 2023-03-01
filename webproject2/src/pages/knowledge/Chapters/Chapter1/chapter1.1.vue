@@ -21,6 +21,7 @@
         </el-row>
 
 
+
         
     </div>
 </template>
@@ -30,17 +31,23 @@
 export default {
   data() {
     return {
-      videoEmbedCode: 'https://www.youtube.com/embed/d3NWBvKQEdE',
-    };
+      videoEmbedCode: 'https://www.youtube.com/embed/bOVamLc5Etc',
+      };
   },
   methods:{
       Gotest(){
           this.$router.push('/chapter1.2')
       },
       Goback(){
-          this.$router.push('/chapter3')
+          this.$router.push('/chapter1')
       }
-  },
+  },    
+  computed: {
+    linkUrl() {
+      // return the URL for the link
+      return 'https://youtu.be/bOVamLc5Etc';
+    },
+    }
   
 };
 

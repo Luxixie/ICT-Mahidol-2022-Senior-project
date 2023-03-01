@@ -98,111 +98,13 @@
 </template>
 
 <script>
-var quiz = {
-    user: "test",
-    questions: [
-        {
-            text: "How much money do I need to start investing in stocks?",
-            responses: [
-                { text: "100000$" },
-                { text: "50000$"},
-                { text: "Any",correct: true },
-                { text: "Answer 4" }
-            ]
-        },
-        {
-            text: "Which should I buy, stocks or bonds?",
-            responses: [
-                { text: "Stock " },
-                { text: "Bonds "},
-                { text: "Both of them " , correct: true },
-                { text: "None of them " }
-            ]
-        },
-        {
-            text: "How do I know which stocks to buy?",
-            responses: [
-                { text: "Value, Growth, Profitability, News, Comfort level", correct: true },
-                { text: "Value, guess, profitability, news" },
-                { text: "Value, guesswork, intuition, news" },
-                { text: "guesswork, Growth, Profitability, News, .Comfort level" }
-            ]
-        },
-        {
-            text: "Which one is largest market around the world?",
-            responses: [
-                { text: "American Stock Exchange" },
-                { text: "Chicago Board Options Exchange (CBOE)", correct: true },
-                { text: "Chicago Mercantile Exchange (CME)" },
-                { text: "New York Stock Exchange (NYSE)" }
-            ]
-        },
-        {
-            text: "This is question 5",
-            responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-    
-            ]
-        },
-        {
-            text:
-                "This is question 6",
-            responses: [
-            { text: "Answer 1" },
-                { text: "Answer 2", correct: true },
-                { text: "Answer 3" },
-                { text: "Answer 4" }
-            ]
-        },
-        {
-            text: "A market in which prices are ring",
-            responses: [
-                { text: "Bull market " , correct: true},
-                { text: "seller's market"},
-                { text: "Expanding market" },
-                { text: "Primary mortgage market" }
-            ]
-        },
-        {
-            text: "Stocks that are considered highly risky. They are priced low because they have not yet proven themselves in the market",
-            responses: [
-                { text: "Common stock" },
-                { text: "Penny stock", correct: true },
-                { text: "Cyclical stock" },
-                { text: "Stock split" }
-            ]
-        },
-        {
-            text:
-                "A sum of money from a company's profits paid regularly (typically quarterly) to its sharholders",
-            responses: [
-                { text: "Stockholder" },
-                { text: "Preferred stock"},
-                { text: "Stock" },
-                { text: "Dividend" , correct: true }
-            ]
-        },
-        {
-            text:
-                "A sum of money from a company's profits paid regularly (typically quarterly) to its sharholders",
-            responses: [
-                { text: "Stockholder" },
-                { text: "Preferred stock"},
-                { text: "Stock" },
-                { text: "Dividend" , correct: true }
-            ]
-        },
-    ]
-},
-    userResponseSkelaton = Array(quiz.questions.length).fill(null);
-
+import  axios from "axios"
 export default {
     data() {
         return {
-            quiz: quiz,
+            quiz: {},
             questionIndex: 0,
-            userResponses: userResponseSkelaton,
+            userResponses: {},
             isActive: false
         }
     },
@@ -245,7 +147,25 @@ export default {
 
             //return this.userResponses.filter(function(val) { return val }).length;
         }
-    }
+    },
+    created() {
+        console.log(this.$route.params.chapter)
+
+        axios.post('http://127.0.0.1:8088/question/' + this.$route.params.chapter).then(res => {
+
+
+            var quiz = {
+                user: "test",
+                questions: res.data
+            }
+
+            this.quiz = quiz
+            this.userResponseSkelaton = Array(this.quiz.questions.length).fill(null);
+            console.log(this.quiz)
+            console.log(this.userResponseSkelaton)
+        });
+
+    },
 
 }
 </script>

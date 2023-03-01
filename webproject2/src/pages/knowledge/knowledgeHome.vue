@@ -18,9 +18,9 @@
         <el-col :span="7" v-for="item in items" :key="item.id" :offset="1" style="margin-top: 1%;">
             <el-card :body-style="{ padding: '0px' }" style="margin-top: 3%; background: #F5EFE0;">
                 <div style="padding: 14px;">
-                    <img width="60px" height="60px" style="float: ; margin-top: 5%; " src="./images/2.png"/>
+                    <img width="60px" height="60px" :src="item.image" style="float: ; margin-top: 5%; " />
                     <div style="float:left; margin-left: 5%; width: 78%">
-                            <el-link :class="topFont" @click="GoLearn">{{item.ChapterName}}</el-link>
+                            <el-link :class="topFont" @click="GoLearn(item.path)">{{item.ChapterName}}</el-link>
                     </div>
                 </div>
             </el-card>
@@ -33,27 +33,26 @@
 </template>
 
 <script>
+
+
 export default {
     data() {
         return {
             items: [
-                { id: '1', image:"./images/1.jpeg" ,ChapterName: 'Chapter 1 Reasons to Invest',path: '/chapter1' },
-                { id: '2', image:"./images/2.png",ChapterName: 'Chapter 2 Fundamentals of the Stock Market',path: '/chapter2'},
-                { id: '3', image:"./images/3.png" ,ChapterName: 'Chapter 3 Types of Investments', path: '/chapter3'},
-                { id: '4', image:"./images/4.png" ,ChapterName: 'Chapter 4 Building Perfect Portfolio', path: '/chapter4'},
-                { id: '5',  image:"./images/4.png" ,ChapterName: 'Chapter 5 Charts and Analysis',path: '/chapter5'},
-                { id: '6',  image:"./images/4.png" ,ChapterName: 'Chapter 6 Stock term',path: '/chapter6'},
+                { id: '1', image:require("../knowledge/images/2.png") ,ChapterName: 'Chapter 1 Reasons to Invest',path: '/chapter1' },
+                { id: '2', image:require("../knowledge/images/3.png"),ChapterName: 'Chapter 2 Fundamentals of the Stock Market',path: '/chapter2'},
+                { id: '3', image:require("../knowledge/images/4.png") ,ChapterName: 'Chapter 3 Types of Investments', path: '/chapter3'},
+                { id: '4', image:require("../knowledge/images/5.png"),ChapterName: 'Chapter 4 Building Perfect Portfolio', path: '/chapter4'},
+                { id: '5',  image:require("../knowledge/images/6.jpeg") ,ChapterName: 'Chapter 5 Charts and Analysis',path: '/chapter5'},
+                { id: '6',  image:require("../knowledge/images/7.png") ,ChapterName: 'Chapter 6 Stock term',path: '/chapter6'},
 
             ],
                     
         };
     },
     methods:{
-        Gotest(){
-            this.$router.push('/chapter2')
-        },
-        GoLearn(){
-            this.$router.push('/chapter3')
+        GoLearn(path){
+            this.$router.push(path)
         }
     }
 }

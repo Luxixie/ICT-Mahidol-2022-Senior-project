@@ -66,7 +66,7 @@
                               </div>
                               <div style="float:right; margin-top: 2%;">
                                   <div>
-                                      <el-button size="medium" type="primary" @click="GoLearn" round
+                                      <el-button size="medium" type="primary" @click="GoLearn(item.path)" round
                                           style="width: 90%;">LEARN</el-button>
                                   </div>
                               </div>
@@ -88,7 +88,7 @@
                               </div>
                               <div style="float:right; margin-top: 2%;">
                                   <div>
-                                      <el-button size="medium" type="primary" @click="GoLearn" round
+                                      <el-button size="medium" type="primary" @click="GoLearn(item.path)" round
                                           style="width: 90%;">LEARN</el-button>
                                   </div>
                               </div>
@@ -118,28 +118,31 @@ export default {
           id: "1",
           QuestionID: "Question #1:",
           QuestionrName: "How do I start investing in stocks?",
+          path:'/chapter2.1'
         },
         {
           id: "2",
           QuestionID: "Question #2:",
-          QuestionrName:
-            "How much money do I need to start investing in stocks?",
+          QuestionrName:"How much money do I need to start investing in stocks?",
+          path:'/chapter2.2'
         },
         {
           id: "3",
           QuestionID: "Question #3:",
-          QuestionrName:
-            "I want to buy Apple, but the stock costs several hundred dollars per share, and I don’t have enough money to buy 100 shares. Should I stick to cheaper stocks?",
+          QuestionrName:"I want to buy Apple, but the stock costs several hundred dollars per share, and I don’t have enough money to buy 100 shares. Should I stick to cheaper stocks?",
+          path:'/chapter2.3'
         },
         {
           id: "4",
           QuestionID: "Question #4:",
           QuestionrName: "Which should I buy, stocks or bonds?",
+          path:'/chapter2.4'
         },
         {
           id: "5",
           QuestionID: "Question #5:",
           QuestionrName: "How do I know which stocks to buy?",
+          path:'/chapter2.5'
         },
       ],
       items2: [
@@ -147,38 +150,40 @@ export default {
           id: "6",
           QuestionID: "Question #6:",
           QuestionrName: "How do I know when to sell a stock?",
+          path:'/chapter2.6'
         },
         {
           id: "7",
           QuestionID: "Question #7:",
-          QuestionrName:
-            "My stock has declined, but I can’t find any news on it. What caused the dip?",
+          QuestionrName:"My stock has declined, but I can’t find any news on it. What caused the dip?",
+          path:'/chapter2.7'
         },
         {
           id: "8",
           QuestionID: "Question #8:",
           QuestionrName: "How do I track my portfolio?",
+          path:'/chapter2.8'
         },
         {
           id: "9",
           QuestionID: "Question #9:",
-          QuestionrName:
-            "Should I subscribe to a newsletter or go to a broker for help picking stocks? Or am I better of making my own investment decisions and not paying for advice?",
+          QuestionrName:"Should I subscribe to a newsletter or go to a broker for help picking stocks? Or am I better of making my own investment decisions and not paying for advice?",
+          path:'/chapter2.9'
         },
         {
           id: "10",
           QuestionID: "Question #10:",
-          QuestionrName:
-            "The stock market is falling, but I like the looks of Acme Widget. Should I buy the shares now or wait until the price dips further?",
+          QuestionrName:"The stock market is falling, but I like the looks of Acme Widget. Should I buy the shares now or wait until the price dips further?",
+          path:'/chapter2.10'
         },
 
       ],
     };
   },
   methods: {
-    GoLearn() {
-      this.$router.push("/chapter2.1");
-    },
+    GoLearn(path){
+      this.$router.push(path)
+    }
   },
 };
 </script>

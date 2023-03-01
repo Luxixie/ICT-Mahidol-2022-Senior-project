@@ -32,7 +32,7 @@
               <span>Description:</span>
             </div>
             <div style="margin-left: 3%;font-size:20px">
-              <span >xxxxxxxxxxxxxxx</span>
+              <span >This chapter looks at six of the most famous ways to invest.</span>
             </div>
           </div>
           <div style="background:#F5EFE0; height: 50% ;border-radius: 30px;" >
@@ -40,7 +40,7 @@
               <span>Objectives of Learning：</span>
             </div>
             <div style="margin-left: 3%;font-size:20px">
-              <span>xxxxxxxxxxxxxxx</span>
+              <span>Know 6 ways to invest.</span>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
                               </div>
                               <div style="float:right; margin-top: 2%;">
                                   <div>
-                                      <el-button size="medium" type="primary" @click="GoLearn" round
+                                      <el-button size="medium" type="primary" @click="GoLearn(item.path)" round
                                           style="width: 90%;">LEARN</el-button>
                                   </div>
                               </div>
@@ -101,46 +101,52 @@ export default {
           id: "1",
           titleID: "01",
           title: "Stocks",
+          path:'/chapter3.1'
         },
         {
           id: "2",
           titleID: "02",
-          title:
-            "Bonds",
+          title:"Bonds",
+          path:'/chapter3.2'
         },
         {
           id: "3",
           titleID: "03",
           title:"Mutual Funds",
+          path:'/chapter3.3'
         },
         {
           id: "4",
           titleID: "04:",
           title: "Exchange-Traded Funds",
+          path:'/chapter3.4'
         },
         {
           id: "5",
           titleID: "05",
           title: "Certificates of Deposit",
+          path:'/chapter3.5'
         },
         {
           id: "6",
           titleID: "06",
           title: "Alternative Assets",
+          path:'/chapter3.6'
         },
         {
           id: "7",
           titleID: "07",
           title:"Weighing the Option",
+          path:'/chapter3.7'
         }
 
       ],
     };
   },
   methods: {
-    GoLearn() {
-      this.$router.push("/chapter3.2");
-    },
+        GoLearn(path){
+            this.$router.push(path)
+        }
   },
 };
 </script>

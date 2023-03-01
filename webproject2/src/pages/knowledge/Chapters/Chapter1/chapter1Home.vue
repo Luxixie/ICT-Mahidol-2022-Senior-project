@@ -32,7 +32,7 @@
               <span>Description:</span>
             </div>
             <div style="margin-left: 3%;font-size:20px">
-              <span >xxxxxxxxxxxxxxx</span>
+              <span >In this section you will learn why you should choose to invest in stocks and how to set investment goals.</span>
             </div>
           </div>
           <div style="background:#F5EFE0; height: 50% ;border-radius: 30px;" >
@@ -40,7 +40,7 @@
               <span>Objectives of Learning：</span>
             </div>
             <div style="margin-left: 3%;font-size:20px">
-              <span>xxxxxxxxxxxxxxx</span>
+              <span>Understand the value of investing in stocks and set investment goals.</span>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
     <el-row>
         <el-col :span="10" :offset="1" style="background: #F5EFE0; margin-left:2%;border-radius: 30px;width:600px; height: 330px; margin-top: 2%;">
         <div style="margin-left:3%;margin-top:2%; font-size:25px ">
-            <span>Chapter 3 outline</span>
+            <span>Chapter 1 outline</span>
         </div>
         <el-col :span="18" offset="1" style="margin-left:10%">
           <el-row :span="4" v-for="(item, index) in items" :key="o" :offset="1" style="margin-left:4%;"  >
@@ -66,7 +66,7 @@
                               </div>
                               <div style="float:right; margin-top: 2%;">
                                   <div>
-                                      <el-button size="medium" type="primary" @click="GoLearn" round
+                                      <el-button size="medium" type="primary" @click="GoLearn(item.path)" round
                                           style="width: 90%;">LEARN</el-button>
                                   </div>
                               </div>
@@ -98,34 +98,26 @@ export default {
     return {
       items: [
         {
-          id: "1",
-          titleID: "01",
-          title: "Opening",
+          id: "1",titleID: "01",title: "Opening",path:'/chapter1.1'
         },
         {
-          id: "2",
-          titleID: "02",
-          title:
-            "Common Motivations",
+          id: "2", titleID: "02",title: "Common Motivations",path:'/chapter1.2'
         },
         {
-          id: "3",
-          titleID: "03",
-          title:"Don’t Kid Yourself",
+          id: "3",titleID: "03",title: "Attach importance to investment",path:'/chapter1.3'
         },
         {
-          id: "4",
-          titleID: "04:",
-          title: "Set Attainable Goals",
+          id: "4",titleID: "04:",title: "Set Attainable Goals",path:'/chapter1.4'
         },
 
       ],
     };
   },
   methods: {
-    GoLearn() {
-      this.$router.push("/chapter1.1");
-    },
+    GoLearn(path){
+      this.$router.push(path)
+    }
+
   },
 };
 </script>
