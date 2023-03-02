@@ -48,7 +48,7 @@
     </el-row>
 
     <el-row>
-        <el-col :span="10" :offset="1" style="background: #F5EFE0; margin-left:2%;border-radius: 30px;width:600px; height: 520px; margin-top: 2%;">
+        <el-col :span="10" :offset="1" style="background: #F5EFE0; margin-left:2%;border-radius: 30px;width:600px; height: 250px; margin-top: 2%;">
         <div style="margin-left:3%;margin-top:2%; font-size:25px ">
             <span>Chapter 3 outline</span>
         </div>
@@ -75,16 +75,19 @@
           </el-row>
         </el-col>
         </el-col>
-        <el-col :span="2" class="container" style="margin-top:6%;margin-left:5%">
+        <el-col :span="2" class="container" style="margin-top:2%;margin-left:5%">
         
-                <img src="./images/2.jpg" class="image" />
+                <img src="./images/1.jpg" class="image" />
            
         </el-col>
 
       
     </el-row>
+
+
     <el-row>
-      <h5 style="margin-left: 3%;margin-right: 3%;font-family: 'Inter';font-style: normal;font-weight: 300;font-size: 25px;line-height: 36px;color: #FFFFFF;">From book: Stock Market Investing for Beginners: Essentials to Start Investing Successfully, Tycho Tycho Press, Callisto Media Incorporated, 2013</h5>
+        <h5 style="margin-left: 3%;margin-right: 3%;font-family: 'Inter';font-style: normal;font-weight: 300;font-size: 25px;line-height: 36px;color: #FFFFFF;">Course resource: </h5> 
+        <h5 style="margin-left: 3%;margin-right: 3%;font-family: 'Inter';font-style: normal;font-weight: 300;font-size: 25px;line-height: 36px;color: #FFFFFF;">1. Website: 38 Must-Know Stock Trading Terms for Beginners  <a v-bind:href="linkUrl">https://www.timothysykes.com/blog/trading-terms-you-need-to-know/</a>. Last updated on January 28, 2023</h5>
     </el-row>
 
    
@@ -123,6 +126,14 @@ export default {
             this.$router.push(path)
         }
   },
+  computed: {
+    linkUrl() {
+      // return the URL for the link
+      return 'https://www.timothysykes.com/blog/trading-terms-you-need-to-know/';
+    },
+
+
+    }
 };
 </script>
 
@@ -149,7 +160,7 @@ export default {
 }
 .container {
     width: 50%;
-    height: 400px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
