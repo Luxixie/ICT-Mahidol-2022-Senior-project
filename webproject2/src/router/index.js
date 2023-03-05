@@ -285,10 +285,6 @@ const router = new Router({
         path:'/chapter6.2',
         component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6.2.vue')
       },
-      {
-        path:'/chapter6.3',
-        component:()=>import('../pages/knowledge/Chapters/Chapter6/chapter6.3.vue')
-      },
 
 
 

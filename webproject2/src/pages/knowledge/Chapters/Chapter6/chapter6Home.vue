@@ -112,12 +112,7 @@ export default {
           title:"Stock term(2)",
           path:'/chapter6.2'
         },
-        {
-          id: "3",
-          titleID: "03",
-          title:"Stock term(3)",
-          path:'/chapter6.3'
-        },
+      
       ],
     };
   },
