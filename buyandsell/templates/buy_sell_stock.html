@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buy/Sell Stock</title>
+</head>
+<body>
+    <h1>Buy/Sell Stock</h1>
+    <form method="post" action="{{ url_for('buy_sell_stock') }}">
+        <label>Stock Ticker:</label>
+        <input type="text" name="stock_ticker"><br><br>
+        <label>Shares:</label>
+        <input type="text" name="shares"><br><br>
+        <label>Action:</label>
+        <select name="action">
+            <option value="buy">Buy</option>
+            <option value="sell">Sell</option>
+        </select><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

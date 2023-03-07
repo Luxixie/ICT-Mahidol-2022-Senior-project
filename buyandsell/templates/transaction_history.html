@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+</head>
+<body>
+    <h1>Transaction History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Symbol</th>
+                <th>Type</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.symbol }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.shares }}</td>
+                <td>{{ transaction.price }}</td>
+                <td>{{ transaction.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ transactions }}
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+    <br>
+    <a href="{{ url_for('buy_sell_stock') }}">Buy/Sell Stocks</a>
+</body>
+</html>

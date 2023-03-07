@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="post" action="{{ url_for('register') }}">
+        <label>Username:</label>
+        <input type="text" name="username"><br><br>
+        <label>Password:</label>
+        <input type="password" name="password"><br><br>
+        <label>Email:</label>
+        <input type="email" name="email"><br><br>
+        <label>Date of Birth:</label>
+        <input type="date" name="dob"><br><br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
