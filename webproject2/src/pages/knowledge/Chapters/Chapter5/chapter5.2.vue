@@ -108,20 +108,39 @@
 
 
 <script>
+import axios from "axios";
 export default {
-  data() {
-    return {
-      videoEmbedCode: 'https://www.youtube.com/embed/jX75o5BOZnc',  
-    };
-  },
-  methods:{
-      GoNext(){
-          this.$router.push('/chapter5.3')
-      },
-      Goback(){
-          this.$router.push('/chapter5')
-      }
-  },
+    data() {
+        return {
+            videoEmbedCode: 'https://www.youtube.com/embed/jX75o5BOZnc',  
+            };
+        },
+    methods:{
+        GoNext(){
+            this.$router.push('/chapter5.3')
+        },
+        Goback(){
+            this.$router.push('/chapter5')
+        }
+        },
+    created(){
+        
+            var userid = this.$store.state.accountid;
+            var chapterid = 5;
+            var subchapterindex = 2;
+            console.log(userid);
+            console.log(chapterid);
+            console.log(subchapterindex);
+            var record = {};
+            record.userid = userid;
+            record.chapterid = chapterid;
+            record.subchapterindex = subchapterindex;
+
+            axios.post("http://127.0.0.1:8088/knowledge/recordcheck", record).then(res => {
+                                console.log(res.data)}).finally(()=>{
+
+                                });
+        }, 
     computed: {
     linkUrl() {
       // return the URL for the link

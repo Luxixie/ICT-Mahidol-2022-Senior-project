@@ -1,6 +1,8 @@
 from crypt import methods
 from re import A, I
+from unittest import result
 from urllib import response
+from webbrowser import get
 from flask import Flask,request,jsonify,session
 from flask_cors import *
 import db
@@ -136,5 +138,72 @@ def question(symbol):
     return quizzes
 
 
+@app.route("/knowledge/recordcheck",methods=['POST'])
+def createRecord():
+    #1.check record 
+    #2. if record is null then create a new learning record 
+    details =  request.get_data()
+    result = json.loads(details)
+    print(result)
+    userid = result['userid']
+    if userid is None:
+        return jsonify(status = "Success")
+
+    chapterid = result['chapterid']
+    subchapterindex = result['subchapterindex']
+    sql = f"SELECT * FROM stockproject.subchapters where chapters_id = {chapterid} and subchapterIndex = {subchapterindex}"
+    datas = db.query_data(sql)
+    print(datas)
+    print(len(datas))
+    if len(datas) == 1:
+         subid  = datas[0]['subchapters_id']
+         print(subid)
+         sql = f"SELECT * FROM stockproject.Learning_process where chapter_id = {chapterid} and subchapters_id= {subid} and AccountId = {userid}"
+         datas = db.query_data(sql)
+         if len(datas) == 0:
+            print("insert")
+            sql = f"INSERT INTO `stockproject`.`Learning_process` (`AccountId`, `chapter_id`, `subchapters_id`,`isLearned`) VALUES ({userid},{chapterid},{subchapterindex},'1');"
+            db.insert_or_update_data(sql)
+         elif len(datas) == 1:
+              print(datas[0])
+              lsid = datas[0]["Learning_process id"]
+              print("update")
+              print(lsid)
+              sql = f"UPDATE `stockproject`.`Learning_process` SET `isLearned` = '1' WHERE (`Learning_process id` = {lsid});"
+              db.insert_or_update_data(sql)
+
+        
+
+    return jsonify(status = "Success")
+
+@app.route("/knowledge/getlearningprocess/<string:userid>",methods=['POST'])
+def getlearningprocess(userid):
+    #1.forearch chapters
+    learningResult = []
+    sql = f"SELECT * FROM stockproject.chapters"
+    datas = db.query_data(sql)
+    for chapter in datas:
+        print(chapter)
+        chapterprocess = {
+              "chapterid":None,
+              "learningprocess":None
+        }
+        chapterid = chapter["chapters id"]
+        chaptername = chapter['ch_name']
+        subchaptersCount = chapter['ch_count']
+        print(f"id {chapterid}----- name : {chaptername} ---- count :{subchaptersCount}")
+        print(userid)
+        sql = f"SELECT * FROM stockproject.Learning_process where Accountid = {userid} and chapter_id = {chapterid}"
+        print(sql)
+        datas = db.query_data(sql)
+        print(datas)
+        chapterprocess['chapterid'] = chapterid
+        resultcount =  len(datas)
+        print(subchaptersCount) 
+        print(resultcount/subchaptersCount)
+        chapterprocess["learningprocess"] = (resultcount/subchaptersCount)*100
+        learningResult.append(chapterprocess)
+    return learningResult
+    
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

@@ -50,6 +50,7 @@
 
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -63,7 +64,25 @@ export default {
       Goback(){
           this.$router.push('/chapter2')
       }
-  },
+    },
+    created(){
+        
+            var userid = this.$store.state.accountid;
+            var chapterid = 2;
+            var subchapterindex = 4;
+            console.log(userid);
+            console.log(chapterid);
+            console.log(subchapterindex);
+            var record = {};
+            record.userid = userid;
+            record.chapterid = chapterid;
+            record.subchapterindex = subchapterindex;
+
+            axios.post("http://127.0.0.1:8088/knowledge/recordcheck", record).then(res => {
+                                console.log(res.data)}).finally(()=>{
+
+                                });
+        }, 
     computed: {
     linkUrl() {
       // return the URL for the link
