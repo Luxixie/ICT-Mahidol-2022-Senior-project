@@ -11,10 +11,10 @@
                  <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today‘s profit</span>
             </el-row>
              <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:47%;color: red">+0 {{ profit }}</span>
+                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0 {{ profit }} BAHT</span>
             </el-row>
             <el-row>
-                <span style="font-weight: bold;margin-left:44%;">Holding profits +0 {{sumprofit}}</span>
+                <span style="font-weight: bold;margin-left:40%;">Holding profits +0 {{sumprofit}} BAHT</span>
             </el-row>
             <el-row>
                 <el-col :span="11">
@@ -22,7 +22,7 @@
                         <span style="font-weight: bold;margin-left:46%;">Total money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:50%;">20,000 {{todaymoney}}</span>
+                        <span style="font-weight: bold;margin-left:45%;">20,000 {{todaymoney}} BAHT</span>
                     </el-row>
                 </el-col>
                 <el-col :span="11">
@@ -30,7 +30,7 @@
                         <span style="font-weight: bold;margin-left:44%;">Avilable money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:50%;">{{avilablemoney}}{{ 18000 | numberWithCommas }}</span>
+                        <span style="font-weight: bold;margin-left:45%;">{{avilablemoney}}{{ 18000 | numberWithCommas }} BAHT</span>
                     </el-row>
                 </el-col>
             </el-row>

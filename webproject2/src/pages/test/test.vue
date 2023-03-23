@@ -132,6 +132,8 @@ export default {
         },
         // Return "true" count in userResponses
         score: function () {
+    
+            
             var score = 0;
             for (let i = 0; i < this.userResponses.length; i++) {
                 if (
@@ -143,13 +145,25 @@ export default {
                     score = score + 1;
                 }
             }
+            var id = this.$store.state.accountid;
+            var chapter = this.$route.params.chapter
+            var reuslt ={
+                chapter:chapter,
+                userid:id,
+                score:score
+            }
+
+            console.log(reuslt)
+            axios.post('http://127.0.0.1:8088/quizinput/', reuslt)
             return score;
+            
 
             //return this.userResponses.filter(function(val) { return val }).length;
         }
     },
     created() {
         console.log(this.$route.params.chapter)
+        
 
         axios.post('http://127.0.0.1:8088/question/' + this.$route.params.chapter).then(res => {
 

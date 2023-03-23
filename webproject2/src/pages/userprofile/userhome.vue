@@ -24,7 +24,7 @@
                     <span class="line-text" >Username: </span><span style="color: yellow; font-size:20px">{{username }} </span>
             </el-row>
             <el-row  class="line">
-                    <span class="line-text" >Region:  </span><span style="color: yellow; font-size:20px">{{ region}}</span>
+                    <span class="line-text" >Country:  </span><span style="color: yellow; font-size:20px">{{ region}}</span>
             </el-row>
             <el-row  class="line">
                     <span class="line-text" >Birthdate: </span><span style="color: yellow; font-size:20px">{{ birthdate}}  </span>

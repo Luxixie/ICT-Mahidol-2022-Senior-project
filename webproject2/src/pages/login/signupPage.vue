@@ -31,17 +31,20 @@
                 <el-input id="regist-input" placeholder="Email" v-model="form.email" type="email"></el-input>
             </el-form-item>
             <el-form-item label="Password" style="font-weight: bold; color: aliceblue;" prop="password">
-                <el-input id="regist-input" placeholder="Password" v-model="form.password" @blur="passwordValidation"></el-input>
+                <el-input id="regist-input" placeholder="Password" show-password v-model="form.password" @blur="passwordValidation"></el-input>
+                    <span v-if="passwordError" class="error">{{ passwordError }}</span>
+
             </el-form-item>
 
             <el-form-item label="Confirm Password" style="font-weight: bold; color: aliceblue;" prop="password">
-                <el-input id="regist-input" placeholder="Confirm Password" v-model="form.confirmpassword"  @blur="passwordValidation"></el-input>
+                <el-input id="regist-input" placeholder="Confirm Password" show-password v-model="form.confirmpassword"  @blur="passwordValidation"></el-input>
+                 <span v-if="confirmPasswordError" class="error">{{ confirmPasswordError }}</span>
             </el-form-item>
             <el-form-item>
 
             </el-form-item>
             <el-form-item>
-                <el-button round type="warning" @click="submitForm" style="width: 45%; margin-left: 25%;">Create User</el-button>
+                <el-button round type="warning" @click="submitForm" style="width: 45%; margin-left: 25%;">Create Account </el-button>
 
             </el-form-item>
         </el-form>
@@ -177,7 +180,9 @@ export default {
                 bod: '',
                 email: '',
                 password: '',
-                confirmpassword: ''
+                confirmpassword: '',
+                passwordError: '',
+                confirmPasswordError: ''
             },            
             rules:{
                 email: [
@@ -215,15 +220,44 @@ export default {
                 callback();
                 }
         },
-        passwordValidation(rule, value, callback) {
-            const numberReg = /\d/;
-            const symbolReg = /[!@#$%^&*(),.?":{}|<>]/;
-            if (!numberReg.test(value) || !symbolReg.test(value)) {
-                callback(new Error("Password must contain a number and symbol"));
-                } else {
-                callback();
-                }
-            },
+
+        validatePassword() {
+        if (this.form.password === this.form.confirmPassword) {
+            console.log(this.form.password);
+            console.log(this.form.confirmPassword);
+            if (this.form.password.length < 8) {
+            console.log("Passwords do not longer than 8");
+            return false;
+            }
+
+   
+            if (!/\d/.test(this.form.password)) {
+            console.log("Passwords do not include number");
+            return false;
+            }
+
+  
+            if (!/[!@#$%^&*(),.?":{}|<>]/g.test(this.form.password)) {
+            console.log("Passwords do not include symbol");
+            return false;
+            }
+
+            if (
+            !/[a-z]/g.test(this.password) ||
+            !/[A-Z]/g.test(this.form.password)
+            ) {
+            console.log(
+                "Passwords do not include at least one uppercase letter and one lowercase letter"
+            );
+            return false;
+            }
+
+      
+            return true;
+        } else {
+            console.log("Passwords do not match");
+        }
+        },
         submitForm() {
             this.$refs.form.validate(valid => {
             if (valid) {

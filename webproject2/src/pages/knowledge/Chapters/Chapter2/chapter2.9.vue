@@ -38,7 +38,7 @@ export default {
   },
   methods:{
       GoNext(){
-          this.$router.push('/chapter2.9')
+          this.$router.push('/chapter2.10')
       },
       Goback(){
           this.$router.push('/chapter2')

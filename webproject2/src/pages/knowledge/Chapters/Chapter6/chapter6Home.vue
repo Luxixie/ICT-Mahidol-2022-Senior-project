@@ -50,7 +50,7 @@
     <el-row>
         <el-col :span="10" :offset="1" style="background: #F5EFE0; margin-left:2%;border-radius: 30px;width:600px; height: 250px; margin-top: 2%;">
         <div style="margin-left:3%;margin-top:2%; font-size:25px ">
-            <span>Chapter 3 outline</span>
+            <span>Chapter 6 outline</span>
         </div>
         <el-col :span="18" offset="1" style="margin-left:10%">
           <el-row :span="4" v-for="(item, index) in items" :key="o" :offset="1" style="margin-left:4%"  >

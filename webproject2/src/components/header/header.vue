@@ -37,6 +37,9 @@
             <el-dropdown-item icon="el-icon-tickets" command="quiz"
               >Quiz review</el-dropdown-item
             >
+            <el-dropdown-item icon="el-icon-s-management" command="Lprogress"
+              >Learning progress</el-dropdown-item
+            >
             <el-dropdown-item icon="el-icon-refresh-left" command="logout"
               >Log out</el-dropdown-item
             >
@@ -95,7 +98,10 @@ export default {
           this.$router.push("/portfolio");
           break;
         case "quiz":
-          this.$router.push("/quiz");
+          this.$router.push("/quizreview");
+          break;
+        case "Lprogress":
+          this.$router.push("/Learningprogress");
           break;
         case "logout":
           window.location.href = "/home";

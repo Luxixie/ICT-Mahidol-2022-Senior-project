@@ -15,7 +15,7 @@
       </div>
     </el-row>
     <el-row>
-      <el-col  :span=8> 
+      <el-col  :span="8"> 
         <div  id="title" >
           <div style=" margin-left: 5%; ">
             <span>Chapter 4:</span>

@@ -50,35 +50,35 @@
             </el-row>
 
             <el-row class="dataSummaryItem">
-              <span>Previous Close:</span>
+              <span>Currency: </span>
               <span class="dataSummaryItemValue">12.10</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Open:</span>
-              <span class="dataSummaryItemValue">12.10</span>
+              <span>High: </span>
+              <span class="dataSummaryItemValue">10</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Ask:</span>
-              <span class="dataSummaryItemValue">11.90 x 0</span>
+              <span>Low: </span>
+              <span class="dataSummaryItemValue">9 </span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Bid:</span>
-              <span class="dataSummaryItemValue">12.00 x 0</span>
+              <span>Exchange: </span>
+              <span class="dataSummaryItemValue">12.00</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Day's Range:</span>
-              <span class="dataSummaryItemValue">11.90 - 12.30</span>
+              <span>Last price: </span>
+              <span class="dataSummaryItemValue">12</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>52 Week Range:</span>
-              <span class="dataSummaryItemValue">10.30 - 25.25</span>
+              <span>Last Volume: </span>
+              <span class="dataSummaryItemValue">10000</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Volume:</span>
-              <span class="dataSummaryItemValue">2,951,456</span>
+              <span>Open: </span>
+              <span class="dataSummaryItemValue">8:00</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Avg. Volume:</span>
+              <span>Previous Close: </span>
               <span class="dataSummaryItemValue">6,293.048</span>
             </el-row>
 
@@ -213,104 +213,47 @@
             <el-row>
               <el-col :span="11" style=" height: 450px; ">
                 <el-row>
-                  <span style="float: left; " class="statisticsItem">Market Cap(intrady)</span>
+                  <span style="float: left; " class="statisticsItem">QuoteType</span>
                   <span style="float: right;" class="statisticsItemValue">7.63B</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Enterprise Value</span>
+                  <span style="float: left;" class="statisticsItem">Ten Day Average Volume</span>
                   <span style="float: right;" class="statisticsItemValue">7.02B</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Trailing P/E</span>
+                  <span style="float: left;" class="statisticsItem">Three Month Average Volume</span>
                   <span style="float: right;" class="statisticsItemValue">11.47</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Forward P/E</span>
+                  <span style="float: left;" class="statisticsItem">Two Hundred Day Average</span>
                   <span style="float: right;" class="statisticsItemValue">N/A</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">PEG Ratio (5 yr expected)</span>
+                  <span style="float: left;" class="statisticsItem">Year Change)</span>
                   <span style="float: right;" class="statisticsItemValue">N/A</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Price/Sales(ttm)</span>
+                  <span style="float: left;" class="statisticsItem">Year High</span>
                   <span style="float: right;" class="statisticsItemValue">0.87</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Price/Book(mrq)</span>
+                  <span style="float: left;" class="statisticsItem">Year Low</span>
                   <span style="float: right;" class="statisticsItemValue">5.18</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Enterprise Value/Revenue</span>
+                  <span style="float: left;" class="statisticsItem">Shares</span>
                   <span style="float: right;" class="statisticsItemValue">0.79</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Enterprise Value/EBITDA</span>
-                  <span style="float: right;" class="statisticsItemValue">0.79</span>
+                  <span style="float: left; font-size:20px" class="statisticsItem">holders</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Market Cap(intrady)</span>
-                  <span style="float: right;" class="statisticsItemValue">6.80</span>
-                </el-row>
-
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Fical Year</span>
-                  <span style="float: right;" class="statisticsItemValue">Dec 31，2021</span>
+                <span>                         0   1</span>
                 </el-row>
                 <el-row>
-                  <span style="float: left;" class="statisticsItem">Most Recent Quarter(mrq)</span>
-                  <span style="float: right;" class="statisticsItemValue">Jun 30 ,2022</span>
+                      <span>0           Previous Close NaN</span>
                 </el-row>
-              </el-col>
-              <el-col :span="11" :offset="1" style="height: 450px; margin-right: 0.5%;">
-                <el-row>
-                  <span style="font-size: x-large;font-weight: bolder;">Profitability</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Profit Margin</span>
-                  <span style="float: right;" class="statisticsItemValue">7.53%</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Operation Margin(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">10.49%</span>
-                </el-row>
-                <br>
-
-                <el-row>
-                  <span style="font-size: x-large;font-weight: bolder;">ManagerMent Effectiveness</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Return on Assets(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">19.06%</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Return on Equity(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">53.35%</span>
-                </el-row>
-                <el-row>
-                  <span style="font-size: x-large;font-weight: bolder;">Income Statement</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Revenue(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">8.9B</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Revenue per Share(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">13.52</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Quarterly Revenue Growth(yoy)</span>
-                  <span style="float: right;" class="statisticsItemValue">20.9%</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Gross Profit(ttm)</span>
-                  <span style="float: right;" class="statisticsItemValue">1.28B</span>
-                </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">EBITDA</span>
-                  <span style="float: right;" class="statisticsItemValue">1B</span>
-                </el-row>
-
+                
               </el-col>
             </el-row>
 

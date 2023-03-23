@@ -37,7 +37,7 @@
                 <el-button  @click="Goback" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Back</el-button>
             </el-col>
             <el-col :span="12" style="text-align: right; " >
-                <el-button @click="Gotest" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Go test</el-button>
+                <el-button @click="GoNext" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Next</el-button>
             </el-col>
         </el-row>
 
@@ -56,8 +56,8 @@ export default {
         };
     },
     methods:{
-        Gotest(){
-            this.$router.push('/test')
+        GoNext(){
+            this.$router.push('/chapter2.2')
         },
         Goback(){
             this.$router.push('/chapter2')

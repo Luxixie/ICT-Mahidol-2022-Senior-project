@@ -30,7 +30,8 @@ const router = new Router({
         component:()=>import('../pages/login/sendemailpage.vue')
       },
       {
-          path:'/newpassword',
+          path:'/newpassword/:email',
+          props:true,
           component:()=>import('../pages/login/newpasswordPage.vue')
       },
       {
@@ -92,14 +93,22 @@ const router = new Router({
         component:()=>import('../pages/portfolio/portfolioPage.vue')
       },
       {
-        path:'/quiz',
-        component:()=>import('../pages/knowledge/quiz.vue')
+        path:'/quizreview',
+        component:()=>import('../pages/knowledge/quizreview.vue')
       },
-
+      {
+        path:'/Learningprogress',
+        component:()=> import('../pages/knowledge/Learningprogress.vue')
+      },
       {
         path:'/stockinformation',
         component:()=>import('../pages/stock/stockInfoPage.vue')
       },
+      {
+        path:'/starterguide',
+        component:()=>import('../pages/knowledge/Starterguide.vue')
+      },
+
       {
         path:'/knowledgeHome',
         component:()=>import('../pages/knowledge/knowledgeHome.vue')
