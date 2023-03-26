@@ -6,24 +6,21 @@
           <el-col :span="10" style="margin-left:8%">
             <h3 style="float: left; margin-left:5%;color: #F5EFE0;">SET</h3>
           </el-col>
-          <el-col :span="10" >
-            <h3 style="float: right;margin-right:6%;color: #F5EFE0;">SET:xxxx{{state}}</h3>
-          </el-col>
         </el-row>
           <el-row>
           <el-col :span="10" style="margin-left:8%">
-            <h4 style="float: left; margin-left:5%;color: #F5EFE0;">high xxx{{high}}</h4>
+            <h4 style="float: left; margin-left:5%;color: #F5EFE0;">high: {{high}}</h4>
           </el-col>
           <el-col :span="10" >
-            <h4 style="float: right; margin-right:6%;color: #F5EFE0;">1629.38{{data1}}</h4>
+            <h4 style="float: right; margin-right:6%;color: #F5EFE0;">current: {{current}}</h4>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="10" style="margin-left:8%">
-            <h4 style="float: left; margin-left:5%; color: #F5EFE0;">low xxx{{low}}</h4>
+            <h4 style="float: left; margin-left:5%; color: #F5EFE0;">low:  {{low}}</h4>
           </el-col>
           <el-col :span="10" >
-            <h4 style="float: right; margin-right:6%; color: #F5EFE0;">+6.00  (+0.37%){{data2}}</h4>
+            <h4 style="float: right; margin-right:6%; color: #F5EFE0;">+6.00  (+0.37%)</h4>
           </el-col>
         </el-row>
       </el-col>
@@ -38,32 +35,12 @@
 
     <el-row style="padding-right: 3%;">
         <el-row class="box">
-          <el-dropdown  @command="handleCommand">
-          <span class="el-dropdown-link">Freight & Logistics<i class="el-icon-arrow-down el-icon--right"></i></span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="case1">Aerospace & Defense</el-dropdown-item>
-            <el-dropdown-item command="case2">Freight & Logistics</el-dropdown-item>
-            <el-dropdown-item command="case3">Airlines</el-dropdown-item>
-            <el-dropdown-item command="case4">Building Products</el-dropdown-item>           
-            <el-dropdown-item command="case5">Commercial Services & Supplies</el-dropdown-item>
-            <el-dropdown-item command="case6">Construction & Engineering</el-dropdown-item>
-            <el-dropdown-item>Electrical Equipment</el-dropdown-item>
-            <el-dropdown-item>Industrial Conglomerates</el-dropdown-item>
-            <el-dropdown-item>Machinery</el-dropdown-item>
-            <el-dropdown-item>Marine</el-dropdown-item>
-            <el-dropdown-item>Professional Services</el-dropdown-item>
-            <el-dropdown-item>Road & Rail</el-dropdown-item>
-            <el-dropdown-item>Trading Companies & Distributors</el-dropdown-item>
-            <el-dropdown-item>Transportation Infrastructure</el-dropdown-item>
-            <el-dropdown-item>All</el-dropdown-item>
-            
-            </el-dropdown-menu>
-          </el-dropdown>
-          </el-row>
-        <el-col :span="7" v-for="(item, index) in items" :key="o" :offset="1" style="margin-top: 2%;">
+            <span style="margin-left:2%;margin-top:1%">{{this.$route.params.industryName}}</span>
+        </el-row>
+        <el-col :span="7" v-for="(item, index) in items"  :offset="1" style="margin-top: 2%;">
             <el-card :body-style="{ padding: '0px' }" style="margin-top: 5%; margin-bottom: 5%; background: #1f3d70;">
                 <div style="padding: 14px;">
-                    <img width="60px" height="60px" style="float: left; margin-top: 5%; " />
+                    <!-- <img width="60px" height="60px" style="float: left; margin-top: 5%; " /> -->
                     <div style="float:left; margin-left: 5%; width: 78%; margin-bottom: 3%;">
                         <div>
                             <span class="topFont">{{item.stockName}}</span>
@@ -72,14 +49,14 @@
                             <span class="topFont">{{item.companyName}}</span>
                         </div>
                         <div style="margin-top: 4%;">
-                            <div style="float: left;width: 50%; ">
+                            <!-- <div style="float: left;width: 50%; ">
                                 <div>
                                     <span class="priceFont">High:{{item.high}}</span>
                                 </div>
                                 <div>
                                     <span class="priceFont">Low:{{item.low}}</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div style="float:right; margin-top: 2%;">
                                 <div>
                                     <el-button size="medium" type="warning" @click="Goinfor" round
@@ -154,8 +131,8 @@
     border-radius: 30px;
     margin-top: 1%;
     margin-left: 3%;
-    width: 250px;
-    height: 50px;
+    width:20%;
+    height: 40px;
 }
 .el-dropdown-link {
     cursor: pointer;
@@ -167,30 +144,21 @@
 </style>
 
 <script>
+import axios from 'axios'
 export default { 
     data() {
         return {
-            items: [
-                { id: '1', stockName: 'KEX.BK', companyName: "Kerry Express (Thailand) Public Company Limited", high: "18.90", low: "18.50" },
-                { id: '2', stockName: 'JWD.BK', companyName: "JWD InfoLogistics Public Company Limited", high: "16.5", low: "10.5" },
-                { id: '3', stockName: 'III.BK', companyName: "Triple i Logistics Public Company Limited", high: "16.5", low: "10.5" },
-                { id: '4', stockName: 'WICE.BK', companyName: "Wice Logistics Public Company Limited", high: "16.5", low: "10.5" },
-                { id: '5', stockName: 'LEO.BK', companyName: "Leo Global Logistics Public Company Limited", high: "16.5", low: "10.5" },
-                { id: '6', stockName: 'SONIC.BK', companyName: "Sonic Interfreight Public Company Limited", high: "16.5", low: "10.5" },
-                { id: '6', stockName: 'NCL.BK', companyName: "NCL International Logistics Public Company Limited,", high: "12.3", low: "11.9" }
-                
-            ],
-            state:'',
+            items: [],
             high:'',
             low:'',
-            data1:'',
-            data2:'',
+            current:'',
             nowTime: ''
             
         };
     },
     mounted() {
     this.getNowTime();
+    this.getSETPrice();
     },
     methods:{
         Goinfor(){
@@ -203,6 +171,19 @@ export default {
             that.nowTime = that.timeNumber()
         }
         setInterval(theNowTime, speed)
+        }, 
+        getSETPrice () {
+        let speed = 1000 * 60
+        let that = this
+        let theNowPrice = function () {
+            axios.post("http://127.0.0.1:8088/GetSETCurrentPrice").then((res) => {
+            console.log(res.data)
+            that.high = res.data['dayhigh']
+            that.low = res.data['daylow']
+            that.current = res.data['lastprice']
+        });
+        }
+        setInterval(theNowPrice, speed)
         },
         timeNumber () {
         let today = new Date()
@@ -214,6 +195,20 @@ export default {
         if (val < 10) return '0' + val
         return val
         },
+    },
+    created(){
+       console.log(this.$route.params.industryName) 
+       var industryName = this.$route.params.industryName
+       axios.post("http://127.0.0.1:8088/GetStockByIndustry/" + industryName ).then((res) => {
+           console.log(res.data)
+           this.items =  res.data
+        });
+        axios.post("http://127.0.0.1:8088/GetSETCurrentPrice").then((res) => {
+           console.log(res.data)
+           this.high = res.data['dayhigh']
+           this.low = res.data['daylow']
+           this.current = res.data['lastprice']
+        });
     }
 }
 </script>

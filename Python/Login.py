@@ -1,3 +1,4 @@
+import yfinance as yf
 from concurrent.futures import process
 from crypt import methods
 from datetime import datetime
@@ -16,6 +17,7 @@ import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 
 
 app = Flask(__name__)
@@ -262,7 +264,7 @@ def quizinput():
     datas= request.json
     print(datas)
     accountid = datas['userid']
-    currentime  = str(datetime.now())
+    currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
     chapterid = datas['chapter']
     Score = datas['score']
     print(accountid)
@@ -271,8 +273,8 @@ def quizinput():
     print(Score)
     sql = f"INSERT INTO `stockproject`.`Quiz_review` (`AccountId`, `Time`, `chapter_id`, `Score`) VALUES ({accountid}, '{currentime}', {chapterid}, {Score})"
     print (sql)
-    datas = db.query_data(sql)
-    
+    datas = db.insert_or_update_data(sql)
+    print(datas)
     return jsonify("Success")
 
 
@@ -305,6 +307,73 @@ def forgetpassword(email):
     return jsonify(status = "Success")
 
 
+@app.route("/GetStockByIndustry/<string:name>",methods=['POST'])
+def GetStockByIndustry(name):
+    print(name)
+    returndatas = []
+    sql = f"SELECT * FROM stockproject.stock where industry = '{name}'"
+    print (sql)
+    datas = db.query_data(sql)
+    for  data in datas:
+        symbol = data['symbol']
+        sql=f"SELECT * FROM stockproject.company_profiles where ticker = '{symbol}'"
+        stockdatas = db.query_data(sql)
+        
+        if(len(stockdatas)==1):
+            stockdata = stockdatas[0]
+            print(stockdata['ticker'])
+            print(stockdata['name'])
+            tickerdata = {
+                "stockName":stockdata['ticker'],
+                "companyName":stockdata['name']
+            }
+            returndatas.append(tickerdata)
+            
+    return returndatas
+
+
+
+@app.route("/marketinform",methods=['POST'])
+def marketinform():
+    msft = yf.Ticker("MSFT")
+    
+    dayhigh = "{:.2f}".format(msft.fast_info.day_high)
+    print(dayhigh)
+   
+    daylow = "{:.2f}".format(msft.fast_info.day_low)
+    print(daylow)
+   
+    lastprice = "{:.2f}".format(msft.fast_info.last_price)
+    print(lastprice)
+    msftinfo = {
+        'dayhigh':dayhigh,
+         'daylow':daylow,
+         'lastprice':lastprice
+    }
+
+    return msftinfo
+
+@app.route("/GetSETCurrentPrice",methods=['POST'])
+def GetSETCurrentPrice():
+    
+    SETTicker = yf.Ticker("^SET.BK")
+    
+    dayhigh = "{:.2f}".format(SETTicker.fast_info.day_high)
+    print(dayhigh)
+   
+    daylow = "{:.2f}".format(SETTicker.fast_info.day_low)
+    print(daylow)
+   
+    lastprice = "{:.2f}".format(SETTicker.fast_info.last_price)
+    print(lastprice)
+    SETInfo = {
+        'dayhigh':dayhigh,
+         'daylow':daylow,
+         'lastprice':lastprice
+    }
+  
+    
+    return SETInfo
 
 
 

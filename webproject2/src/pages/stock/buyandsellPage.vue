@@ -50,39 +50,25 @@
             </el-row>
 
             <el-row class="dataSummaryItem">
-              <span>Currency: </span>
-              <span class="dataSummaryItemValue">12.10</span>
-            </el-row>
-            <el-row class="dataSummaryItem">
               <span>High: </span>
-              <span class="dataSummaryItemValue">10</span>
+              <span class="dataSummaryItemValue" :v-model="datasummary.day_high">{{dayhigh}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Low: </span>
-              <span class="dataSummaryItemValue">9 </span>
+              <span class="dataSummaryItemValue" :v-model="datasummary.day_low">{{daylow}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Exchange: </span>
-              <span class="dataSummaryItemValue">12.00</span>
+              <span class="dataSummaryItemValue" :v-bind="datasummary.exchange">{{exchange}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Last price: </span>
-              <span class="dataSummaryItemValue">12</span>
+              <span class="dataSummaryItemValue" v-bind="datasummary.lastprice"> {{lastprice}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Last Volume: </span>
-              <span class="dataSummaryItemValue">10000</span>
+              <span class="dataSummaryItemValue" v-bind="datasummary.last_volume" >{{last_volume}}</span>
             </el-row>
-            <el-row class="dataSummaryItem">
-              <span>Open: </span>
-              <span class="dataSummaryItemValue">8:00</span>
-            </el-row>
-            <el-row class="dataSummaryItem">
-              <span>Previous Close: </span>
-              <span class="dataSummaryItemValue">6,293.048</span>
-            </el-row>
-
-
           </div>
         </div>
       </el-col>
@@ -265,6 +251,45 @@
         <div style="background: #d9d9d9; border-radius: 30px;">
           <span style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:2%">Historical Data</span>
           <div ref="candleChart" style="height:400px;"></div>
+            <el-table :data="tableData" border style="width: 100%">
+              <el-table-column
+                  prop="Datetime"
+                  label="Datetime"
+                  align="center"
+                  :v-model="tableData.Datetime">
+              </el-table-column>
+              <el-table-column
+                  prop="Open"
+                  label="Open"
+                  align="center">
+              </el-table-column>
+
+              <el-table-column
+                  prop="High"
+                  label="High"
+                  align="center">
+              </el-table-column>
+              <el-table-column
+                  prop="Low"
+                  label="Low"
+                  align="center">
+              </el-table-column>
+              <el-table-column
+                  prop="Close"
+                  label="Close"
+                  align="center">
+              </el-table-column>
+              <el-table-column
+                  prop="Adj Close"
+                  label="Adj Close"
+                  align="center">
+              </el-table-column>
+              <el-table-column
+                  prop="Volume"
+                  label="Volume"
+                  align="center">
+              </el-table-column>
+              </el-table>
 
           
         </div>
@@ -371,10 +396,19 @@
 
 <script>
 import * as echarts from 'echarts';
+import axios from 'axios'
 
 export default {
   data() {
     return {
+    
+        lastprice:'',
+        dayhigh:'',
+        daylow:'',
+        exchange:'',
+        last_volume:'',
+      statistics:[],
+
       nowTime: '',
       chart: null,
       showInfo: false,
@@ -394,6 +428,18 @@ export default {
     this.initChart();
     this.createCandleChart();
     this.getNowTime();
+  },
+  created() {
+        axios.post('http://127.0.0.1:8088/marketinform').then(res => {
+        this.statistics = [];
+        //console.log(res.data)
+        res.data.forEach(result  => {
+          this.statistics.push(result);
+        });
+        console.log(this.statistics);
+        
+          
+        });
   },
   methods: {
     createCandleChart() {
@@ -505,6 +551,17 @@ export default {
       if (val < 10) return '0' + val
       return val
     },
-  }
+    
+  
+  },
+  created(){
+        axios.post("http://127.0.0.1:8088/marketinform").then((res) => {
+           console.log(res.data)
+           this.dayhigh = res.data['dayhigh']
+           this.daylow = res.data['daylow']
+           this.lastprice = res.data['lastprice']
+        });
+    },
+
 };
 </script>

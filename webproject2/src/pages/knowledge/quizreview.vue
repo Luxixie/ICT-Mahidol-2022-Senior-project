@@ -49,7 +49,10 @@ export default {
     console.log(id)
     axios.post("http://127.0.0.1:8088/quizreview/" + id).then((res) => {
       this.tableData = [];
-      this.tableData.push(res);
+      //console.log(res.data)
+      res.data.forEach(result  => {
+        this.tableData.push(result);
+      });
       console.log(this.tableData);
     });
   },

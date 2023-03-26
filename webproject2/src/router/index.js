@@ -54,7 +54,8 @@ const router = new Router({
         component:()=>import('../pages/stock/markethome.vue')
       },
       {
-        path:'/submarket',
+        path:'/submarket/:industryName',
+        props:true,
         component:()=>import('../pages/stock/submarket.vue')
       },
 

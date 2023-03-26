@@ -79,6 +79,10 @@
                                     Total score: {{ score() }} / {{ quiz.questions.length }}
                                 </p>
                                 <br>
+                                <a class="button" @click="Goknowledgehomepage()"> Back to knowledge Homepage<i class="fa fa-refresh"></i></a>
+                                <br>
+                                <br>
+                                <br>
                                 <a class="button" @click="restart()">restart <i class="fa fa-refresh"></i></a>
                                 <!--/resultTitleBlock-->
 
@@ -105,7 +109,8 @@ export default {
             quiz: {},
             questionIndex: 0,
             userResponses: {},
-            isActive: false
+            isActive: false,
+            testscore :0
         }
     },
     filters: {
@@ -115,8 +120,37 @@ export default {
     },
     methods: {
         restart: function () {
+            var id = this.$store.state.accountid;
+            var chapter = this.$route.params.chapter
+            var Score = this.testscore 
+            console.log(Score)
+            var result ={
+                chapter:chapter,
+                userid:id,
+                score:this.testscore 
+            }
+            console.log(result)
+            axios.post('http://127.0.0.1:8088/quizinput/', result).then((res)=>{
+                console.log(res.data)
+            })
             this.questionIndex = 0;
             this.userResponses = Array(this.quiz.questions.length).fill(null);
+        },
+        Goknowledgehomepage(){
+             var id = this.$store.state.accountid;
+            var chapter = this.$route.params.chapter
+            var Score = this.testscore 
+            console.log(Score)
+            var result ={
+                chapter:chapter,
+                userid:id,
+                score:this.testscore 
+            }
+            console.log(result)
+            axios.post('http://127.0.0.1:8088/quizinput/', result).then((res)=>{
+                console.log(res.data)
+            })
+            this.$route.push('/knowledgeHome')
         },
         selectOption: function (index) {
             this.$set(this.userResponses, this.questionIndex, index);
@@ -145,16 +179,11 @@ export default {
                     score = score + 1;
                 }
             }
-            var id = this.$store.state.accountid;
-            var chapter = this.$route.params.chapter
-            var reuslt ={
-                chapter:chapter,
-                userid:id,
-                score:score
-            }
+           
 
-            console.log(reuslt)
-            axios.post('http://127.0.0.1:8088/quizinput/', reuslt)
+            //console.log(reuslt)
+            //axios.post('http://127.0.0.1:8088/quizinput/', reuslt)
+            this.testscore = score
             return score;
             
 
