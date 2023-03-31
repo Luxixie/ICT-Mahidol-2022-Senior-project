@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Trading App</title>
+</head>
+<body>
+    {% if 'user_id' in session %}
+        <h1>Welcome to the Stock Trading App, {{ username }}!</h1>
+        <p>Balance: {{ user_balance }}</p>
+        <ul>
+            <li><a href="{{ url_for('buy_sell_stock') }}">Buy/Sell Stocks</a></li>
+            <a href="{{ url_for('view_transactions') }}">View Transaction History</a>
+
+
+
+
+
+        </ul>
+        <form method="POST" action="{{ url_for('logout') }}">
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <h1>Welcome to the Stock Trading App!</h1>
+        <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a> to start trading stocks.</p>
+    {% endif %}
+</body>
+</html>
