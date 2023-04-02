@@ -64,7 +64,8 @@ const router = new Router({
         component:()=>import('../pages/stock/stockInfoPage.vue')
       },
       {
-        path:'/buyandsell',
+        path:'/buyandsell/:tickerName',
+        props:true,
         component:()=>import('../pages/stock/buyandsellPage.vue')
       },
 

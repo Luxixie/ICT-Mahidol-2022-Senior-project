@@ -24,8 +24,12 @@
                 </el-select>
                 <!-- <el-input id="regist-input" placeholder="Birth Date" v-model="form.name" ></el-input> -->
                 <span style="color:gray">    Birth Date</span>
-                <el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="Birth Date">
-                </el-date-picker>
+                <!--<el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="Birth Date">
+                </el-date-picker> -->
+                <el-date-picker
+                    id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd"
+                    type="date" placeholder="Birth Date" :disabled-date="disabledDate"
+                ></el-date-picker>
             </el-form-item>
             <el-form-item prop="email" label="Email" style="font-weight: bold; color: aliceblue;">
                 <el-input id="regist-input" placeholder="Email" v-model="form.email" type="email"></el-input>
@@ -206,6 +210,12 @@ export default {
         
     },
     methods: {
+        disabledDate(date) {
+            // Get today's date
+            const today = new Date();
+            // Disable dates in the future
+            return date > today;
+        },
         firstnameLengthValidation(rule, value, callback) {
             if (value.length > 10) {
                 callback(new Error("Firstname length should be less than 10"));

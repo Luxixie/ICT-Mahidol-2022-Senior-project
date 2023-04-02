@@ -1,19 +1,26 @@
 <template>
   <el-row class="para1" style="background: #d9d9d9">
-    <el-col :span="4">
-      <img src="./imges/logo.png" height="100" width="200" />
+    <el-col :span="3">
+      <img src="./imges/logo.png" height="110" width="200" />
     </el-col>
-    <el-col :span="13">
+    <el-col :span="10" :offset="2">
       <div class="SearchPart">
-        <el-input
-          id="searchBar"
+        <el-autocomplete
+          style="width:100%;margin-top: 2%"
+          class="inline-input"
+          v-model="searchTerm"
+          :fetch-suggestions="querySearch"
           placeholder="Search"
+          :trigger-on-focus="false"
+          @select="handleSelect"
           prefix-icon="el-icon-search"
-        />
+          @keydown.enter="handleSelect(searchTerm)"
+        ></el-autocomplete>
       </div>
     </el-col>
-    <el-col :span="5">
-      <div class="userInfo" style="margin-top: 10%" v-if="username">
+    <el-col :span="8" :offset="1">
+
+      <div class="userInfo" style="margin-top: 8%" v-if="username">
         <el-button size="medium" type="info" round @click="GoHome"
           >Home</el-button
         >
@@ -51,6 +58,9 @@
       </div>
 
       <div class="LoginPart" v-if="!username" style="margin-top: 8%">
+        <el-button size="medium" type="info" round @click="GoHome"
+          >Home</el-button
+        >
         <el-button size="medium" type="info" round @click="GoLoginPage"
           >Log In</el-button
         >
@@ -67,6 +77,7 @@
   </el-row>
 </template>
 <script>
+import axios from "axios";
 import { Spinner } from "element-ui";
 import { computed } from "vue";
 import { mapGetters } from "vuex";
@@ -74,7 +85,10 @@ import { mapGetters } from "vuex";
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      searchTerm: "",
+      stocks: [],
+    };
   },
   methods: {
     GoLoginPage() {
@@ -85,6 +99,29 @@ export default {
     },
     GoHome() {
       this.$router.push("/home");
+    },
+    loadAll() {
+      axios.post("http://127.0.0.1:8088/GetStockInfo").then((res) => {
+        //console.log(res.data)
+        this.stocks = res.data;
+      });
+    },
+    querySearch(queryString, cb) {
+      var stocks = this.stocks;
+      var results = queryString
+        ? stocks.filter(this.createFilter(queryString))
+        : stocks;
+
+      //console.log(results)
+      cb(results);
+      //console.log(results)
+    },
+    createFilter(queryString) {
+      return (stocks) => {
+        return (
+          stocks.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        );
+      };
     },
     handleCommand(command) {
       switch (command) {
@@ -107,6 +144,24 @@ export default {
           window.location.href = "/home";
       }
     },
+
+    handleSelect(item) {
+      console.log(item);
+      this.Goinfor(item.value)
+    },
+    Goinfor(value) {
+      console.log(value);
+      //this.$router.push('/buyandsell')
+      this.$router.push({
+        path: "/buyandsell/" + value,
+        params: { tickerName: value },
+      });
+     
+    },
+
+  },
+  mounted() {
+    this.stocks = this.loadAll();
   },
   created() {
     console.log();
@@ -114,22 +169,22 @@ export default {
   updated() {
     console.log(this.$store.state.username);
   },
-  computed: {
 
+  computed: {
     username() {
-      return this.$store.state.username;  
+      return this.$store.state.username;
     },
     accountid() {
-      return this.$store.state.accountid;  
+      return this.$store.state.accountid;
     },
     region() {
-      return this.$store.state.region;  
+      return this.$store.state.region;
     },
     birthdate() {
-      return this.$store.state.birthdate;  
+      return this.$store.state.birthdate;
     },
     email() {
-      return this.$store.state.email;  
+      return this.$store.state.email;
     },
   },
   watch: {
@@ -141,7 +196,7 @@ export default {
 
 <style>
 #signupbt {
-  margin-left: 30px;
+  margin-left: 2%;
 }
 
 .SearchPart {

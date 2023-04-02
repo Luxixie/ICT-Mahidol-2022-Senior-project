@@ -1,8 +1,9 @@
+from configparser import MAX_INTERPOLATION_DEPTH
 import yfinance as yf
 from concurrent.futures import process
 from crypt import methods
 from datetime import datetime
-from re import A, I
+from re import A, I, search
 from time import time
 from traceback import format_exc
 from unittest import result
@@ -307,6 +308,8 @@ def forgetpassword(email):
     return jsonify(status = "Success")
 
 
+
+
 @app.route("/GetStockByIndustry/<string:name>",methods=['POST'])
 def GetStockByIndustry(name):
     print(name)
@@ -333,9 +336,11 @@ def GetStockByIndustry(name):
 
 
 
-@app.route("/marketinform",methods=['POST'])
-def marketinform():
-    msft = yf.Ticker("MSFT")
+@app.route("/marketinform/<string:ticker>",methods=['POST'])
+def marketinform(ticker):
+    print(ticker)
+    msft = yf.Ticker(f"{ticker}")
+    print(msft)
     
     dayhigh = "{:.2f}".format(msft.fast_info.day_high)
     print(dayhigh)
@@ -345,13 +350,69 @@ def marketinform():
    
     lastprice = "{:.2f}".format(msft.fast_info.last_price)
     print(lastprice)
-    msftinfo = {
-        'dayhigh':dayhigh,
-         'daylow':daylow,
-         'lastprice':lastprice
-    }
+    previousclose = "{:.2f}".format(msft.fast_info.previous_close)
+    print(previousclose)
 
-    return msftinfo
+    lastvolume = "{:.2f}".format(msft.fast_info.last_volume)
+    print(lastvolume)
+
+    open = "{:.2f}".format(msft.fast_info.open)
+    print(open)
+
+    QuoteType = msft.fast_info.quote_type
+    print(QuoteType)
+
+    TenDayAverageVolume = "{:.2f}".format(msft.fast_info.ten_day_average_volume)
+    print(TenDayAverageVolume)
+
+    ThreeMonthAverageVolume = "{:.2f}".format(msft.fast_info.three_month_average_volume)
+    print(ThreeMonthAverageVolume)
+
+    TwoHundredDayAverage = "{:.2f}".format(msft.fast_info.two_hundred_day_average)
+    print(TwoHundredDayAverage)
+
+    YearChange = "{:.2f}".format(msft.fast_info.year_change)
+    print(YearChange)
+
+    YearHigh = "{:.2f}".format(msft.fast_info.year_high)
+    print(YearHigh)
+
+    YearLow = "{:.2f}".format(msft.fast_info.year_low)
+    print(YearLow)
+
+    Shares = "{:.2f}".format(msft.fast_info.shares)
+    print(Shares)
+    ##data = msft.history(period="1y")
+    ##json_str = json.dumps(data.to_dict())
+    ##print(json_str)
+
+    sql = f"SELECT * FROM stockproject.company_profiles where ticker = '{ticker}'"
+    company_profiles = db.query_data(sql)
+    msftinfo = {}
+    if(len(company_profiles) == 1):
+        companyInfo = company_profiles[0]
+        print(companyInfo)
+        msftinfo = {
+        'dayhigh':dayhigh,
+        'daylow':daylow,
+        'lastprice':lastprice,
+        'previousclose':previousclose,
+        'lastvolume':lastvolume,
+        'open':open,
+        'QuoteType':QuoteType,
+        'TenDayAverageVolume':TenDayAverageVolume,
+        'ThreeMonthAverageVolume':ThreeMonthAverageVolume,
+        'TwoHundredDayAverage':TwoHundredDayAverage,
+        'YearChange':YearChange,
+        'YearHigh':YearHigh,
+        'YearLow':YearLow,
+        'Shares':Shares,
+        'Company':companyInfo
+        }
+        return msftinfo
+    else:
+        return msftinfo
+    
 
 @app.route("/GetSETCurrentPrice",methods=['POST'])
 def GetSETCurrentPrice():
@@ -376,6 +437,75 @@ def GetSETCurrentPrice():
     return SETInfo
 
 
+@app.route('/GetWatchlist',methods=['POST'])
+def watchlist():
+    datas = request.json
+    accountid = datas['accountid']
+    sql = f"SELECT * FROM stockproject.watchlist where AccountId = {accountid}"
+    print(sql)
+    datas = db.query_data(sql)
+    print(datas)
+    return datas
+
+
+
+
+@app.route('/AddToWatchlist',methods=['POST'])
+def AddToWatchlist():
+    result = {}
+    data= request.json
+    searchsql = f"SELECT * FROM stockproject.watchlist where Accountid = {data['accountid']} and ticker = '{data['tickerName']}'"
+    searchresult = db.query_data(searchsql)
+    print(len(searchresult))
+    if len(searchresult)==0:
+        currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+        sql = f"INSERT INTO `stockproject`.`watchlist` (`AccountId`, `ticker`, `timestamp`) VALUES ({data['accountid']}, '{data['tickerName']}','{currentime}')"
+        result1 = db.insert_or_update_data(sql)
+        print(result1)
+        print(data)  
+    return result
+
+@app.route('/RemoveFromWatchlist',methods=['POST'])
+def RemoveFromWatchlist():
+    result = {}
+    data= request.json
+    print(data)
+    sql = f"DELETE FROM `stockproject`.`watchlist` WHERE (`watchlistid` = {data['watchlistid']})"
+    sqlresult = db.insert_or_update_data(sql)
+    print (sqlresult)
+    return result
+
+@app.route('/GetBalance',methods=['POST'])
+def GetBalance():
+    result = {}
+    data= request.json
+    print(data)
+    sql = f"SELECT AccountId , Balance  FROM stockproject.accounts where AccountId = {data['accountid']})"
+    sqlresult = db.query_data(sql)
+    print (sqlresult[0])
+    if len(sqlresult)== 1:
+        return sqlresult[0]     
+    return result
+
+@app.route('/BuyStock',methods=['POST'])
+def BuyStock():
+    result = {}
+    data= request.json
+    print(data)
+    return result
+
+@app.route('/SellStock',methods=['POST'])
+def SellStock():
+    result = {}
+    data= request.json   
+    return result
+
+
+@app.route('/GetBuySellHistory',methods=['POST'])
+def GetBuySellHistory():
+    result = {}
+    data= request.json   
+    return result
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

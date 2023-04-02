@@ -59,7 +59,7 @@
                             </div> -->
                             <div style="float:right; margin-top: 2%;">
                                 <div>
-                                    <el-button size="medium" type="warning" @click="Goinfor" round
+                                    <el-button size="medium" type="warning" @click="Goinfor(item.stockName)" round
                                         style="width: 100%;">Buy/Sell</el-button>
                                 </div>
                             </div>
@@ -161,8 +161,13 @@ export default {
     this.getSETPrice();
     },
     methods:{
-        Goinfor(){
-            this.$router.push('/buyandsell')
+        Goinfor(ticker){
+            console.log(ticker)
+            //this.$router.push('/buyandsell')
+             this.$router.push({
+            path:"/buyandsell/"+ticker,
+            params:{tickerName:ticker}
+            })
         },
         getNowTime () {
         let speed = 1000
@@ -199,7 +204,7 @@ export default {
     created(){
        console.log(this.$route.params.industryName) 
        var industryName = this.$route.params.industryName
-       axios.post("http://127.0.0.1:8088/GetStockByIndustry/" + industryName ).then((res) => {
+        axios.post("http://127.0.0.1:8088/GetStockByIndustry/" + industryName ).then((res) => {
            console.log(res.data)
            this.items =  res.data
         });

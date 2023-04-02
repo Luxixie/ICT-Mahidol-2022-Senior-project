@@ -137,7 +137,7 @@ export default {
             this.userResponses = Array(this.quiz.questions.length).fill(null);
         },
         Goknowledgehomepage(){
-             var id = this.$store.state.accountid;
+            var id = this.$store.state.accountid;
             var chapter = this.$route.params.chapter
             var Score = this.testscore 
             console.log(Score)

@@ -3,13 +3,13 @@
     <el-row style="height: 200px;">
       <el-col :span="12">
         <el-row style="height: 30%; overflow: auto;">
-          <span style="font-size: xx-large; color:#f5efe1;">BKK:WICE</span>
+          <span style="font-size: xx-large; color:#f5efe1;margin-left:2%">{{tickerName}}</span>
         </el-row>
         <el-row style="height: 30%;">
-          <span style="font-size: x-large; color:#f5efe1;">Wice Logistics Public Company Limited</span>
+          <span style="font-size: x-large; color:#f5efe1;margin-left:2%">{{companyInfo.name}}</span>
         </el-row>
         <el-row style="height: 30%;">
-          <el-button style="margin-top: 3%;border-radius: 35px;" type="warning" icon="el-icon-star-off">Add to Watch
+          <el-button style="margin-top: 3%;border-radius: 35px;margin-left:1%" type="warning" icon="el-icon-star-off"  @click="Addwatchlist(tickerName)">Add to Watch
             list</el-button>
           <el-button style="margin-top: 3%;border-radius: 35px;" type="warning" @click="ShowBuyAndSell" > Buy / Sell
           </el-button>
@@ -17,17 +17,20 @@
             Infomation </el-button>
         </el-row>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="12" style="margin-top:2%">
         <el-row>
           <el-col :span="8" :offset="8">
-            <span style="font-size: xx-large; color:#f5efe1;">12.00</span>
+            <span style="font-size: xx-large; color:#f5efe1;">{{lastprice}}</span>
           </el-col>
 
         </el-row>
         <el-row style="height: 30%;">
           <el-col :span="8" :offset="6">
-            <span style="font-size: xx-large; color:#f5efe1;">-0.10(-0.83%)</span>
-          </el-col>
+            <span style="font-size: x-large; color:#f5efe1;margin-left: 10%;">
+              {{ (lastprice - previousclose) >= 0 ? '+' : '-' }}{{ Math.abs(lastprice - previousclose).toFixed(2) }} ({{((lastprice / previousclose-1)*100).toFixed(2)}}%)
+            </span>
+            
+        </el-col>
         </el-row>
         <el-row style="height: 30%;">
           <el-col :span="12" :offset="5">
@@ -44,30 +47,30 @@
       </el-col>
       <el-col :span="6" :offset="1">
         <div style="background: #d9d9d9; border-radius: 30px;">
-          <div style="height:300px;padding-top: 3%;  padding-left: 3%;">
+          <div style="padding-top: 8%;  padding-left: 6%;padding-bottom: 12%;padding-right: 6%;">
             <el-row>
-              <span style="font-size: x-large; padding-bottom: 2%;">Data Summary</span>
+              <span style="font-size: x-large; padding-bottom: 2%; margin-top:2%">Data Summary</span>
+            </el-row>
+            <el-row class="dataSummaryItem"> 
+              <span>Previous close: </span>
+              <span class="dataSummaryItemValue">{{previousclose}}</span>
             </el-row>
 
             <el-row class="dataSummaryItem">
               <span>High: </span>
-              <span class="dataSummaryItemValue" :v-model="datasummary.day_high">{{dayhigh}}</span>
+              <span class="dataSummaryItemValue" >{{dayhigh}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Low: </span>
-              <span class="dataSummaryItemValue" :v-model="datasummary.day_low">{{daylow}}</span>
+              <span class="dataSummaryItemValue" >{{daylow}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Exchange: </span>
-              <span class="dataSummaryItemValue" :v-bind="datasummary.exchange">{{exchange}}</span>
+              <span>Open: </span>
+              <span class="dataSummaryItemValue" >{{open}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
-              <span>Last price: </span>
-              <span class="dataSummaryItemValue" v-bind="datasummary.lastprice"> {{lastprice}}</span>
-            </el-row>
-            <el-row class="dataSummaryItem">
-              <span>Last Volume: </span>
-              <span class="dataSummaryItemValue" v-bind="datasummary.last_volume" >{{last_volume}}</span>
+              <span>Volume: </span>
+              <span class="dataSummaryItemValue"> {{lastvolume}}</span>
             </el-row>
           </div>
         </div>
@@ -192,54 +195,46 @@
       <el-row style="margin-top: 2%;">
 
         <div style="background: #d9d9d9; border-radius: 30px;">
-          <div style="height:500px;padding-top: 1%;  padding-left: 3%;">
+          <div style=" padding-top: 1%; padding-bottom: 1%; padding-left: 3%;">
             <el-row>
               <span style="font-size:xx-large; font-weight: bold;">Statistics</span>
             </el-row>
             <el-row>
-              <el-col :span="11" style=" height: 450px; ">
+              <el-col :span="10" >
                 <el-row>
                   <span style="float: left; " class="statisticsItem">QuoteType</span>
-                  <span style="float: right;" class="statisticsItemValue">7.63B</span>
+                  <span style="float: right;" class="statisticsItemValue">{{QuoteType}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Ten Day Average Volume</span>
-                  <span style="float: right;" class="statisticsItemValue">7.02B</span>
+                  <span style="float: right;" class="statisticsItemValue">{{TenDayAverageVolume}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Three Month Average Volume</span>
-                  <span style="float: right;" class="statisticsItemValue">11.47</span>
+                  <span style="float: right;" class="statisticsItemValue">{{ThreeMonthAverageVolume}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Two Hundred Day Average</span>
-                  <span style="float: right;" class="statisticsItemValue">N/A</span>
+                  <span style="float: right;" class="statisticsItemValue">{{TwoHundredDayAverage}}</span>
                 </el-row>
-                <el-row>
-                  <span style="float: left;" class="statisticsItem">Year Change)</span>
-                  <span style="float: right;" class="statisticsItemValue">N/A</span>
+              </el-col>
+              <el-col :span="10" :offset="3">
+                <el-row >
+                  <span style="float: left;" class="statisticsItem">Year Change</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearChange}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Year High</span>
-                  <span style="float: right;" class="statisticsItemValue">0.87</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearHigh}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Year Low</span>
-                  <span style="float: right;" class="statisticsItemValue">5.18</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearLow}}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Shares</span>
-                  <span style="float: right;" class="statisticsItemValue">0.79</span>
+                  <span style="float: right;" class="statisticsItemValue">{{Shares}}</span>
                 </el-row>
-                <el-row>
-                  <span style="float: left; font-size:20px" class="statisticsItem">holders</span>
-                </el-row>
-                <el-row>
-                <span>                         0   1</span>
-                </el-row>
-                <el-row>
-                      <span>0           Previous Close NaN</span>
-                </el-row>
-                
               </el-col>
             </el-row>
 
@@ -250,7 +245,7 @@
       <el-row style="margin-top: 2%;">
         <div style="background: #d9d9d9; border-radius: 30px;">
           <span style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:2%">Historical Data</span>
-          <div ref="candleChart" style="height:400px;"></div>
+          <!-- <div ref="candleChart" style="height:400px;"></div>
             <el-table :data="tableData" border style="width: 100%">
               <el-table-column
                   prop="Datetime"
@@ -262,9 +257,9 @@
                   prop="Open"
                   label="Open"
                   align="center">
-              </el-table-column>
+              </el-table-column> -->
 
-              <el-table-column
+              <!-- <el-table-column
                   prop="High"
                   label="High"
                   align="center">
@@ -289,59 +284,35 @@
                   label="Volume"
                   align="center">
               </el-table-column>
-              </el-table>
+              </el-table> -->
 
           
         </div>
       </el-row>
-      <el-row style="margin-top: 2%;background: #d9d9d9; border-radius: 30px;">
-        <span style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:2%">Company Profile</span>
-        <h2 style="margin-left:3%">Wice Logistics Public Company Limited</h2>
+      <el-row style="margin-top: 2%;background: #d9d9d9; border-radius: 30px;padding-bottom: 1%;">
+        <h1 style="font-size:xx-large; font-weight: bold; margin-left:3%;margin-top:1%">Company Profile</h1>
+        <h2 style="margin-left:3%;margin-top:1%">{{companyInfo['name']}}</h2>
+        <span style="margin-left:3%">Address: {{companyInfo['address']}}</span>
         <el-row>
             <el-col :span="10">
-              <span style="margin-left:8%">88/8 Nonsee Road</span>
+              <span style="margin-left:7%;margin-top:1%">Industry: {{companyInfo['industry']}}</span>
             </el-col>
             <el-col :span="10">
-              <span>Sector(s): Industrials</span>
+              <span style="margin-left:7%;margin-top:1%">Sector(s): {{companyInfo['sector']}}</span>
             </el-col>
             <el-col :span="10">
-              <span style="margin-left:8%">Chong-Nonsee Yannawa</span>
+              <span style="margin-left:7%;margin-top:1%">Phone: {{companyInfo['phone']}}</span>
             </el-col>
             <el-col :span="10">
-              <span>Industry: Integrated Freight & Logistics</span>
-            </el-col>
-            <el-col :span="10">
-              <span style="margin-left:8%">Bangkok 10120</span>
-            </el-col>
-            <el-col :span="10">
-              <span>Full Time Employees: </span>
+              <span style="margin-left:7%;margin-top:1%">Website: {{companyInfo['website']}} </span>
             </el-col>
         </el-row> 
-        <el-row :span="10">
-          <span style="margin-left:3%">Thailand</span>
-        </el-row>
-        <el-row :span="10">
-          <span style="margin-left:3%">66 2 681 6181</span>
-        </el-row>
-        <el-row :span="10">
-          <el-link style="margin-left:3%">https://www.wice.co.th</el-link>
-        </el-row>
         <el-row>
           <h3 style="font-weight: bold; margin-left:3%;margin-top:2%">Description</h3>
         </el-row>
         <el-row style="margin-left:3%;margin-right:4%">
-          <span >Wice Logistics Public Company Limited provides air and sea freight forwarding, customs brokerage, inland transportation, cross-border and multimodal transportation, warehousing, and various freight related services for imports and exports in Thailand and internationally. It operates through Sea Freight, Air Freight, Cross Border Service, and Service Supply Chain Solutions. The company transports sea freight comprising full container load and less than container load services for various forwarders and containers; and offers air freight services. It also provides customs clearance services, including duty intensive consultation; internal transportation services using trailer and dump trucks, lorries, or minivans from pick up point to the port; and warehouse storage and management services. The company was formerly known as Wice Freight Services (Thailand) Company Limited and changed its name to Wice Logistics Public Company Limited in April 2015. Wice Logistics Public Company Limited was founded in 1993 and is headquartered in Bangkok, Thailand.</span>
+          <span style="margin-left:3%">{{companyInfo['description']}}</span>
         </el-row>
-        <el-row style="font-weight: bold; margin-left:3%;margin-top:2%">
-          <h3 >Corporate Governance</h3>
-        </el-row>
-        <el-row style="margin-left:3%;margin-right:4%">
-          <span >Wice Logistics Public Company Limited’s ISS Governance QualityScore as of N/A is N/A. The pillar scores are Audit: N/A; Board: N/A; Shareholder Rights: N/A; Compensation: N/A. </span>
-        </el-row>
-        <el-row style="margin-left:3%;margin-right:4%;margin-top:1%">
-          <span >Corporate governance scores courtesy of Institutional Shareholder Services (ISS). Scores indicate decile rank relative to index or region. A decile score of 1 indicates lower governance risk, while a 10 indicates higher governance risk.</span>
-        </el-row>
-
       </el-row>
     </div>
   </div>
@@ -355,15 +326,15 @@
 }
 
 .dataSummaryItem {
-  margin-top: 1%;
+  margin-top: 4%;
   margin-bottom: 1%;
   font-size: large;
   font-weight: bold;
 }
 
 .statisticsItem {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: 3%;
+  margin-bottom: 1%;
   font-size: medium;
   font-weight: bold;
 }
@@ -381,7 +352,7 @@
 }
 
 .statisticsItemValue {
-
+  margin-top: 3%;
   font-size: medium;
   font-weight: bold;
 }
@@ -401,12 +372,24 @@ import axios from 'axios'
 export default {
   data() {
     return {
-    
+      tickerName:'',
+        companyInfo:{},
         lastprice:'',
+        previousclose:'',
         dayhigh:'',
         daylow:'',
         exchange:'',
-        last_volume:'',
+        lastvolume:'',
+        open:'',
+        QuoteType:'',
+        TenDayAverageVolume:'',
+        ThreeMonthAverageVolume:'',
+        TwoHundredDayAverage:'',
+        YearChange:'',
+        YearHigh:'',
+        YearLow:'',
+        Shares:'',  
+
       statistics:[],
 
       nowTime: '',
@@ -429,19 +412,23 @@ export default {
     this.createCandleChart();
     this.getNowTime();
   },
-  created() {
-        axios.post('http://127.0.0.1:8088/marketinform').then(res => {
-        this.statistics = [];
-        //console.log(res.data)
-        res.data.forEach(result  => {
-          this.statistics.push(result);
-        });
-        console.log(this.statistics);
-        
-          
-        });
-  },
   methods: {
+    Addwatchlist(tickerName){
+      console.log(tickerName)
+
+      console.log(this.$store.state.accountid)
+      var id = this.$store.state.accountid
+      var result = {
+        tickerName: tickerName,
+        accountid: id
+      }
+      axios.post('http://127.0.0.1:8088/AddToWatchlist', result).then((res)=>{
+                console.log(res.data)
+            })
+
+
+         
+    },
     createCandleChart() {
       let candleChart = this.$echarts.init(this.$refs.candleChart)
       let option2 = {
@@ -555,13 +542,34 @@ export default {
   
   },
   created(){
-        axios.post("http://127.0.0.1:8088/marketinform").then((res) => {
-           console.log(res.data)
-           this.dayhigh = res.data['dayhigh']
-           this.daylow = res.data['daylow']
-           this.lastprice = res.data['lastprice']
+      console.log(this.$route.params.tickerName) 
+       var tickerName = this.$route.params.tickerName
+       this.tickerName = tickerName
+       axios.post("http://127.0.0.1:8088/marketinform/"+tickerName).then((res) => {
+          console.log(res.data)
+          this.dayhigh = res.data['dayhigh']
+          this.daylow = res.data['daylow']
+          this.lastprice = res.data['lastprice']
+          this.previousclose = res.data['previousclose']
+          this.lastvolume = res.data['lastvolume']
+          this.open = res.data['open']
+          this.QuoteType = res.data['QuoteType']
+          this.TenDayAverageVolume = res.data['TenDayAverageVolume']
+          this.ThreeMonthAverageVolume = res.data['ThreeMonthAverageVolume']
+          this.TwoHundredDayAverage  =res.data['TwoHundredDayAverage']
+          this.YearChange = res.data['YearChange']
+          this.YearHigh = res.data['YearHigh']
+          this.YearLow = res.data['YearLow']
+          this.Shares = res.data['Shares']
+          this.companyInfo = res.data['Company']
+          console.log(this.companyInfo)
+
+
         });
+      
+
     },
+
 
 };
 </script>

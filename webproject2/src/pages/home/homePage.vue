@@ -1,9 +1,10 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="24">
-        <img style="width:1510px" src="./imges/backgroud.png" />
-      </el-col>
+      <el-col :span="24" class="container">
+                <img src="./imges/backgroud.png" class="image" />
+           
+        </el-col>
     </el-row>
     <el-row>
       <el-col :span="8" :offset="10">
@@ -60,9 +61,7 @@ export default {
   color: #ffffff;
 }
 
-#home-bt-row {
-  margin-top: 100px;
-}
+
 
 .homebt {
   color: black;
@@ -74,5 +73,13 @@ export default {
 .home-bts {
   height: 150px;
   border-radius: 100px;
+}
+.container {
+    width: 100%;
+    height: 350px;
+}
+.image {
+    max-width: 100%;
+    max-height: 100%;
 }
 </style>
