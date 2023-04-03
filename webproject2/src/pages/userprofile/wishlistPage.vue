@@ -12,47 +12,43 @@
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 300px; margin-top:5%">
                 <span style="margin-left:20%;font-size: 40px;color: #F5EFE0;">Watch list</span>
             </el-row>
-            <el-row style="padding-right: 3%;">
-            <el-col :span="7" v-for="(item, index) in items"  :offset="1" style="margin-top: 2%;">
-                <el-card :body-style="{ padding: '0px' }" style="margin-top: 5%; margin-bottom: 5%; background: #1f3d70;">
-                    <div style="padding: 14px;">
-                        <!-- <img width="60px" height="60px" style="float: left; margin-top: 5%; " /> -->
-                        <div style="float:left; margin-left: 5%; width: 78%; margin-bottom: 3%;">
-                            <div>
-                                <span class="topFont">{{item.stockName}}</span>
-                            </div>
-                            <div>
-                                <span class="topFont">{{item.companyName}}</span>
-                            </div>
-                            <div style="margin-top: 4%;">
-                                <!-- <div style="float: left;width: 50%; ">
-                                    <div>
-                                        <span class="priceFont">High:{{item.high}}</span>
-                                    </div>
-                                    <div>
-                                        <span class="priceFont">Low:{{item.low}}</span>
-                                    </div>
-                                </div> -->
-                                <div style="float:right; margin-top: 2%;">
-                                    <div>
-                                        <el-button size="medium" type="warning" @click="Goinfor(item.stockName)" round
-                                            style="width: 100%;">Buy/Sell</el-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </el-card>
-                </el-col>
+            <el-row style="padding-right: 3%;margin-top:2%">
+                <el-table
+                    :data="tableData"
+                    border
+                    style="width: 100%">
+                    <el-table-column
+                    fixed
+                    prop="timestamp"
+                    label="Time Stamp"
+                    align="center">
+                    </el-table-column>
+                    <el-table-column
+                    fixed
+                    prop="watchlistid"
+                    label="Watchlist Id"
+                    align="center">
+                    </el-table-column>
+                    <el-table-column
+                    prop="ticker"
+                    label="Ticker"
+                    align="center">
+                    </el-table-column>
+                    <el-table-column
+                    fixed="right"
+                    label="Action"
+                    align="center">
+                    <template slot-scope="scope">
+                        <el-button @click="Goinfor(scope.row.ticker)" type="text" size="small">Buy and Sell</el-button>
+                        <el-button @click="Editwatchlist(scope.row.watchlistid)" type="text" size="small">Delete</el-button>
+                    </template>
+                    </el-table-column>
+                </el-table>
+            
+            
             </el-row>
-            <el-row>
-                <el-col :span="4" :offset="3">
-                    <el-button icon="el-icon-plus" style="background: #1F3D70;width:200px; margin-top:5%;color:white" @click="Gomarkethome"></el-button>
-                </el-col>
-                <el-col :span="4" :offset="5">
-                    <el-button icon="el-icon-minus" style="background: #1F3D70; width:200px;  margin-top:5%;color:white" @click="Editwatchlist"></el-button>
-                </el-col>
-
+            <el-row :span="8" :offset="3">
+                <el-button icon="el-icon-plus" style="background: #1F3D70;width:200px; margin-top:5%;margin-left:35%;color:white" @click="Gomarkethome"></el-button>
             </el-row>
             
 
@@ -113,7 +109,7 @@ export default {
     data() {
         return {
             avatar:'https://avatars0.githubusercontent.com/u/8186664?s=460&v=4',
-            items: [],
+            tableData: [],
             
             
         };
@@ -126,13 +122,26 @@ export default {
         }
            
         console.log(req)
-        
+
         axios.post("http://127.0.0.1:8088/GetWatchlist",req ).then((res) => {
             console.log(res.data)
-            this.items = res.data
+            this.tableData = res.data
         });
     },
     methods:{
+        Editwatchlist(watchlistid){
+            var watchlistid = watchlistid
+            var req = {
+                watchlistid: watchlistid
+            }
+            console.log(req)
+
+            axios.post("http://127.0.0.1:8088/RemoveFromWatchlist",req ).then((res) => {
+                console.log(res.data)
+            });
+
+
+        },
         Goinfor(ticker){
                     console.log(ticker)
                     //this.$router.push('/buyandsell')
