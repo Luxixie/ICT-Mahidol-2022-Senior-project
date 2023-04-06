@@ -40,7 +40,7 @@
                     align="center">
                     <template slot-scope="scope">
                         <el-button @click="Goinfor(scope.row.ticker)" type="text" size="small">Buy and Sell</el-button>
-                        <el-button @click="Editwatchlist(scope.row.watchlistid)" type="text" size="small">Delete</el-button>
+                        <el-button  @click.native.prevent="deleteRow(scope.$index, tableData,scope.row.watchlistid)"  type="text" size="small">Delete</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -129,6 +129,7 @@ export default {
         });
     },
     methods:{
+    
         Editwatchlist(watchlistid){
             var watchlistid = watchlistid
             var req = {
@@ -140,7 +141,13 @@ export default {
                 console.log(res.data)
             });
 
+           
 
+        },
+        deleteRow(index, rows,watchlistid) {
+          this.Editwatchlist(watchlistid)
+          rows.splice(index, 1);
+           
         },
         Goinfor(ticker){
                     console.log(ticker)

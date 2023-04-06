@@ -9,18 +9,21 @@
         </el-row>
           <el-row>
           <el-col :span="10" style="margin-left:8%">
-            <h4 style="float: left; margin-left:5%;color: #F5EFE0;">high: {{high}}</h4>
+            <h4 style="float: left; margin-left:5%;color: #F5EFE0;">high: {{high | numberWithCommas }}</h4>
           </el-col>
           <el-col :span="10" >
-            <h4 style="float: right; margin-right:6%;color: #F5EFE0;">current: {{current}}</h4>
+            <h4 style="float: right; margin-right:6%;color: #F5EFE0;">current: {{current | numberWithCommas }}</h4>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="10" style="margin-left:8%">
-            <h4 style="float: left; margin-left:5%; color: #F5EFE0;">low:  {{low}}</h4>
+            <h4 style="float: left; margin-left:5%; color: #F5EFE0;">low:  {{low | numberWithCommas }}</h4>
           </el-col>
           <el-col :span="10" >
-            <h4 style="float: right; margin-right:6%; color: #F5EFE0;">+6.00  (+0.37%)</h4>
+            <h4 style="float: right; margin-right:6%; color: #F5EFE0;">
+                <span> {{ (current - previousclose) >= 0 ? '+' : '-' }}{{ Math.abs(current - previousclose).toFixed(2) }} ({{((current / previousclose-1)*100).toFixed(2)}}%)
+                </span>
+            </h4>
           </el-col>
         </el-row>
       </el-col>
@@ -78,7 +81,9 @@
                 width:200px;
                 font-weight: 800;
                 font-size: 25px;
-                ">Back</el-button>
+                "
+                onclick="window.history.back()"
+                >Back</el-button>
     </el-row>
     </div>
 </template>
@@ -186,6 +191,8 @@ export default {
             that.high = res.data['dayhigh']
             that.low = res.data['daylow']
             that.current = res.data['lastprice']
+            that.previousclose = res.data['previousclose']
+
         });
         }
         setInterval(theNowPrice, speed)
@@ -213,7 +220,21 @@ export default {
            this.high = res.data['dayhigh']
            this.low = res.data['daylow']
            this.current = res.data['lastprice']
+           this.previousclose = res.data['previousclose']
         });
+    },
+    filters: {
+    numberWithCommas: function (value) {
+        if (!value) return ''
+        var parts = value.toString().split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        if (parts.length > 1) {
+        parts[1] = parts[1].substr(0, 2) // Only keep the first two decimal places
+        } else {
+        parts.push('00') // Add trailing zeros if the value doesn't have any decimal places
+        }
+        return parts.join('.')
+    }
     }
 }
 </script>

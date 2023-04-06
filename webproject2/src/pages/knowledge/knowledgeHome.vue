@@ -112,42 +112,42 @@ export default {
           image: require("../knowledge/images/2.png"),
           ChapterName: "Chapter 1 Reasons to Invest",
           path: "/chapter1",
-          learningProcess:30
+          learningProcess:0
         },
         {
           id: "2",
           image: require("../knowledge/images/3.png"),
           ChapterName: "Chapter 2 Fundamentals of the Stock Market",
           path: "/chapter2",
-          learningProcess:20
+          learningProcess:0
         },
         {
           id: "3",
           image: require("../knowledge/images/4.png"),
           ChapterName: "Chapter 3 Types of Investments",
           path: "/chapter3",
-          learningProcess:10
+          learningProcess:0
         },
         {
           id: "4",
           image: require("../knowledge/images/5.png"),
           ChapterName: "Chapter 4 Building Perfect Portfolio",
           path: "/chapter4",
-          learningProcess:50
+          learningProcess:0
         },
         {
           id: "5",
           image: require("../knowledge/images/6.jpeg"),
           ChapterName: "Chapter 5 Charts and Analysis",
           path: "/chapter5",
-          learningProcess:40
+          learningProcess:0
         },
         {
           id: "6",
           image: require("../knowledge/images/7.png"),
           ChapterName: "Chapter 6 Stock term",
           path: "/chapter6",
-          learningProcess:20
+          learningProcess:0
         },
       ]
     console.log(items)

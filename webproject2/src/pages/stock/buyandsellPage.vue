@@ -20,7 +20,7 @@
       <el-col :span="12" style="margin-top:2%">
         <el-row>
           <el-col :span="8" :offset="8">
-            <span style="font-size: xx-large; color:#f5efe1;">{{lastprice}}</span>
+            <span style="font-size: xx-large; color:#f5efe1;">{{lastprice | numberWithCommas }}</span>
           </el-col>
 
         </el-row>
@@ -58,19 +58,19 @@
 
             <el-row class="dataSummaryItem">
               <span>High: </span>
-              <span class="dataSummaryItemValue" >{{dayhigh}}</span>
+              <span class="dataSummaryItemValue" >{{dayhigh | numberWithCommas}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Low: </span>
-              <span class="dataSummaryItemValue" >{{daylow}}</span>
+              <span class="dataSummaryItemValue" >{{daylow | numberWithCommas}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Open: </span>
-              <span class="dataSummaryItemValue" >{{open}}</span>
+              <span class="dataSummaryItemValue" >{{open | numberWithCommas}}</span>
             </el-row>
             <el-row class="dataSummaryItem">
               <span>Volume: </span>
-              <span class="dataSummaryItemValue"> {{lastvolume}}</span>
+              <span class="dataSummaryItemValue"> {{lastvolume | numberWithCommas}}</span>
             </el-row>
           </div>
         </div>
@@ -83,31 +83,31 @@
         <el-col :span="11" style="border-radius: 15px; height: 100%; ">
           <div style="margin-left: 4%; margin-right: 4%;">
             <el-row>
-              <el-button :span="11"
-                style="color: black; font-size: larger; font-weight: bolder; margin-top: 3%;border-radius: 35px; width: 40%;"
-                type="warning"> Sell
-              </el-button>
-              <el-button :span="11"
-                style=" color: black; font-size: larger; font-weight: bolder;  float: right; margin-top: 3%;border-radius: 35px;  width: 40%;"
-                type="warning"> Buy </el-button>
+             <el-radio-group v-model="action">
+                <el-radio-button label="Buy"></el-radio-button>
+                <el-radio-button label="Sell"></el-radio-button>
+                
+              </el-radio-group>
             </el-row>
             <el-row style="height: 300px; margin-top: 2%; border-radius: 12px; background: #f5efe1;">
               <el-col :span="12" style=" height: 100%;">
                 <el-row style="margin-top:10%; margin-bottom: 5%; margin-left: 7%;">
                   <span :span="5" style="font-size:medium;">Price</span>
-                  <button :span="3" size="mini" style="margin-left: 8%;  border: 0px;">-</button>
+                  <button :span="3" size="mini" style="margin-left: 8%;  border: 0px;" @click="decreaseInputValue('price-input'); updateTotal()">-</button>
                   <el-input
-                    style="outline: none;   width: 40%; margin-left: 5%; margin-right: 5%; border-color: transparent;"
+                    id="price-input"
+                    style="outline: none;   width: 50%; margin-left: 5%; margin-right: 5%; border-color: transparent;"
                     placeholder="input the price"></el-input>
-                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;">+</button>
+                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="increaseValue('price-input'); updateTotal()">+</button>
                 </el-row>
                 <el-row style="margin-top:10%; margin-bottom: 5%; margin-left: 7%;">
                   <span :span="5" style="font-size:medium;">Volume</span>
-                  <button :span="3" size="mini" style="margin-left: 2%;  border: 0px;">-</button>
+                  <button :span="3" size="mini" style="margin-left: 2%;  border: 0px;" @click="decreaseInputValue2('volume-input'); updateTotal()">-</button>
                   <el-input
-                    style="outline: none; margin-left: 5%; margin-right: 5%; border-color: transparent; width: 40%; "
+                    id="volume-input"
+                    style="outline: none; margin-left: 5%; margin-right: 5%; border-color: transparent; width: 50%; "
                     placeholder="input the price"></el-input>
-                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;">+</button>
+                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="increaseValue2('volume-input'); updateTotal()" >+</button>
                 </el-row>
 
                 <el-row style="margin-left: 10%;">
@@ -118,7 +118,7 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8" :offset="7" style="margin-top: 4%;">
-                    <el-button round type="warning" style="color: black;">Simulation of buy</el-button>
+                    <el-button round type="warning" style="color: black;" @click = "simulation()" >Simulation of {{action}}</el-button>
                   </el-col>
                 </el-row>
               </el-col>
@@ -127,20 +127,20 @@
                   <el-col :span="12" :offset="6" style="margin-top: 10%; ">
                     <div
                       style="height: 30px; background: #dfd4dd; border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
-                      <span style="float:left;">new price</span>
-                      <span style="float:right;">70.00</span>
+                      <span style="float:left;">Current</span>
+                      <span style="float:right;">{{lastprice | numberWithCommas}}</span>
                     </div>
 
                     <div
                       style="height: 30px;  margin-top: 10%; background: #dfd4dd; border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
-                      <span style="float:left;">new price</span>
-                      <span style="float:right;">70.00</span>
+                      <span style="float:left;">High</span>
+                      <span style="float:right;">{{dayhigh | numberWithCommas}}</span>
                     </div>
 
                     <div
                       style="height: 30px; background: #dfd4dd; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
-                      <span style="float:left;">new price</span>
-                      <span style="float:right;">70.00</span>
+                      <span style="float:left;">Low</span>
+                      <span style="float:right;">{{daylow | numberWithCommas}}</span>
                     </div>
 
 
@@ -154,7 +154,7 @@
                       style="color: white; height: 30px; background: #203f6f; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
                       <span style="float:left;">Total</span>
                       <span style="float:right;">THB</span>
-                      <span style="float:right;">70.00</span>
+                      <span style="float:right;" id="total"></span>
 
                     </div>
                   </el-col>
@@ -207,33 +207,33 @@
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Ten Day Average Volume</span>
-                  <span style="float: right;" class="statisticsItemValue">{{TenDayAverageVolume}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{TenDayAverageVolume | numberWithCommas }}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Three Month Average Volume</span>
-                  <span style="float: right;" class="statisticsItemValue">{{ThreeMonthAverageVolume}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{ThreeMonthAverageVolume | numberWithCommas }}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Two Hundred Day Average</span>
-                  <span style="float: right;" class="statisticsItemValue">{{TwoHundredDayAverage}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{TwoHundredDayAverage | numberWithCommas }}</span>
                 </el-row>
               </el-col>
               <el-col :span="10" :offset="3">
                 <el-row >
                   <span style="float: left;" class="statisticsItem">Year Change</span>
-                  <span style="float: right;" class="statisticsItemValue">{{YearChange}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearChange | numberWithCommas }}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Year High</span>
-                  <span style="float: right;" class="statisticsItemValue">{{YearHigh}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearHigh | numberWithCommas }}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Year Low</span>
-                  <span style="float: right;" class="statisticsItemValue">{{YearLow}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{YearLow | numberWithCommas }}</span>
                 </el-row>
                 <el-row>
                   <span style="float: left;" class="statisticsItem">Shares</span>
-                  <span style="float: right;" class="statisticsItemValue">{{Shares}}</span>
+                  <span style="float: right;" class="statisticsItemValue">{{Shares | numberWithCommas }}</span>
                 </el-row>
               </el-col>
             </el-row>
@@ -390,8 +390,8 @@ export default {
         YearLow:'',
         Shares:'',  
 
-      statistics:[],
-
+      statistics:[],      
+      action:'Buy',
       nowTime: '',
       chart: null,
       showInfo: false,
@@ -400,11 +400,11 @@ export default {
         Bid: 11.90,
         Ask: 12.00
       }],
-      AccountData: [{
+      AccountData: {
         Balance: "18800",
         Order: "-",
         InPort: 100
-      }],
+      },
     };
   },
   mounted() {
@@ -538,9 +538,87 @@ export default {
       if (val < 10) return '0' + val
       return val
     },
+    decreaseInputValue(inputId) {
+    const inputElement = document.getElementById(inputId);
+      if (inputElement) {
+        let value = parseFloat(inputElement.value) || 0;
+        value -= 1; // decrease the value by 1 (or whatever amount you choose)
+        inputElement.value = value.toFixed(2); // update the input value and format it as a string with two decimal places
+      }
+    },
+    increaseValue(inputId) {
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) {
+      let value = parseFloat(inputElement.value) || 0;
+      value += 1; // increase the value by 1 (or whatever amount you choose)
+      inputElement.value = value.toFixed(2); // update the input value and format it as a string with two decimal places
+    }
+    },
+    decreaseInputValue2(inputId2) {
+    const inputElement = document.getElementById(inputId2);
+    if (inputElement) {
+      let value = parseFloat(inputElement.value) || 0;
+      value -= 1; // decrease the value by 1 (or whatever amount you choose)
+      inputElement.value = value.toFixed(); 
+    }
+    },
+    increaseValue2(inputId2) {
+    const inputElement = document.getElementById(inputId2);
+    if (inputElement) {
+      let value = parseFloat(inputElement.value) || 0;
+      value += 1; // increase the value by 1 (or whatever amount you choose)
+      inputElement.value = value.toFixed(); 
+    }
+    },
+    updateTotal() {
+      var price = parseInt(document.getElementById("price-input").value) || 0;
+      var volume = parseInt(document.getElementById("volume-input").value) || 0;
+      var total = price * volume;
+      document.getElementById("total").textContent = total;
+    },
+    buyStock(){
+      axios.post("http://127.0.0.1:8088/BuyStock",buydata).then((res) => {
+            
+            //
+
+
+        });
+      
+    },
+    SellStock(){
+      axios.post("http://127.0.0.1:8088/SellStock",buydata).then((res) => {
+            
+            //
+
+
+        });
+      
+    },
+
+    simulation(){
+       if(action == "buy"){
+         this.buyStock()
+       }
+       else{
+         this.SellStock()
+       }
+    }
     
   
   },
+  filters: {
+    numberWithCommas: function (value) {
+        if (!value) return ''
+        var parts = value.toString().split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        if (parts.length > 1) {
+        parts[1] = parts[1].substr(0, 2) // Only keep the first two decimal places
+        } else {
+        parts.push('00') // Add trailing zeros if the value doesn't have any decimal places
+        }
+        return parts.join('.')
+    }
+    },
   created(){
       console.log(this.$route.params.tickerName) 
        var tickerName = this.$route.params.tickerName

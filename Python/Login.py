@@ -1,4 +1,5 @@
 from configparser import MAX_INTERPOLATION_DEPTH
+from turtle import update
 import yfinance as yf
 from concurrent.futures import process
 from crypt import methods
@@ -427,10 +428,15 @@ def GetSETCurrentPrice():
    
     lastprice = "{:.2f}".format(SETTicker.fast_info.last_price)
     print(lastprice)
+    
+    previousclose = "{:.2f}".format(SETTicker.fast_info.previous_close)
+    print(previousclose)
     SETInfo = {
         'dayhigh':dayhigh,
-         'daylow':daylow,
-         'lastprice':lastprice
+        'daylow':daylow,
+        'lastprice':lastprice,
+        'previousclose':previousclose,
+
     }
   
     
@@ -492,12 +498,97 @@ def BuyStock():
     result = {}
     data= request.json
     print(data)
+
+    currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+    sql = f"INSERT INTO `stockproject`.`transaction` (`AccountId`, `ticker`, `stockprice`, `shares`, `action`, `cost`,`timestamp`) VALUES ({data['accountid']}, '{data['tickerName']}', {data['lastprice']} , {data['volume']}, '{data['action']}','{currentime}')"
+    result = db.insert_or_update_data(sql)
+
+    #update balance
+    cost = data['cost']
+    
+    #get balance 
+    getbalancesql = f"Select * from xxxxxx where accountid = {data['accountid']}"
+
+    accountinfos = db.query_data(getbalancesql)
+    accountinfo = accountinfos[0]
+    balance = accountinfo['balance']
+    
+    balance = balance - cost
+
+    updatebalancesql = f"update xxxxxx xxxxx "
+    db.insert_or_update_data(updatebalancesql)
+     
+    
+    #get ortder 
+    getordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} orderby timer"
+    orderinfos = db.query_data(getordersql)
+
+    ordercount = len(orderinfos)
+    latestOrderinfo =  orderinfos[0]
+
+    #get ortder 
+    getbuyordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'buy' "
+    orderinfos = db.query_data(getbuyordersql)
+    shares = 0,
+    for order in orderinfos:
+        shares += order['shares']
+  
+    getsellordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'sell' "
+    orderinfos = db.query_data(getsellordersql)
+    for order in orderinfos:
+        shares -= order["shares"]
+
+    result = {
+        'balance':balance,
+        'order':ordercount,
+        'inport':shares,
+    }
+    
     return result
 
 @app.route('/SellStock',methods=['POST'])
 def SellStock():
     result = {}
-    data= request.json   
+    data= request.json
+    
+    currentprice = data['currentprice']
+    volume = data['volume']
+    accountid = data['accountid']
+    #getbuyrecorder 
+    buysql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'buy' and shares > 0 deorderby time"
+    buyrecorders = db.query_data(buysql)
+    
+    for buyrecorder  in buyrecorders:
+        if buyrecorder['shares'] >= volume:
+            shares = buyrecorder['shares'] - volume
+            income = volume * currentprice
+            id = buyrecorder['id']
+            #update record 
+            updatesql = f'update shares  xxxxx , xxxxx  where recordeid = {id}'
+            db.insert_or_update_data(updatesql)
+            #update balance 
+            getbalance = f"select balance from xxxx where accountid = {accountid}"
+            balance = db.query_data(getbalance)[0]
+            balance = balance + income
+            updatebalancesql = f'update balance =xxxxxx where accountd  = {accountid}'
+            db.insert_or_update_data(updatebalancesql)
+            break
+        else:
+            volume = volume - buyrecorder['shares'] 
+            shares = 0,
+            income = buyrecorder['shares']  * currentprice
+            id = buyrecorder['id']
+            #update record 
+            updatesql = f'update shares  xxxxx , xxxxx  where recordeid = {id}'
+            db.insert_or_update_data(updatesql)
+            #update balance 
+            getbalance = f"select balance from xxxx where accountid = {accountid}"
+            balance = db.query_data(getbalance)[0]
+            balance = balance + income
+            updatebalancesql = f'update balance =xxxxxx where accountd  = {accountid}'
+            db.insert_or_update_data(updatebalancesql)
+            continue
+
     return result
 
 
