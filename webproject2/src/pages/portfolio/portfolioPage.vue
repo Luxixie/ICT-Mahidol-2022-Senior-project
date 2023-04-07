@@ -11,10 +11,10 @@
                  <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today‘s profit</span>
             </el-row>
              <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0 {{ profit }} BAHT</span>
+                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0BAHT</span>
             </el-row>
             <el-row>
-                <span style="font-weight: bold;margin-left:40%;">Holding profits +0 {{sumprofit}} BAHT</span>
+                <span style="font-weight: bold;margin-left:40%;">Holding profits +0  BAHT</span>
             </el-row>
             <el-row>
                 <el-col :span="11">
@@ -22,7 +22,7 @@
                         <span style="font-weight: bold;margin-left:46%;">Total money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:45%;">20,000 {{todaymoney}} BAHT</span>
+                        <span style="font-weight: bold;margin-left:45%;">20,000BAHT</span>
                     </el-row>
                 </el-col>
                 <el-col :span="11">
@@ -30,7 +30,7 @@
                         <span style="font-weight: bold;margin-left:44%;">Avilable money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:45%;">{{avilablemoney}}{{ 18000 | numberWithCommas }} BAHT</span>
+                        <span style="font-weight: bold;margin-left:45%;">{{avilablemoney | numberWithCommas }} BAHT</span>
                     </el-row>
                 </el-col>
             </el-row>
@@ -42,7 +42,7 @@
 
                 </el-button>
             </el-col>
-            <el-col :span="11" offset="1"  style="background:green;float:right; border-radius: 20px;">
+            <el-col :span="11" :offset="1"  style="background:green;float:right; border-radius: 20px;">
                 <el-button icon="el-icon-star-off" style="background: #F5EFE0; border-radius: 20px; width:100%;font-weight: bold;color:black;font-size:18px">Watch list
                 </el-button>
             </el-col>
@@ -58,21 +58,21 @@
                     :data="tableData"
                     style="width: 100%">
                     <el-table-column
-                        prop="no"
+                        prop="transactionid"
                         label="No."
                         width="180">
                     </el-table-column>
                     <el-table-column
-                        prop="name"
-                        label="Name"
+                        prop="ticker"
+                        label="TickerName"
                         width="180">
                     </el-table-column>
                     <el-table-column
-                        prop="vol"
+                        prop="shares"
                         label="Vol">
                     </el-table-column>
                     <el-table-column
-                        prop="price"
+                        prop="cost"
                         label="Price">
                     </el-table-column>
                     </el-table>
@@ -122,16 +122,14 @@
 
 <script>
 import * as echarts from "echarts";
-
+import axios from 'axios'
 
 
 export default {
     data() {
         return {
             nowTime: '',
-            profit:'',
-            sumprofit:'',
-            today_money:'',
+            avilablemoney:'',
             Avilable_money:'',
             myChart: {},
             pieData: [
@@ -147,49 +145,7 @@ export default {
                 ],
             pieName: [],
                     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
-            tableData: [{
-                no:'1',
-                name: 'WICE',
-                vol: '100',
-                price:'1200',
-            },
-            {
-                no:'2',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            {
-                no:'3',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            {
-                no:'4',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            {
-                no:'5',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            {
-                no:'6',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            {
-                no:'7',
-                name: '',
-                vol: '',
-                price:'',
-            },
-            ]
+            tableData: []
             }
     },
 
@@ -275,6 +231,8 @@ export default {
       });
 
     },
+    
+    },
     filters: {
         numberWithCommas: function (value) {
             if (!value) return ''
@@ -287,8 +245,23 @@ export default {
             }
             return parts.join('.')
         }
+    },
+    created(){
+        var id = this.$store.state.accountid
+        console.log(id)
+        var req = {
+            accountid:id
         }
+        axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
+            console.log(res)
+            this.avilablemoney = res.data['Balance']
 
+        })
+        axios.post("http://127.0.0.1:8088/GetBuySellHistory",req).then((res) => {
+            console.log(res)
+            this.tableData = res.data
+
+        })
     }
 }
 

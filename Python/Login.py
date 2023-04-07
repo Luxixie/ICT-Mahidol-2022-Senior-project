@@ -486,7 +486,8 @@ def GetBalance():
     result = {}
     data= request.json
     print(data)
-    sql = f"SELECT AccountId , Balance  FROM stockproject.accounts where AccountId = {data['accountid']})"
+    accountid = data['accountid']
+    sql = f"SELECT AccountId , Balance  FROM stockproject.accounts where AccountId = {accountid}"
     sqlresult = db.query_data(sql)
     print (sqlresult[0])
     if len(sqlresult)== 1:
@@ -500,49 +501,53 @@ def BuyStock():
     print(data)
 
     currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
-    sql = f"INSERT INTO `stockproject`.`transaction` (`AccountId`, `ticker`, `stockprice`, `shares`, `action`, `cost`,`timestamp`) VALUES ({data['accountid']}, '{data['tickerName']}', {data['lastprice']} , {data['volume']}, '{data['action']}','{currentime}')"
+    sql = f"INSERT INTO `stockproject`.`transaction` (`AccountId`, `ticker`, `stockprice`, `shares`, `action`, `cost`,`timestamp`) VALUES ({data['AccountId']}, '{data['ticker']}', '{data['stockprice']}' , {data['shares']}, '{data['action']}','{data['cost']}','{currentime}')"
     result = db.insert_or_update_data(sql)
 
     #update balance
-    cost = data['cost']
+    cost = float(data['cost'])
+    print(cost)
     
     #get balance 
-    getbalancesql = f"Select * from xxxxxx where accountid = {data['accountid']}"
+    getbalancesql = f"SELECT * FROM stockproject.accounts where AccountId = {data['AccountId']}"
 
     accountinfos = db.query_data(getbalancesql)
     accountinfo = accountinfos[0]
-    balance = accountinfo['balance']
+    balance = accountinfo['Balance']
+    print(balance)
     
     balance = balance - cost
+    print(balance)
 
-    updatebalancesql = f"update xxxxxx xxxxx "
+    updatebalancesql = f"UPDATE stockproject.accounts SET Balance = {balance} where AccountId = {data['AccountId']}"
     db.insert_or_update_data(updatebalancesql)
-     
+    
     
     #get ortder 
-    getordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} orderby timer"
+    getordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}'ORDER BY timestamp"
     orderinfos = db.query_data(getordersql)
-
+    
     ordercount = len(orderinfos)
     latestOrderinfo =  orderinfos[0]
-
+    print(ordercount)
     #get ortder 
-    getbuyordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'buy' "
+    getbuyordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'buy' "
     orderinfos = db.query_data(getbuyordersql)
-    shares = 0,
+    shares = 0
     for order in orderinfos:
         shares += order['shares']
   
-    getsellordersql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'sell' "
+    getsellordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'sell' "
     orderinfos = db.query_data(getsellordersql)
     for order in orderinfos:
         shares -= order["shares"]
 
     result = {
-        'balance':balance,
-        'order':ordercount,
-        'inport':shares,
+        'Balance':balance,
+        'Order':ordercount,
+        'Inport':shares,
     }
+    print(result)
     
     return result
 
@@ -594,9 +599,14 @@ def SellStock():
 
 @app.route('/GetBuySellHistory',methods=['POST'])
 def GetBuySellHistory():
-    result = {}
-    data= request.json   
-    return result
+    data= request.json
+    print(data)   
+    accountid = request.json['accountid']
+    sql = f'SELECT * FROM stockproject.transaction where AccountId = {accountid} '
+    datas = db.query_data(sql)
+    print(data)
+    return datas
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

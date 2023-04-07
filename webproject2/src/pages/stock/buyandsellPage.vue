@@ -89,36 +89,34 @@
                 
               </el-radio-group>
             </el-row>
-            <el-row style="height: 300px; margin-top: 2%; border-radius: 12px; background: #f5efe1;">
+            <el-row style="padding-bottom: 2%; margin-top: 2%; border-radius: 12px; background: #f5efe1;">
               <el-col :span="12" style=" height: 100%;">
                 <el-row style="margin-top:10%; margin-bottom: 5%; margin-left: 7%;">
-                  <span :span="5" style="font-size:medium;">Price</span>
-                  <button :span="3" size="mini" style="margin-left: 8%;  border: 0px;" @click="decreaseInputValue('price-input'); updateTotal()">-</button>
-                  <el-input
-                    id="price-input"
-                    style="outline: none;   width: 50%; margin-left: 5%; margin-right: 5%; border-color: transparent;"
-                    placeholder="input the price"></el-input>
-                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="increaseValue('price-input'); updateTotal()">+</button>
-                </el-row>
-                <el-row style="margin-top:10%; margin-bottom: 5%; margin-left: 7%;">
                   <span :span="5" style="font-size:medium;">Volume</span>
-                  <button :span="3" size="mini" style="margin-left: 2%;  border: 0px;" @click="decreaseInputValue2('volume-input'); updateTotal()">-</button>
+                  <button :span="3" size="mini" style="margin-left: 2%;  border: 0px;" @click="volumes -= 100">-</button>
                   <el-input
-                    id="volume-input"
+        
                     style="outline: none; margin-left: 5%; margin-right: 5%; border-color: transparent; width: 50%; "
-                    placeholder="input the price"></el-input>
-                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="increaseValue2('volume-input'); updateTotal()" >+</button>
+                    placeholder="input the volume" 
+                    v-model.number="volumes"></el-input> 
+                  <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="volumes += 100" >+</button>
+                  <span v-if="priceError" style="color: red; margin-left:2%">{{ priceError }}</span>
                 </el-row>
 
                 <el-row style="margin-left: 10%;">
-                  <el-button round style="background: #203f6f; color: white;">1/4</el-button>
-                  <el-button round style="background: #203f6f; color: white;">1/3</el-button>
-                  <el-button round style="background: #203f6f; color: white;">1/2</el-button>
-                  <el-button round style="background: #203f6f; color: white;">ALL IN</el-button>
+                  <el-button round style="background: #203f6f; color: white;"
+                              :disabled="AccountData.Balance < parseInt(volumes) / 4"
+                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100 / 4">1/4</el-button>
+                  <el-button round style="background: #203f6f; color: white;"
+                              :disabled="AccountData.Balance < parseInt(volumes) / 2"
+                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100 / 2">1/2</el-button>
+                  <el-button round style="background: #203f6f; color: white;"
+                              :disabled="AccountData.Balance < parseInt(volumes)"
+                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100">ALL IN</el-button>
                 </el-row>
                 <el-row>
                   <el-col :span="8" :offset="7" style="margin-top: 4%;">
-                    <el-button round type="warning" style="color: black;" @click = "simulation()" >Simulation of {{action}}</el-button>
+                    <el-button round type="warning" style="color: black;" v-on:click="simulation()" >Simulation of {{action}}</el-button>
                   </el-col>
                 </el-row>
               </el-col>
@@ -149,12 +147,12 @@
                 </el-row>
 
                 <el-row>
-                  <el-col :span="14" :offset="5">
+                  <el-col :span="18" :offset="5">
                     <div
-                      style="color: white; height: 30px; background: #203f6f; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
-                      <span style="float:left;">Total</span>
+                      style="color: white; height: 30px; background: #203f6f; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left:2%; padding-right: 2%;">
+                      <span style="float:left;">Total: </span>
                       <span style="float:right;">THB</span>
-                      <span style="float:right;" id="total"></span>
+                      <span style="float:right;">{{(lastprice * volumes).toFixed(2) | numberWithCommas}}</span>
 
                     </div>
                   </el-col>
@@ -167,25 +165,18 @@
 
         </el-col>
         <el-col :span="11" :offset="2" style="border-radius: 15px; height: 100%;  ">
-          <el-row style="background: #f5efe1; height: 40%; border-radius: 15px; ">
-            <el-table :data="StockData" style="width: 80%;margin-top: 3%; margin-left: 10%; background-color: #f5efe1;">
-              <el-table-column prop="Vol" label="Vol">
+          <el-row style="background: #f5efe1;margin-top: 4%; border-radius: 15px;">
+            <el-table :data="AccountData" style="width: 80%;margin-top: 6%; margin-left: 10%; background: transparent;">
+              <el-table-column fixed prop="Balance" label="Balance" align="center">
               </el-table-column>
-              <el-table-column prop="Bid" label="Bid">
+              <el-table-column prop="Order" label="Order" align="center">
               </el-table-column>
-              <el-table-column prop="Ask" label="Ask">
+              <el-table-column prop="InPort" label="In Port" align="center">
               </el-table-column>
             </el-table>
           </el-row>
-          <el-row style="background: #f5efe1; height: 50%;margin-top: 4%; border-radius: 15px;">
-            <el-table :data="AccountData" style="width: 80%;margin-top: 6%; margin-left: 10%; background: transparent;">
-              <el-table-column prop="Balance" label="Balance">
-              </el-table-column>
-              <el-table-column prop="Order" label="Order">
-              </el-table-column>
-              <el-table-column prop="InPort" label="in Port">
-              </el-table-column>
-            </el-table>
+          <el-row style="background: #f5efe1; margin-top:1%; border-radius: 15px; ">
+
           </el-row>
         </el-col>
       </el-row>
@@ -373,9 +364,9 @@ export default {
   data() {
     return {
       tickerName:'',
-        companyInfo:{},
-        lastprice:'',
-        previousclose:'',
+      companyInfo:{},
+      lastprice:'',
+      previousclose:'',
         dayhigh:'',
         daylow:'',
         exchange:'',
@@ -389,23 +380,31 @@ export default {
         YearHigh:'',
         YearLow:'',
         Shares:'',  
-
+      totalprice:'',
+      volume: 0.25,
+      volumes:'',
       statistics:[],      
-      action:'Buy',
+      action:"Buy",
       nowTime: '',
       chart: null,
       showInfo: false,
-      StockData: [{
-        Vol: 12.00,
-        Bid: 11.90,
-        Ask: 12.00
-      }],
-      AccountData: {
-        Balance: "18800",
-        Order: "-",
-        InPort: 100
-      },
+      AccountData:[],
     };
+  },
+  computed: {
+    priceError() {
+      if (!this.volumes || isNaN(this.volumes) || this.volumes <= 0) {
+        return "Please enter a valid volume";
+      }
+      return null;
+    },
+
+  },
+  watch: {
+  volumes(newVal) {
+    this.totalprice = (newVal * this.lastprice).toFixed(2)
+
+  }
   },
   mounted() {
     this.initChart();
@@ -538,55 +537,49 @@ export default {
       if (val < 10) return '0' + val
       return val
     },
-    decreaseInputValue(inputId) {
-    const inputElement = document.getElementById(inputId);
-      if (inputElement) {
-        let value = parseFloat(inputElement.value) || 0;
-        value -= 1; // decrease the value by 1 (or whatever amount you choose)
-        inputElement.value = value.toFixed(2); // update the input value and format it as a string with two decimal places
-      }
-    },
-    increaseValue(inputId) {
-    const inputElement = document.getElementById(inputId);
-    if (inputElement) {
-      let value = parseFloat(inputElement.value) || 0;
-      value += 1; // increase the value by 1 (or whatever amount you choose)
-      inputElement.value = value.toFixed(2); // update the input value and format it as a string with two decimal places
-    }
-    },
-    decreaseInputValue2(inputId2) {
-    const inputElement = document.getElementById(inputId2);
-    if (inputElement) {
-      let value = parseFloat(inputElement.value) || 0;
-      value -= 1; // decrease the value by 1 (or whatever amount you choose)
-      inputElement.value = value.toFixed(); 
-    }
-    },
-    increaseValue2(inputId2) {
-    const inputElement = document.getElementById(inputId2);
-    if (inputElement) {
-      let value = parseFloat(inputElement.value) || 0;
-      value += 1; // increase the value by 1 (or whatever amount you choose)
-      inputElement.value = value.toFixed(); 
-    }
-    },
-    updateTotal() {
-      var price = parseInt(document.getElementById("price-input").value) || 0;
-      var volume = parseInt(document.getElementById("volume-input").value) || 0;
-      var total = price * volume;
-      document.getElementById("total").textContent = total;
-    },
+    
     buyStock(){
+      console.log("buyStock called");
+      var id = this.$store.state.accountid
+      console.log(id)
+      var stockprice = this.lastprice
+      console.log(stockprice)
+      var tickerName = this.$route.params.tickerName
+      console.log(tickerName)
+      var shares = this.volumes
+      console.log(shares)
+      var action = this.action
+      console.log(action)
+      var cost = this.totalprice
+      console.log(cost)
+      var buydata = {
+        AccountId: id , 
+        ticker: tickerName,
+        stockprice: stockprice , 
+        shares: shares, 
+        action: action, 
+        cost:cost,
+
+      }
+      console.log(buydata)
       axios.post("http://127.0.0.1:8088/BuyStock",buydata).then((res) => {
-            
-            //
+        console.log(res)
+        //this.AccountData = res.data
+        this.AccountData.Balance = res.data['Balance']
+        this.AccountData.Order = res.data['Order']
+        this.AccountData.Inport = res.data['Inport']
+
 
 
         });
       
     },
     SellStock(){
-      axios.post("http://127.0.0.1:8088/SellStock",buydata).then((res) => {
+      var selldata = {
+        AccountId: id , 
+
+      }
+      axios.post("http://127.0.0.1:8088/SellStock",selldata).then((res) => {
             
             //
 
@@ -596,16 +589,23 @@ export default {
     },
 
     simulation(){
-       if(action == "buy"){
+      console.log('simulation() called');
+      
+      var action = this.action;
+      console.log(action)
+       if(action === "Buy"){
          this.buyStock()
        }
        else{
-         this.SellStock()
+         //this.SellStock()
        }
-    }
+    },
+
+
     
-  
+    
   },
+  
   filters: {
     numberWithCommas: function (value) {
         if (!value) return ''
@@ -643,10 +643,20 @@ export default {
           console.log(this.companyInfo)
 
 
-        });
+        });     
+      var id = this.$store.state.accountid
+      console.log(id)
+      var req = {
+          accountid:id
+      }
+      axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
+        console.log(res)
+        this.AccountData.Balance = res.data['Balance']
+
+      })
       
 
-    },
+    }
 
 
 };
