@@ -108,9 +108,11 @@ export default {
     },
     querySearch(queryString, cb) {
       var stocks = this.stocks;
+      console.log(stocks)
       var results = queryString
         ? stocks.filter(this.createFilter(queryString))
         : stocks;
+      
 
       //console.log(results)
       cb(results);

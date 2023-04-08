@@ -34,7 +34,7 @@
         </el-row>
         <el-row style="height: 30%;">
           <el-col :span="12" :offset="5">
-            <span style="font-size:small; color:#f5efe1;">Market Status:Pre-Open2 update 14/2/2023 18:16:00{{ nowTime }}</span>
+            <span style="font-size:small; color:#f5efe1;">Market Status:{{ nowTime }}</span>
           </el-col>
         </el-row>
       </el-col>
@@ -171,7 +171,7 @@
               </el-table-column>
               <el-table-column prop="Order" label="Order" align="center">
               </el-table-column>
-              <el-table-column prop="InPort" label="In Port" align="center">
+              <el-table-column prop="Inport" label="In Port" align="center">
               </el-table-column>
             </el-table>
           </el-row>
@@ -403,13 +403,13 @@ export default {
   watch: {
   volumes(newVal) {
     this.totalprice = (newVal * this.lastprice).toFixed(2)
-
+     
   }
   },
   mounted() {
+    this.getNowTime();
     this.initChart();
     this.createCandleChart();
-    this.getNowTime();
   },
   methods: {
     Addwatchlist(tickerName){
@@ -559,30 +559,46 @@ export default {
         shares: shares, 
         action: action, 
         cost:cost,
-
       }
       console.log(buydata)
       axios.post("http://127.0.0.1:8088/BuyStock",buydata).then((res) => {
         console.log(res)
         //this.AccountData = res.data
-        this.AccountData.Balance = res.data['Balance']
-        this.AccountData.Order = res.data['Order']
-        this.AccountData.Inport = res.data['Inport']
-
-
-
+        this.AccountData = []
+        var data = {
+          "Balance": res.data['Balance'],
+          "Order": res.data['Order'],
+          "Inport": res.data['Inport']
+        }
+        this.AccountData.push(data)
         });
       
     },
     SellStock(){
+      console.log("SellStock called");
+      var id = this.$store.state.accountid
+      console.log(id)
+      var currentprice = this.lastprice
+      console.log(currentprice)
+      var tickerName = this.$route.params.tickerName
+      console.log(tickerName)
+      var volume = this.volumes
+      console.log(volume)
+      var action = this.action
+      console.log(action)
+      var cost = this.totalprice
+      console.log(cost)
       var selldata = {
-        AccountId: id , 
-
+        accountid: id , 
+        ticker: tickerName,
+        currentprice: currentprice , 
+        volume: volume, 
+        action: action, 
+        cost:cost,
       }
+      console.log(selldata)
       axios.post("http://127.0.0.1:8088/SellStock",selldata).then((res) => {
-            
-            //
-
+            console.log(res)
 
         });
       
@@ -597,7 +613,7 @@ export default {
          this.buyStock()
        }
        else{
-         //this.SellStock()
+         this.SellStock()
        }
     },
 

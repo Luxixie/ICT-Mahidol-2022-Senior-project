@@ -531,13 +531,13 @@ def BuyStock():
     latestOrderinfo =  orderinfos[0]
     print(ordercount)
     #get ortder 
-    getbuyordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'buy' "
+    getbuyordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'Buy' "
     orderinfos = db.query_data(getbuyordersql)
     shares = 0
     for order in orderinfos:
         shares += order['shares']
   
-    getsellordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'sell' "
+    getsellordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}' and action = 'Sell' "
     orderinfos = db.query_data(getsellordersql)
     for order in orderinfos:
         shares -= order["shares"]
@@ -555,42 +555,67 @@ def BuyStock():
 def SellStock():
     result = {}
     data= request.json
+    print(data)
     
-    currentprice = data['currentprice']
+    currentprice = float(data['currentprice'])
+    print(currentprice)
     volume = data['volume']
+    print(volume)
     accountid = data['accountid']
+    print(accountid)
+    income = data['cost']
     #getbuyrecorder 
-    buysql = f"select * from xxxx where accountid = {data['accountid']} and ticker = {data['tickerName']} and action = 'buy' and shares > 0 deorderby time"
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and ticker = '{data['ticker']}' and action = 'buy' and shares > 0 ORDER BY timestamp"
     buyrecorders = db.query_data(buysql)
     
     for buyrecorder  in buyrecorders:
         if buyrecorder['shares'] >= volume:
+            print("biger")
             shares = buyrecorder['shares'] - volume
-            income = volume * currentprice
-            id = buyrecorder['id']
+            print(shares)
+            print("cp:"+ str(currentprice))
+            print("colume" + str(volume))
+           
+            income = currentprice * volume
+            print("inome:"+str(income))
+            id = buyrecorder['transactionid']
+            print(id)
             #update record 
-            updatesql = f'update shares  xxxxx , xxxxx  where recordeid = {id}'
+            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = {shares} WHERE (`transactionid` = {id})'
             db.insert_or_update_data(updatesql)
             #update balance 
-            getbalance = f"select balance from xxxx where accountid = {accountid}"
-            balance = db.query_data(getbalance)[0]
-            balance = balance + income
-            updatebalancesql = f'update balance =xxxxxx where accountd  = {accountid}'
+            getbalance = f'SELECT * FROM stockproject.accounts where AccountId = {accountid}'
+            print(getbalance)
+            balanceobj = db.query_data(getbalance)[0]
+            print(balanceobj)
+
+            balance = balanceobj['Balance'] + income
+            print(str(balance))
+            updatebalancesql = f'UPDATE stockproject.accounts SET Balance = {balance} where AccountId = {accountid}'
             db.insert_or_update_data(updatebalancesql)
             break
         else:
+            print("Small")
             volume = volume - buyrecorder['shares'] 
+            print(volume)
             shares = 0,
             income = buyrecorder['shares']  * currentprice
-            id = buyrecorder['id']
+            print(buyrecorder['shares'])
+            print("inome:"+str(income))
+            id = buyrecorder['transactionid']
+            print(id)
             #update record 
-            updatesql = f'update shares  xxxxx , xxxxx  where recordeid = {id}'
+            updatesql = f'UPDATE stockproject.transaction SET shares = {shares} WHERE transactionid = {id}'
             db.insert_or_update_data(updatesql)
             #update balance 
-            getbalance = f"select balance from xxxx where accountid = {accountid}"
-            balance = db.query_data(getbalance)[0]
+            getbalance = f'SELECT * FROM stockproject.accounts where AccountId = {accountid}'
+            print(getbalance)
+            balanceobj = db.query_data(getbalance)[0]
+            print(balanceobj)
+
             balance = balance + income
-            updatebalancesql = f'update balance =xxxxxx where accountd  = {accountid}'
+            print(balance)
+            updatebalancesql = f'UPDATE stockproject.accounts SET Balance = {balance} where AccountId = {accountid}'
             db.insert_or_update_data(updatebalancesql)
             continue
 
@@ -607,6 +632,13 @@ def GetBuySellHistory():
     print(data)
     return datas
 
+
+
+@app.route('/GetStockInfo',methods=['POST'])
+def GetStockInfo():
+
+
+    return 
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

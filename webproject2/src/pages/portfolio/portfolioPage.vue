@@ -56,16 +56,18 @@
             <el-col :span="11" :offset="1" style="background:#D9D9D9;;float:right;border-radius: 20px;">
                 <el-table
                     :data="tableData"
-                    style="width: 100%">
+                    style="width: 100%"
+                    border
+                    height="400">
                     <el-table-column
                         prop="transactionid"
                         label="No."
-                        width="180">
+                        >
                     </el-table-column>
                     <el-table-column
                         prop="ticker"
                         label="TickerName"
-                        width="180">
+                       >
                     </el-table-column>
                     <el-table-column
                         prop="shares"
@@ -134,7 +136,7 @@ export default {
             myChart: {},
             pieData: [
                 {
-                value: 18800,
+                value: this.avilablemoney,
                 name: "Avilable_money"
                 },
                 {
@@ -150,7 +152,7 @@ export default {
     },
 
     mounted() {
-    this.getNowTime();
+    //this.getNowTime();
     this.initDate(); //数据初始化
     this.initEcharts();
     },
@@ -255,6 +257,14 @@ export default {
         axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
             console.log(res)
             this.avilablemoney = res.data['Balance']
+            this.pieData=[]
+            var data = {
+                value: this.avilablemoney,
+                name: "Avilable_money"
+                
+            }
+            this.pieData.push(data)
+  
 
         })
         axios.post("http://127.0.0.1:8088/GetBuySellHistory",req).then((res) => {
