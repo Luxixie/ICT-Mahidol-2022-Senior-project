@@ -605,7 +605,7 @@ def SellStock():
             id = buyrecorder['transactionid']
             print(id)
             #update record 
-            updatesql = f'UPDATE stockproject.transaction SET shares = {shares} WHERE transactionid = {id}'
+            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = 0 WHERE (`transactionid` = {id})'
             db.insert_or_update_data(updatesql)
             #update balance 
             getbalance = f'SELECT * FROM stockproject.accounts where AccountId = {accountid}'
@@ -613,12 +613,38 @@ def SellStock():
             balanceobj = db.query_data(getbalance)[0]
             print(balanceobj)
 
-            balance = balance + income
-            print(balance)
+            balance = balanceobj['Balance'] + income
+            print(str(balance))
             updatebalancesql = f'UPDATE stockproject.accounts SET Balance = {balance} where AccountId = {accountid}'
             db.insert_or_update_data(updatebalancesql)
             continue
 
+    #get ortder 
+    getordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}'ORDER BY timestamp"
+    orderinfos = db.query_data(getordersql)
+    
+    ordercount = len(orderinfos)
+    latestOrderinfo =  orderinfos[0]
+    print(ordercount)
+    #get ortder 
+    getbuyordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}' and action = 'Buy' "
+    orderinfos = db.query_data(getbuyordersql)
+    shares = 0
+    for order in orderinfos:
+        shares += order['shares']
+  
+    getsellordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}' and action = 'Sell' "
+    orderinfos = db.query_data(getsellordersql)
+    for order in orderinfos:
+        shares -= order["shares"]
+
+    result = {
+        'Balance':balance,
+        'Order':ordercount,
+        'Inport':shares,
+    }
+    print(result)
+    
     return result
 
 

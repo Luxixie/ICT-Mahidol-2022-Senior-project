@@ -599,8 +599,15 @@ export default {
       console.log(selldata)
       axios.post("http://127.0.0.1:8088/SellStock",selldata).then((res) => {
             console.log(res)
-
-        });
+            //this.AccountData = res.data
+            this.AccountData = []
+            var data = {
+              "Balance": res.data['Balance'],
+              "Order": res.data['Order'],
+              "Inport": res.data['Inport']
+            }
+            this.AccountData.push(data)
+      });
       
     },
 
