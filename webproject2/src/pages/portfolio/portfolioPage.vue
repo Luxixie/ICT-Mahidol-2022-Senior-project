@@ -22,7 +22,7 @@
                         <span style="font-weight: bold;margin-left:46%;">Total money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:45%;">20,000BAHT</span>
+                        <span style="font-weight: bold;margin-left:45%;">100,000BAHT</span>
                     </el-row>
                 </el-col>
                 <el-col :span="11">
@@ -38,12 +38,12 @@
 
         <el-row style="margin-left:10%;margin-right:10%;margin-top:1%;">
             <el-col :span="11" style="background:blue; float:left; border-radius: 20px;" >
-                <el-button icon="el-icon-sold-out" style="background: #F5EFE0; border-radius: 20px; width:100%;font-weight: bold;color:black;font-size:18px">  Buy and Sell
+                <el-button icon="el-icon-sold-out" style="background: #F5EFE0; border-radius: 20px; width:100%;font-weight: bold;color:black;font-size:18px" @click="Gobuyandsell">  Buy and Sell
 
                 </el-button>
             </el-col>
             <el-col :span="11" :offset="1"  style="background:green;float:right; border-radius: 20px;">
-                <el-button icon="el-icon-star-off" style="background: #F5EFE0; border-radius: 20px; width:100%;font-weight: bold;color:black;font-size:18px">Watch list
+                <el-button icon="el-icon-star-off" style="background: #F5EFE0; border-radius: 20px; width:100%;font-weight: bold;color:black;font-size:18px" @click="Gowatchlist">Watch list
                 </el-button>
             </el-col>
 
@@ -74,11 +74,16 @@
                         label="Vol">
                     </el-table-column>
                     <el-table-column
-                        prop="cost"
+                        prop="stockprice"
                         label="Price">
+                    </el-table-column>
+                    <el-table-column
+                        prop="cost"
+                        label="Cost">
                     </el-table-column>
                     </el-table>
             </el-col>
+
 
         </el-row>
     </div>
@@ -147,7 +152,7 @@ export default {
                 ],
             pieName: [],
                     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
-            tableData: []
+            tableData: [],
             }
     },
 
@@ -160,6 +165,7 @@ export default {
         this.initData();
     },
     methods: {
+        
     getNowTime () {
       let speed = 1000
       let that = this
@@ -233,7 +239,12 @@ export default {
       });
 
     },
-    
+    Gobuyandsell(){
+          this.$router.push('/markethome')
+    },
+    Gowatchlist(){
+          this.$router.push('/watchlist')
+    },
     },
     filters: {
         numberWithCommas: function (value) {
@@ -267,7 +278,7 @@ export default {
   
 
         })
-        axios.post("http://127.0.0.1:8088/GetBuySellHistory",req).then((res) => {
+        axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
             console.log(res)
             this.tableData = res.data
 

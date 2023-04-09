@@ -1,4 +1,5 @@
 from configparser import MAX_INTERPOLATION_DEPTH
+from symtable import Symbol
 from turtle import update
 import yfinance as yf
 from concurrent.futures import process
@@ -648,23 +649,62 @@ def SellStock():
     return result
 
 
-@app.route('/GetBuySellHistory',methods=['POST'])
-def GetBuySellHistory():
+@app.route('/GetBuyHistory',methods=['POST'])
+def GetBuyHistory():
     data= request.json
     print(data)   
     accountid = request.json['accountid']
-    sql = f'SELECT * FROM stockproject.transaction where AccountId = {accountid} '
-    datas = db.query_data(sql)
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'buy' and shares > 0 ORDER BY timestamp"
+    datas = db.query_data(buysql)
+    print(data)
+    return datas
+
+@app.route('/GetSellHistory',methods=['POST'])
+def GetSellHistory():
+    data= request.json
+    print(data)   
+    accountid = request.json['accountid']
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'buy' and shares = 0 ORDER BY timestamp"
+    datas = db.query_data(buysql)
     print(data)
     return datas
 
 
+@app.route('/GetPurchaseinfor',methods=['POST'])
+def GetPurchaseinfor():
+    data= request.json
+    print(data)
+    sql = f"SELECT AccountId , Balance  FROM stockproject.accounts where AccountId = {data['accountid']}"
+    sqlres = db.query_data(sql)
+    Balance = float(sqlres[0]['Balance'])
+    print(Balance)
+    #get ortder 
+    getordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}'ORDER BY timestamp"
+    orderinfos = db.query_data(getordersql)
+    
+    ordercount = len(orderinfos)
+    latestOrderinfo =  orderinfos[0]
+    print(ordercount)
+    #get ortder 
+    getbuyordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}' and action = 'Buy' "
+    orderinfos = db.query_data(getbuyordersql)
+    shares = 0
+    for order in orderinfos:
+        shares += order['shares']
+  
+    getsellordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}' and action = 'Sell' "
+    orderinfos = db.query_data(getsellordersql)
+    for order in orderinfos:
+        shares -= order["shares"]
 
-@app.route('/GetStockInfo',methods=['POST'])
-def GetStockInfo():
+    result = {
+        'Balance':Balance,
+        'Order':ordercount,
+        'Inport':shares,
+    }
+    print(result)
+    return result
 
-
-    return 
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8088)

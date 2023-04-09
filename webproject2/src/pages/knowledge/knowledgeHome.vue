@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row id="knowledgehome-title">
-      <el-col :span="8" :offset="9" class="text">
+      <el-col :span="10" :offset="7" class="text">
         <span>Stock knowledge</span>
       </el-col>
       <el-col :span="18" :offset="7">

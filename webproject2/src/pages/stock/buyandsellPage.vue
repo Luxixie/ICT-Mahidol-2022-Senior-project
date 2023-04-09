@@ -565,8 +565,9 @@ export default {
         console.log(res)
         //this.AccountData = res.data
         this.AccountData = []
+        var balance = res.data.Balance.toFixed(2);
         var data = {
-          "Balance": res.data['Balance'],
+          "Balance": balance,
           "Order": res.data['Order'],
           "Inport": res.data['Inport']
         }
@@ -601,8 +602,9 @@ export default {
             console.log(res)
             //this.AccountData = res.data
             this.AccountData = []
+            var balance = res.data.Balance.toFixed(2);
             var data = {
-              "Balance": res.data['Balance'],
+              "Balance": balance,
               "Order": res.data['Order'],
               "Inport": res.data['Inport']
             }
@@ -669,12 +671,21 @@ export default {
         });     
       var id = this.$store.state.accountid
       console.log(id)
+      var tickerName = this.$route.params.tickerName
       var req = {
-          accountid:id
+          accountid:id,
+          ticker: tickerName
       }
-      axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
-        console.log(res)
-        this.AccountData.Balance = res.data['Balance']
+      axios.post("http://127.0.0.1:8088/GetPurchaseinfor",req).then((res) => {
+          var balance = res.data.Balance.toFixed(2);
+          console.log(res)
+          var data = {
+              "Balance": balance,
+              "Order": res.data['Order'],
+              "Inport": res.data['Inport']
+            }
+          console.log(data)
+          this.AccountData.push(data)
 
       })
       

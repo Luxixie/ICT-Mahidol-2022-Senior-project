@@ -75,7 +75,7 @@
           </el-row>
         </el-col>
         </el-col>
-        <el-col :span="2" class="container" style="margin-top:3%;margin-left:5%">
+        <el-col :span="2" class="container" style="margin-top:3%;margin-left:1%">
         
                 <img src="./images/1.jpg" class="image" />
            

@@ -12,16 +12,13 @@
       </el-col>
     </el-row>
     <el-row id="home-bt-row">
-      <el-col class="home-bts" :span="6" :offset="1">
+      <el-col class="home-bts" :span="7" :offset="2">
         <el-button class="homebt" type="warning" @click="GoMarket" round >Market Infomation</el-button>
       </el-col>
-      <el-col class="home-bts" :span="6">
+      <el-col class="home-bts" :span="7">
         <el-button class="homebt" type="warning" @click="Goknowledgehome" round>Stock knowledge</el-button>
       </el-col>
-      <el-col class="home-bts"  :span="5" v-if="username">
-        <el-button class="homebt" type="warning" @click="Gobuyandsell" round>Buy and Sell</el-button>
-      </el-col>
-      <el-col class="home-bts"  :span="5" v-if="username">
+      <el-col class="home-bts" :span="7" v-if="username">
         <el-button class="homebt" type="warning" @click="GoPortfolio" round>Portfolio</el-button>
       </el-col>
     </el-row>

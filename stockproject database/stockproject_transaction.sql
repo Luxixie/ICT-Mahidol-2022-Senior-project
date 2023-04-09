@@ -1,0 +1,58 @@
+-- MySQL dump 10.13  Distrib 8.0.27, for macos11 (x86_64)
+--
+-- Host: localhost    Database: stockproject
+-- ------------------------------------------------------
+-- Server version	8.0.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transaction` (
+  `transactionid` int NOT NULL AUTO_INCREMENT,
+  `AccountId` int NOT NULL,
+  `ticker` varchar(45) NOT NULL,
+  `stockprice` float NOT NULL,
+  `shares` int NOT NULL,
+  `action` varchar(45) NOT NULL,
+  `cost` float NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`transactionid`),
+  KEY `AccountId_idx` (`AccountId`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` VALUES (1,24,'CCET.BK',2.1,0,'Buy',79.8,'2023-04-07 16:16:04'),(2,24,'CCET.BK',2.1,0,'Buy',105,'2023-04-07 16:22:40'),(3,24,'CCET.BK',2.1,0,'Buy',105,'2023-04-07 16:23:50'),(4,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:28:15'),(5,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:31:41'),(6,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:33:22'),(7,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:34:08'),(8,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:34:58'),(9,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:35:29'),(10,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:37:08'),(11,24,'CCET.BK',2.1,0,'Buy',21,'2023-04-07 16:39:05'),(12,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:41:29'),(13,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:42:23'),(14,24,'CCET.BK',2.1,0,'Buy',8.4,'2023-04-07 16:44:29'),(15,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-07 16:47:52'),(16,24,'CCET.BK',2.1,0,'Buy',4.2,'2023-04-07 16:52:05'),(17,24,'CCET.BK',2.12,0,'Buy',4.24,'2023-04-07 16:55:46'),(18,24,'CCET.BK',2.12,0,'Buy',4.24,'2023-04-07 16:56:22'),(19,24,'AOT.BK',72,5,'Buy',360,'2023-04-08 16:35:36'),(20,24,'AOT.BK',72,2,'Buy',144,'2023-04-08 16:36:44'),(21,24,'AAV.BK',2.76,0,'Buy',13.8,'2023-04-08 17:27:00'),(22,24,'CCET.BK',2.1,0,'Buy',8.4,'2023-04-08 22:01:31'),(23,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-08 22:17:07'),(24,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-08 22:17:08'),(25,24,'CCET.BK',2.1,0,'Buy',8.4,'2023-04-08 22:26:23'),(26,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-08 22:27:09'),(27,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-08 22:29:56'),(28,24,'CCET.BK',2.1,0,'Buy',10.5,'2023-04-08 22:30:28'),(29,24,'CCET.BK',2.1,5,'Buy',10.5,'2023-04-08 22:31:12'),(30,24,'CCET.BK',2.1,5,'Buy',10.5,'2023-04-08 22:31:23'),(31,24,'CCET.BK',2.1,2,'Buy',4.2,'2023-04-09 11:47:41'),(32,24,'CCET.BK',2.1,2,'Buy',4.2,'2023-04-09 11:47:43'),(33,24,'CCET.BK',2.1,1,'Buy',2.1,'2023-04-09 11:49:23'),(34,24,'CCET.BK',2.1,1,'Buy',2.1,'2023-04-09 11:49:54'),(35,24,'CCET.BK',2.1,2,'Buy',4.2,'2023-04-09 11:50:00'),(36,24,'CCET.BK',2.1,1,'Buy',2.1,'2023-04-09 11:50:06');
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-04-09 14:32:14

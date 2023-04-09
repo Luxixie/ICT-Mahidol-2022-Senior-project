@@ -22,7 +22,7 @@
     <el-row style="font-size:20px;color: #f6f7e4;margin-left:5%;margin-right:5%">
         <p>Dear User:</p>
         <p>Thank you for choosing to use our website to learn about and simulate stock trading.</p>
-        <p>First of all, you can use our website to view information about stocks and learn about stocks without registering. Then,when you have finished registering your account, you will have <span style="color:red" >20,000 baht</span> in virtual funds. If you need to increase your virtual funds, you can change your expected funds in your "user profile".</p>
+        <p>First of all, you can use our website to view information about stocks and learn about stocks without registering. Then,when you have finished registering your account, you will have <span style="color:red" >50,000 baht</span> in virtual funds. If you need to increase your virtual funds, you can change your expected funds in your "user profile".</p>
     </el-row>
     <el-row :span="8" class="container" style=";margin-left:15%">
         <img src="./images/8.png" class="image" >
