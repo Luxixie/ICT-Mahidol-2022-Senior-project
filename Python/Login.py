@@ -37,7 +37,6 @@ def trylogin():
     datas = db.query_data(sql)
     password2 = datas[0]["Password"]
     print(password)
-    print(password2)
     if(password2 == password[0]):
         accountid = datas[0]["AccountId"]
         username = datas[0]["FirstName"]+datas[0]["LastName"]
@@ -310,7 +309,14 @@ def forgetpassword(email):
     return jsonify(status = "Success")
 
 
-
+@app.route("/savemessage",methods=['POST'])
+def Savemessage():
+    datas= request.json
+    print(datas)
+    sql = f"INSERT INTO `stockproject`.`Savemessage` (`Name`, `Email`, `Message`) VALUES ('{datas['Name']}', '{datas['Email']}', '{datas['Message']}')"
+    datas = db.insert_or_update_data(sql)
+    print(datas)
+    return jsonify(status = "Success")
 
 @app.route("/GetStockByIndustry/<string:name>",methods=['POST'])
 def GetStockByIndustry(name):
@@ -439,8 +445,6 @@ def GetSETCurrentPrice():
         'previousclose':previousclose,
 
     }
-  
-    
     return SETInfo
 
 
@@ -654,7 +658,7 @@ def GetBuyHistory():
     data= request.json
     print(data)   
     accountid = request.json['accountid']
-    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'buy' and shares > 0 ORDER BY timestamp"
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
     datas = db.query_data(buysql)
     print(data)
     return datas
@@ -664,11 +668,21 @@ def GetSellHistory():
     data= request.json
     print(data)   
     accountid = request.json['accountid']
-    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'buy' and shares = 0 ORDER BY timestamp"
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'Buy' and shares = 0 ORDER BY timestamp"
     datas = db.query_data(buysql)
     print(data)
     return datas
 
+@app.route('/GetonelHistory',methods=['POST'])
+def GetonelHistory():
+    data= request.json
+    print(data)   
+    accountid = request.json['accountid']
+    ticker = request.json['ticker']
+    buysql = f"SELECT * FROM stockproject.transaction where ticker ='{ticker}' and AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
+    datas = db.query_data(buysql)
+    print(data)
+    return datas
 
 @app.route('/GetPurchaseinfor',methods=['POST'])
 def GetPurchaseinfor():

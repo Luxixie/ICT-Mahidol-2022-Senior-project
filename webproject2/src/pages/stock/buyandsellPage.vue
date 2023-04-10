@@ -91,7 +91,7 @@
             </el-row>
             <el-row style="padding-bottom: 2%; margin-top: 2%; border-radius: 12px; background: #f5efe1;">
               <el-col :span="12" style=" height: 100%;">
-                <el-row style="margin-top:10%; margin-bottom: 5%; margin-left: 7%;">
+                <el-row style="margin-top:15%; margin-bottom: 5%; margin-left: 7%;">
                   <span :span="5" style="font-size:medium;">Volume</span>
                   <button :span="3" size="mini" style="margin-left: 2%;  border: 0px;" @click="volumes -= 100">-</button>
                   <el-input
@@ -100,22 +100,22 @@
                     placeholder="input the volume" 
                     v-model.number="volumes"></el-input> 
                   <button :span="3" size="mini" style="background: #f8bd9e; border: 0px;"  @click="volumes += 100" >+</button>
-                  <span v-if="priceError" style="color: red; margin-left:2%">{{ priceError }}</span>
+                  <span v-if="priceError" style="color: red; margin-left:2%;margin-top: 5%;">{{ priceError }}</span>
                 </el-row>
 
-                <el-row style="margin-left: 10%;">
+                <el-row style="margin-left: 10%; margin-top: 10%;">
                   <el-button round style="background: #203f6f; color: white;"
-                              :disabled="AccountData.Balance < parseInt(volumes) / 4"
-                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100 / 4">1/4</el-button>
+                              :disabled="balance < parseInt(volumes) / 4"
+                              @click="volumes = balance / 100 * 100 / 4">1/4</el-button>
                   <el-button round style="background: #203f6f; color: white;"
-                              :disabled="AccountData.Balance < parseInt(volumes) / 2"
-                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100 / 2">1/2</el-button>
+                              :disabled="balance < parseInt(volumes) / 2"
+                              @click="volumes = Math.floor(balance / 100) * 100 / 2">1/2</el-button>
                   <el-button round style="background: #203f6f; color: white;"
-                              :disabled="AccountData.Balance < parseInt(volumes)"
-                              @click="volumes = Math.floor(AccountData.Balance / 100) * 100">ALL IN</el-button>
+                              :disabled="balance < parseInt(volumes)"
+                              @click="volumes = Math.floor(balance / 100) * 100">ALL IN</el-button>
                 </el-row>
                 <el-row>
-                  <el-col :span="8" :offset="7" style="margin-top: 4%;">
+                  <el-col :span="8" :offset="6" style="margin-top: 10%;">
                     <el-button round type="warning" style="color: black;" v-on:click="simulation()" >Simulation of {{action}}</el-button>
                   </el-col>
                 </el-row>
@@ -124,19 +124,19 @@
                 <el-row>
                   <el-col :span="12" :offset="6" style="margin-top: 10%; ">
                     <div
-                      style="height: 30px; background: #dfd4dd; border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
+                      style="height: 30px; background: #dfd4dd; border-radius: 15px; padding-top: 4%; padding-left: 5%; padding-right: 5%;">
                       <span style="float:left;">Current</span>
                       <span style="float:right;">{{lastprice | numberWithCommas}}</span>
                     </div>
 
                     <div
-                      style="height: 30px;  margin-top: 10%; background: #dfd4dd; border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
+                      style="height: 30px;  margin-top: 10%; background: #dfd4dd; border-radius: 15px; padding-top: 4%; padding-left: 5%; padding-right: 5%;">
                       <span style="float:left;">High</span>
                       <span style="float:right;">{{dayhigh | numberWithCommas}}</span>
                     </div>
 
                     <div
-                      style="height: 30px; background: #dfd4dd; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left: 5%; padding-right: 5%;">
+                      style="height: 30px; background: #dfd4dd; margin-top: 10%;border-radius: 15px; padding-top: 4%; padding-left: 5%; padding-right: 5%;">
                       <span style="float:left;">Low</span>
                       <span style="float:right;">{{daylow | numberWithCommas}}</span>
                     </div>
@@ -149,7 +149,7 @@
                 <el-row>
                   <el-col :span="18" :offset="5">
                     <div
-                      style="color: white; height: 30px; background: #203f6f; margin-top: 10%;border-radius: 15px; padding-top: 3%; padding-left:2%; padding-right: 2%;">
+                      style="color: white; height: 30px; background: #203f6f; margin-top: 13%;border-radius: 15px; padding-top: 3%; padding-left:2%; padding-right: 2%;">
                       <span style="float:left;">Total: </span>
                       <span style="float:right;">THB</span>
                       <span style="float:right;">{{(lastprice * volumes).toFixed(2) | numberWithCommas}}</span>
@@ -165,7 +165,7 @@
 
         </el-col>
         <el-col :span="11" :offset="2" style="border-radius: 15px; height: 100%;  ">
-          <el-row style="background: #f5efe1;margin-top: 4%; border-radius: 15px;">
+          <el-row style="background: #f5efe1;margin-top: 1%; border-radius: 15px;">
             <el-table :data="AccountData" style="width: 80%;margin-top: 6%; margin-left: 10%; background: transparent;">
               <el-table-column fixed prop="Balance" label="Balance" align="center">
               </el-table-column>
@@ -175,10 +175,36 @@
               </el-table-column>
             </el-table>
           </el-row>
+          <el-row style="background: #f5efe1;margin-top: 1%; border-radius: 15px;">
+            <el-table
+                    :data="tableData2"
+                    style="width: 100%"
+                    border
+                    height="150">
+                    <el-table-column
+                        prop="transactionid"
+                        label="No."
+                        >
+                    </el-table-column>
+                    <el-table-column
+                        prop="shares"
+                        label="Vol">
+                    </el-table-column>
+                    <el-table-column
+                    prop="stockprice"
+                        label="Price">
+                    </el-table-column>
+                    <el-table-column
+                        prop="cost"
+                        label="Cost">
+                    </el-table-column>
+                    </el-table>
+          </el-row>
           <el-row style="background: #f5efe1; margin-top:1%; border-radius: 15px; ">
 
           </el-row>
         </el-col>
+        
       </el-row>
 
     </div>
@@ -389,6 +415,7 @@ export default {
       chart: null,
       showInfo: false,
       AccountData:[],
+      tableData2:[],
     };
   },
   computed: {
@@ -573,6 +600,11 @@ export default {
         }
         this.AccountData.push(data)
         });
+      axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
+            console.log(res)
+            this.tableData2 = res.data
+
+        })
       
     },
     SellStock(){
@@ -610,6 +642,11 @@ export default {
             }
             this.AccountData.push(data)
       });
+      axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
+            console.log(res)
+            this.tableData2 = res.data
+
+        })
       
     },
 
@@ -686,8 +723,25 @@ export default {
             }
           console.log(data)
           this.AccountData.push(data)
-
       })
+      var tickerName = this.$route.params.tickerName
+      var res = {
+          ticker: tickerName
+      }
+      axios.post("http://127.0.0.1:8088/Getstockprice",res).then((res) => {
+            console.log(res.data)
+            this.high = res.data['dayhigh']
+            this.low = res.data['daylow']
+            this.current = res.data['lastprice']
+            this.previousclose = res.data['previousclose']
+        });
+
+      axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
+            console.log(res)
+            this.tableData2 = res.data
+
+        })
+
       
 
     }

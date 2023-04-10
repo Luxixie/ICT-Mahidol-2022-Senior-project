@@ -87,43 +87,6 @@
 
         </el-row>
     </div>
-
-        <!-- update pie chart data
-            import VueApexCharts from 'vue-apexcharts'
-
-        export default {
-        name: 'Vue Chart',
-        data: function () {
-        return {
-        chartOptions: {
-            chart: {
-            id: 'vuechart-example',
-            },
-            xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-            },
-        },
-        series: [{
-            name: 'Vue Chart',
-            data: [30, 40, 45, 50, 49, 60, 70, 81]
-        }]
-        }
-        },
-        methods: {
-        updateChart() {
-        const max = 90;
-        const min = 20;
-        const newData = this.series[0].data.map(() => {
-            return Math.floor(Math.random() * (max - min + 1)) + min
-        })
-        // In the same way, update the series option
-        this.series = [{
-            data: newData
-        }]
-        }
-        }
-        } -->
-    
 </template>
 
 
@@ -141,7 +104,7 @@ export default {
             myChart: {},
             pieData: [
                 {
-                value: this.avilablemoney,
+                value: 1000,
                 name: "Avilable_money"
                 },
                 {
@@ -151,7 +114,7 @@ export default {
 
                 ],
             pieName: [],
-                    myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
+            myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
             tableData: [],
             }
     },
@@ -193,6 +156,7 @@ export default {
     },
     initEcharts() {
       // 饼图
+
       const option = {
         legend: {
           // 图例
@@ -268,14 +232,6 @@ export default {
         axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
             console.log(res)
             this.avilablemoney = res.data['Balance']
-            this.pieData=[]
-            var data = {
-                value: this.avilablemoney,
-                name: "Avilable_money"
-                
-            }
-            this.pieData.push(data)
-  
 
         })
         axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {

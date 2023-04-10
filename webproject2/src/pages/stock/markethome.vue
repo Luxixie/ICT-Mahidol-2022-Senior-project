@@ -46,7 +46,6 @@
             <el-dropdown-item command="case3">Publishing</el-dropdown-item>
             <el-dropdown-item command="case4">Broadcasting</el-dropdown-item>           
             <el-dropdown-item command="case5">Entertainment</el-dropdown-item>
-            <el-dropdown-item command="case6">Internet Content & Information</el-dropdown-item>
             <el-dropdown-item command="case7">Electronic Gaming & Multimedia</el-dropdown-item>
 
             </el-dropdown-menu>
@@ -59,26 +58,20 @@
               <el-dropdown-item command="case8">Auto & Truck Dealerships</el-dropdown-item>
               <el-dropdown-item command="case9">Auto Manufacturers</el-dropdown-item>
               <el-dropdown-item command="case10">Auto Parts</el-dropdown-item>
-              <el-dropdown-item command="case11">Recreational Vehicles</el-dropdown-item>           
               <el-dropdown-item command="case12">Furnishings, Fixtures & Appliances</el-dropdown-item>
-              <el-dropdown-item command="case13">Residential Construction</el-dropdown-item>
               <el-dropdown-item command="case14">Textile Manufacturing</el-dropdown-item>
               <el-dropdown-item command="case15">Apparel Manufacturing</el-dropdown-item>
               <el-dropdown-item command="case16">Footwear & Accessories</el-dropdown-item>
               <el-dropdown-item command="case17">Packaging & Containers</el-dropdown-item>
-              <el-dropdown-item command="case18">Personal Services</el-dropdown-item>           
               <el-dropdown-item command="case19">Restaurants</el-dropdown-item>           
               <el-dropdown-item command="case20">Apparel Retail</el-dropdown-item>           
               <el-dropdown-item command="case21">Department Stores</el-dropdown-item>           
               <el-dropdown-item command="case22">Home Improvement Retail</el-dropdown-item>           
               <el-dropdown-item command="case23">Luxury Goods</el-dropdown-item>           
-              <el-dropdown-item command="case24">Internet Retail</el-dropdown-item>           
               <el-dropdown-item command="case25">Specialty Retail</el-dropdown-item>           
-              <el-dropdown-item command="case26">Gambling</el-dropdown-item>           
               <el-dropdown-item command="case27">Leisure</el-dropdown-item>           
               <el-dropdown-item command="case28">Lodging</el-dropdown-item>           
               <el-dropdown-item command="case29">Resorts & Casinos</el-dropdown-item>           
-              <el-dropdown-item command="case30">Travel Services</el-dropdown-item>           
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
@@ -87,18 +80,14 @@
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">Consumer Defensive<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="case31">Beverages—Brewers</el-dropdown-item>
-              <el-dropdown-item command="case32">Beverages—Wineries & Distilleries</el-dropdown-item>
               <el-dropdown-item command="case33">Beverages—Non-Alcoholic</el-dropdown-item>
               <el-dropdown-item command="case34">Confectioners</el-dropdown-item>           
               <el-dropdown-item command="case35">Farm Products</el-dropdown-item>
               <el-dropdown-item command="case36">Household & Personal Products</el-dropdown-item>
               <el-dropdown-item command="case37">Packaged Foods</el-dropdown-item>
               <el-dropdown-item command="case38">Education & Training Services</el-dropdown-item>
-              <el-dropdown-item command="case39">Discount Stores</el-dropdown-item>
               <el-dropdown-item command="case40">Food Distribution</el-dropdown-item>
               <el-dropdown-item command="case41">Grocery Stores</el-dropdown-item>
-              <el-dropdown-item command="case42">Tobacco</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
@@ -107,12 +96,10 @@
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">Energy<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="case43">Oil & Gas Drilling</el-dropdown-item>
               <el-dropdown-item command="case44">Oil & Gas E&P</el-dropdown-item>
               <el-dropdown-item command="case45">Oil & Gas Integrated</el-dropdown-item>
               <el-dropdown-item command="case46">Oil & Gas Midstream</el-dropdown-item>
               <el-dropdown-item command="case47">Oil & Gas Refining & Marketing</el-dropdown-item>
-              <el-dropdown-item command="case49">Oil & Gas Equipment & Services</el-dropdown-item>
               <el-dropdown-item command="case50">Thermal Coal</el-dropdown-item>
               <el-dropdown-item command="case51">Uranium</el-dropdown-item>
 
@@ -125,18 +112,13 @@
             <span class="el-dropdown-link">Financial Services<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="case52">Asset Management</el-dropdown-item>
-              <el-dropdown-item command="case53">Banks—Diversified</el-dropdown-item>
               <el-dropdown-item command="case54">Banks—Regional</el-dropdown-item>
-              <el-dropdown-item command="case55">Mortgage Finance</el-dropdown-item>           
               <el-dropdown-item command="case56">Capital Markets</el-dropdown-item>
-              <el-dropdown-item command="case57">Financial Data & Stock Exchanges</el-dropdown-item>
               <el-dropdown-item command="case58">Insurance—Life</el-dropdown-item>
               <el-dropdown-item command="case59">Insurance—Property & Casualty</el-dropdown-item>
               <el-dropdown-item command="case60">Insurance—Reinsurance</el-dropdown-item>
-              <el-dropdown-item command="case61">Insurance—Specialty</el-dropdown-item>
               <el-dropdown-item command="case62">Insurance Brokers</el-dropdown-item>
               <el-dropdown-item command="case63">Insurance—Diversified</el-dropdown-item>
-              <el-dropdown-item command="case64">Shell Companies</el-dropdown-item>
               <el-dropdown-item command="case65">Financial Conglomerates</el-dropdown-item>
               <el-dropdown-item command="case66">Credit Services</el-dropdown-item>
               </el-dropdown-menu>
@@ -149,17 +131,10 @@
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Healthcare<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="case67">Biotechnology</el-dropdown-item>
-            <el-dropdown-item command="case68">Drug Manufacturers—General</el-dropdown-item>
             <el-dropdown-item  command="case69">Drug Manufacturers—Specialty & Generic</el-dropdown-item>
-            <el-dropdown-item  command="case70">Healthcare Plans</el-dropdown-item>           
             <el-dropdown-item  command="case71">Medical Care Facilities</el-dropdown-item>
-            <el-dropdown-item  command="case72">Pharmaceutical Retailers</el-dropdown-item>
-            <el-dropdown-item command="case73">Health Information Services</el-dropdown-item>
             <el-dropdown-item command="case74">Medical Devices</el-dropdown-item>
             <el-dropdown-item command="case75">Medical Instruments & Supplies</el-dropdown-item>
-            <el-dropdown-item command="case76">Diagnostics & Research</el-dropdown-item>
-            <el-dropdown-item command="case77">Medical Distribution</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
@@ -172,7 +147,6 @@
             <el-dropdown-item command="case80">Consulting Services</el-dropdown-item>
             <el-dropdown-item command="case81">Rental & Leasing Services</el-dropdown-item>           
             <el-dropdown-item command="case82">Security & Protection Services</el-dropdown-item>
-            <el-dropdown-item command="case83">Staffing & Employment Services</el-dropdown-item>
             <el-dropdown-item command="case84">Conglomerates</el-dropdown-item>
             <el-dropdown-item command="case85">Engineering & Construction</el-dropdown-item>
             <el-dropdown-item command="case86">Infrastructure Operations</el-dropdown-item>
@@ -204,12 +178,8 @@
             <el-dropdown-item command="case104">Software—Application</el-dropdown-item>
             <el-dropdown-item command="case105">Electronic Components</el-dropdown-item>
             <el-dropdown-item command="case106">Electronics & Computer Distribution</el-dropdown-item>
-            <el-dropdown-item command="case107">Scientific & Technical Instruments</el-dropdown-item>
-            <el-dropdown-item command="case108">Semiconductor Equipment & Materials</el-dropdown-item>
             <el-dropdown-item command="case109">Semiconductors</el-dropdown-item>
             <el-dropdown-item command="case110">Solar</el-dropdown-item>
-            <el-dropdown-item command="case111">Software—Infrastructure</el-dropdown-item>
-            <el-dropdown-item command="case112">Semiconductors & Semiconductors Equipment</el-dropdown-item>           
             <el-dropdown-item command="case113">Communication Equipment</el-dropdown-item>
             <el-dropdown-item command="case114">Computer Hardware</el-dropdown-item>
             <el-dropdown-item command="case115">Consumer Electronics</el-dropdown-item>
@@ -222,12 +192,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="case116">Paper & Paper Products</el-dropdown-item>
             <el-dropdown-item command="case117">Aluminum</el-dropdown-item>
-            <el-dropdown-item command="case118">Copper</el-dropdown-item>
             <el-dropdown-item command="case119">Other Industrial Metals & Mining</el-dropdown-item>
-            <el-dropdown-item command="case120">Gold</el-dropdown-item>
-            <el-dropdown-item command="case121">Silver</el-dropdown-item>
-            <el-dropdown-item command="case122">Other Precious Metals & Mining</el-dropdown-item>
-            <el-dropdown-item command="case123">Coking Coal</el-dropdown-item>
             <el-dropdown-item command="case124">Steel</el-dropdown-item>
             <el-dropdown-item command="case125">Agricultural Inputs</el-dropdown-item>
             <el-dropdown-item command="case126">Building Materials</el-dropdown-item>
@@ -244,13 +209,11 @@
             <el-dropdown-item command="case130">Real Estate—Development</el-dropdown-item>
             <el-dropdown-item command="case131">Real Estate Services</el-dropdown-item>
             <el-dropdown-item command="case132">Real Estate—Diversified</el-dropdown-item>
-            <el-dropdown-item command="case133">REIT—Healthcare Facilities</el-dropdown-item>
             <el-dropdown-item command="case134">REIT—Hotel & Motel</el-dropdown-item>
             <el-dropdown-item command="case135">REIT—Industrial</el-dropdown-item>
             <el-dropdown-item command="case136">REIT—Office</el-dropdown-item>
             <el-dropdown-item command="case137">REIT—Residential</el-dropdown-item>
             <el-dropdown-item command="case138">REIT—Retail</el-dropdown-item>
-            <el-dropdown-item command="case139">REIT—Mortgage</el-dropdown-item>
             <el-dropdown-item command="case140">REIT—Specialty</el-dropdown-item>
             <el-dropdown-item command="case141">REIT—Diversified</el-dropdown-item>
             </el-dropdown-menu>
@@ -263,12 +226,12 @@
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Utilities<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="case143">Utilities—Independent Power Producers</el-dropdown-item>
-            <el-dropdown-item command="case144">Utilities—Renewable</el-dropdown-item>
-            <el-dropdown-item command="case145">Utilities—Regulated Water</el-dropdown-item>
-            <el-dropdown-item command="case146">Utilities—Regulated Electric</el-dropdown-item>           
-            <el-dropdown-item command="case147">Utilities—Regulated Gas</el-dropdown-item>
-            <el-dropdown-item command="case148">Utilities—Diversified</el-dropdown-item>
+            <el-dropdown-item command="case142">Utilities—Independent Power Producers</el-dropdown-item>
+            <el-dropdown-item command="case143">Utilities—Renewable</el-dropdown-item>
+            <el-dropdown-item command="case144">Utilities—Regulated Water</el-dropdown-item>
+            <el-dropdown-item command="case145">Utilities—Regulated Electric</el-dropdown-item>           
+            <el-dropdown-item command="case146">Utilities—Regulated Gas</el-dropdown-item>
+            <el-dropdown-item command="case147">Utilities—Diversified</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
@@ -305,7 +268,7 @@ export default {
           setInterval(theNowTime, speed)
           }, 
           getSETPrice () {
-          let speed = 1000 * 60
+          let speed = 1000 * 600
           let that = this
           let theNowPrice = function () {
               axios.post("http://127.0.0.1:8088/GetSETCurrentPrice").then((res) => {
@@ -361,12 +324,6 @@ export default {
               params:{industryName:'Entertainment'}
           })
           break;
-        case "case6":
-            this.$router.push({
-              path:"/submarket/"+'Internet Content & Information',
-              params:{industryName:'Internet Content & Information'}
-          })
-          break;
         case "case7":
             this.$router.push({
               path:"/submarket/"+'Electronic Gaming & Multimedia',
@@ -391,24 +348,14 @@ export default {
               params:{industryName:'Auto Parts'}
           })
           break;       
-        case "case11":
-            this.$router.push({
-              path:"/submarket/"+'Recreational Vehicles',
-              params:{industryName:'Recreational Vehicles'}
-          })
-          break; 
+       
         case "case12":
             this.$router.push({
               path:"/submarket/"+'Furnishings, Fixtures & Appliances',
               params:{industryName:'Furnishings, Fixtures & Appliances'}
           })
           break;   
-        case "case13":
-            this.$router.push({
-              path:"/submarket/"+'Residential Construction',
-              params:{industryName:'Residential Construction'}
-          })
-          break;   
+          
         case "case14":
             this.$router.push({
               path:"/submarket/"+'Textile Manufacturing',
@@ -434,12 +381,7 @@ export default {
                   })
                   break;  
 
-        case "case18":
-          this.$router.push({
-            path:"/submarket/"+'Personal Services',
-            params:{industryName:'Personal Services'}
-            })
-          break; 
+       
         case "case19":
           this.$router.push({
             path:"/submarket/"+'Restaurants',
@@ -470,24 +412,14 @@ export default {
             params:{industryName:'Luxury Goods'}
             })
           break;  
-        case "case24":
-          this.$router.push({
-            path:"/submarket/"+'Internet Retail',
-            params:{industryName:'Internet Retail'}
-            })
-          break; 
+       
         case "case25":
           this.$router.push({
             path:"/submarket/"+'Specialty Retail',
             params:{industryName:'Specialty Retail'}
             })
           break; 
-        case "case26":
-          this.$router.push({
-            path:"/submarket/"+'Gambling',
-            params:{industryName:'Gambling'}
-            })
-          break; 
+       
         case "case27":
           this.$router.push({
             path:"/submarket/"+'Leisure',
@@ -502,28 +434,11 @@ export default {
           break; 
         case "case29":
           this.$router.push({
-            path:"/submarket/"+'Resorts & Casino',
-            params:{industryName:'Resorts & Casino'}
+            path:"/submarket/"+'Resorts & Casinos',
+            params:{industryName:'Resorts & Casinos'}
             })
           break; 
-        case "case30":
-          this.$router.push({
-            path:"/submarket/"+'Travel Services',
-            params:{industryName:'Travel Services'}
-            })
-          break; 
-        case "case31":
-          this.$router.push({
-            path:"/submarket/"+'Beverages—Brewers',
-            params:{industryName:'Beverages—Brewers'}
-            })
-          break; 
-        case "case32":
-          this.$router.push({
-            path:"/submarket/"+'Beverages—Wineries & Distilleries',
-            params:{industryName:'Beverages—Wineries & Distilleries'}
-            })
-          break; 
+     
         case "case33":
           this.$router.push({
             path:"/submarket/"+'Beverages—Non-Alcoholic',
@@ -560,12 +475,7 @@ export default {
             params:{industryName:'Education & Training Services'}
             })
           break; 
-        case "case39":
-          this.$router.push({
-            path:"/submarket/"+'Discount Stores',
-            params:{industryName:'Discount Stores'}
-            })
-          break; 
+      
         case "case40":
           this.$router.push({
             path:"/submarket/"+'Food Distribution',
@@ -578,18 +488,8 @@ export default {
             params:{industryName:'Grocery Stores'}
             })
           break; 
-        case "case42":
-          this.$router.push({
-            path:"/submarket/"+'Tobacco',
-            params:{industryName:'Tobacco'}
-            })
-          break; 
-        case "case43":
-          this.$router.push({
-            path:"/submarket/"+'Oil & Gas Drilling',
-            params:{industryName:'Oil & Gas Drilling'}
-            })
-          break; 
+     
+
         case "case44":
           this.$router.push({
             path:"/submarket/"+'Oil & Gas E&P',
@@ -608,18 +508,13 @@ export default {
             params:{industryName:'Oil & Gas Midstream'}
             })
           break; 
-        case "case47":
+            case "case47":
           this.$router.push({
-            path:"/submarket/"+'Oil & Gas Refining & Marketing&Rail',
+            path:"/submarket/"+'Oil & Gas Refining & Marketing',
             params:{industryName:'Oil & Gas Refining & Marketing'}
             })
           break; 
-        case "case49":
-          this.$router.push({
-            path:"/submarket/"+'Oil & Gas Equipment & Services',
-            params:{industryName:'Oil & Gas Equipment & Services'}
-            })
-          break; 
+   
         case "case50":
           this.$router.push({
             path:"/submarket/"+'Thermal Coal',
@@ -638,36 +533,21 @@ export default {
             params:{industryName:'Asset Management'}
             })
           break; 
-        case "case53":
-          this.$router.push({
-            path:"/submarket/"+'Banks—Diversified',
-            params:{industryName:'Banks—Diversified'}
-            })
-          break; 
+  
         case "case54":
           this.$router.push({
             path:"/submarket/"+'Banks—Regional',
             params:{industryName:'Banks—Regional'}
             })
           break; 
-        case "case55":
-          this.$router.push({
-            path:"/submarket/"+'Mortgage Finance',
-            params:{industryName:'Mortgage Finance'}
-            })
-          break; 
+  
         case "case56":
           this.$router.push({
             path:"/submarket/"+'Capital Markets',
             params:{industryName:'Capital Markets'}
             })
           break; 
-        case "case57":
-          this.$router.push({
-            path:"/submarket/"+'Financial Data & Stock Exchanges',
-            params:{industryName:'Financial Data & Stock Exchanges'}
-            })
-          break; 
+      
         case "case58":
           this.$router.push({
             path:"/submarket/"+'Insurance—Life',
@@ -686,12 +566,7 @@ export default {
             params:{industryName:'Insurance—Reinsurance'}
             })
           break; 
-        case "case61":
-          this.$router.push({
-            path:"/submarket/"+'Insurance—Specialty',
-            params:{industryName:'Insurance—Specialty'}
-            })
-          break; 
+    
         case "case62":
           this.$router.push({
             path:"/submarket/"+'Insurance Brokers',
@@ -704,12 +579,7 @@ export default {
             params:{industryName:'Insurance—Diversified'}
             })
           break; 
-        case "case64":
-          this.$router.push({
-            path:"/submarket/"+'Shell Companies',
-            params:{industryName:'Shell Companies'}
-            })
-          break; 
+     
         case "case65":
           this.$router.push({
             path:"/submarket/"+'Financial Conglomerates',
@@ -722,48 +592,22 @@ export default {
             params:{industryName:'Credit Services'}
             })
           break; 
-        case "case67":
-          this.$router.push({
-            path:"/submarket/"+'Biotechnology',
-            params:{industryName:'Biotechnology'}
-            })
-          break;
-        case "case68":
-          this.$router.push({
-            path:"/submarket/"+'Drug Manufacturers—General',
-            params:{industryName:'Drug Manufacturers—General'}
-            })
-          break;
+    
+     
         case "case69":
           this.$router.push({
             path:"/submarket/"+'Drug Manufacturers—Specialty & Generic',
             params:{industryName:'Drug Manufacturers—Specialty & Generic'}
             })
           break;
-        case "case70":
-          this.$router.push({
-            path:"/submarket/"+'Healthcare Plans',
-            params:{industryName:'Healthcare Plans'}
-            })
-          break;
+   
         case "case71":
           this.$router.push({
             path:"/submarket/"+'Medical Care Facilities',
             params:{industryName:'Medical Care Facilities'}
             })
           break;
-        case "case72":
-          this.$router.push({
-            path:"/submarket/"+'Pharmaceutical Retailers',
-            params:{industryName:'Pharmaceutical Retailers'}
-            })
-          break;
-        case "case73":
-          this.$router.push({
-            path:"/submarket/"+'Health Information Service',
-            params:{industryName:'Health Information Service'}
-            })
-          break;
+
         case "case74":
           this.$router.push({
             path:"/submarket/"+'Medical Devices',
@@ -772,22 +616,12 @@ export default {
           break;
         case "case75":
           this.$router.push({
-            path:"/submarket/"+'Medical Instruments & Supplie',
-            params:{industryName:'Medical Instruments & Supplie'}
+            path:"/submarket/"+'Medical Instruments & Supplies',
+            params:{industryName:'Medical Instruments & Supplies'}
             })
           break;
-        case "case76":
-          this.$router.push({
-            path:"/submarket/"+'Diagnostics & Research',
-            params:{industryName:'Diagnostics & Research'}
-            })
-          break;
-        case "case77":
-          this.$router.push({
-            path:"/submarket/"+'Medical Distribution',
-            params:{industryName:'Medical Distribution'}
-            })
-          break;
+     
+      
         case "case78":
           this.$router.push({
             path:"/submarket/"+'Aerospace & Defense',
@@ -818,12 +652,7 @@ export default {
             params:{industryName:'Security & Protection Services'}
             })
           break;
-        case "case83":
-          this.$router.push({
-            path:"/submarket/"+'Staffing & Employment Servicesg',
-            params:{industryName:'Staffing & Employment Servicesg'}
-            })
-          break;
+      
         case "case84":
           this.$router.push({
             path:"/submarket/"+'Conglomerates',
@@ -838,8 +667,8 @@ export default {
           break;
         case "case86":
           this.$router.push({
-            path:"/submarket/"+'nfrastructure Operations',
-            params:{industryName:'nfrastructure Operations'}
+            path:"/submarket/"+'Infrastructure Operations',
+            params:{industryName:'Infrastructure Operations'}
             })
           break;
         case "case87":
@@ -882,6 +711,12 @@ export default {
           this.$router.push({
             path:"/submarket/"+'Pollution & Treatment Controls',
             params:{industryName:'Pollution & Treatment Controls'}
+            })
+          break;
+            case "case94":
+          this.$router.push({
+            path:"/submarket/"+'Tools & Accessories',
+            params:{industryName:'Tools & Accessories'}
             })
           break;
         case "case95":
@@ -956,18 +791,7 @@ export default {
             params:{industryName:'Electronics & Computer Distribution'}
             })
           break;
-          case "case107":
-          this.$router.push({
-            path:"/submarket/"+'Scientific & Technical Instruments',
-            params:{industryName:'Scientific & Technical Instruments'}
-            })
-          break;
-          case "case108":
-          this.$router.push({
-            path:"/submarket/"+'Semiconductor Equipment & Materials',
-            params:{industryName:'Semiconductor Equipment & Materials'}
-            })
-          break;
+ 
           case "case109":
           this.$router.push({
             path:"/submarket/"+'Semiconductors',
@@ -980,18 +804,7 @@ export default {
             params:{industryName:'Solar'}
             })
           break;
-          case "case111":
-          this.$router.push({
-            path:"/submarket/"+'Software—Infrastructure',
-            params:{industryName:'Software—Infrastructure'}
-            })
-          break;
-          case "case112":
-          this.$router.push({
-            path:"/submarket/"+'Semiconductors & Semiconductors Equipment',
-            params:{industryName:'Semiconductors & Semiconductors Equipment'}
-            })
-          break;
+
           case "case113":
           this.$router.push({
             path:"/submarket/"+'Communication Equipment',
@@ -1022,42 +835,16 @@ export default {
             params:{industryName:'Aluminum'}
             })
           break;
-          case "case118":
-          this.$router.push({
-            path:"/submarket/"+'Copper',
-            params:{industryName:'Copper'}
-            })
-          break;
+
           case "case119":
           this.$router.push({
             path:"/submarket/"+'Other Industrial Metals & Mining',
             params:{industryName:'Other Industrial Metals & Mining'}
             })
           break;
-          case "case120":
-          this.$router.push({
-            path:"/submarket/"+'Gold',
-            params:{industryName:'Gold'}
-            })
-          break;
-          case "case121":
-          this.$router.push({
-            path:"/submarket/"+'Silver',
-            params:{industryName:'Silver'}
-            })
-          break;
-          case "case122":
-          this.$router.push({
-            path:"/submarket/"+'Other Precious Metals & Mining',
-            params:{industryName:'Other Precious Metals & Mining'}
-            })
-          break;
-          case "case123":
-          this.$router.push({
-            path:"/submarket/"+'Coking Coal',
-            params:{industryName:'Coking Coal'}
-            })
-          break;
+
+
+     
           case "case124":
           this.$router.push({
             path:"/submarket/"+'Steel',
@@ -1112,12 +899,7 @@ export default {
             params:{industryName:'Real Estate—Diversified'}
             })
           break;
-           case "case133":
-          this.$router.push({
-            path:"/submarket/"+'REIT—Healthcare Facilities',
-            params:{industryName:'REIT—Healthcare Facilities'}
-            })
-          break;
+     
            case "case134":
           this.$router.push({
             path:"/submarket/"+'REIT—Hotel & Motel',
@@ -1148,24 +930,56 @@ export default {
             params:{industryName:'REIT—Retail'}
             })
           break;
-           case "case139":
-          this.$router.push({
-            path:"/submarket/"+'REIT—Mortgage',
-            params:{industryName:'REIT—Mortgage'}
-            })
-          break;
+  
            case "case140":
           this.$router.push({
             path:"/submarket/"+'REIT—Specialty',
             params:{industryName:'REIT—Specialty'}
             })
           break;
-           case "case141":
+          case "case141":
           this.$router.push({
             path:"/submarket/"+'REIT—Diversified',
             params:{industryName:'REIT—Diversified'}
             })
           break;
+          case "case142":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Independent Power Producers',
+            params:{industryName:'Utilities—Independent Power Producers'}
+            })
+          break;
+          case "case143":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Renewable',
+            params:{industryName:'Utilities—Renewable'}
+            })
+          break;
+          case "case144":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Regulated Water',
+            params:{industryName:'Utilities—Regulated Water'}
+            })
+          break;
+          case "case145":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Regulated Electric',
+            params:{industryName:'Utilities—Regulated Electric'}
+            })
+          break;
+          case "case146":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Regulated Gas',
+            params:{industryName:'Utilities—Regulated Gas'}
+            })
+          break;
+          case "case147":
+          this.$router.push({
+            path:"/submarket/"+'Utilities—Diversified',
+            params:{industryName:'Utilities—Diversified'}
+            })
+          break;
+      
       }
     },
   },

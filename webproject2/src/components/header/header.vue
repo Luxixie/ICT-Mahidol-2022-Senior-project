@@ -52,9 +52,6 @@
             >
           </el-dropdown-menu>
         </el-dropdown>
-        <el-badge :value="100" :max="1">
-          <el-link icon="el-icon-message-solid" style="width: 5%"></el-link>
-        </el-badge>
       </div>
 
       <div class="LoginPart" v-if="!username" style="margin-top: 8%">

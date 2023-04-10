@@ -49,21 +49,14 @@
                 <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Balance</span>
             </el-row>
             <el-row  class="line">
-                    <span class="line-text" >{{ 20000 | numberWithCommas }} BAHT</span>
+                    <span class="line-text" >{{ 50000 | numberWithCommas }} BAHT</span>
             </el-row>
 
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
                 <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Setting</span>
             </el-row>
 
-            <el-button style="    background: #1F3D70; 
-                            border-radius: 50px;
-                            width: 500px; 
-                            margin-top:2%;
-                            margin-left:10%;
-                            text-align: left;
-                            font-size: 18px;" 
-                        icon = "el-icon-chat-dot-square" type="primary" @click="Gocontactus">Contact us</el-button>
+        
             <el-button style="    background: #1F3D70; 
                             border-radius: 50px;
                             width: 500px; 
@@ -79,9 +72,20 @@
                             margin-left:10%;
                             text-align: left;
                             font-size: 18px;" 
-                        icon = "el-icon-lock" type="primary">Reset password</el-button>
+                        icon = "el-icon-lock" type="primary" @click="Gopassword">Reset password</el-button>
 
-
+            <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
+                <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Contact us</span>
+            </el-row>
+                <el-button style="    background: #1F3D70; 
+                            border-radius: 50px;
+                            width: 500px; 
+                            margin-top:2%;
+                            margin-left:10%;
+                            text-align: left;
+                            font-size: 18px;" 
+                        icon = "el-icon-chat-dot-square" type="primary" @click="Gocontactus">Contact us</el-button>
+            </el-row>
         </el-col>
 
     </div>
@@ -104,6 +108,9 @@ export default {
         },
         Gowatchlist(){
             this.$router.push('/watchlist')
+        },
+        Gopassword(){
+            this.$router.push('/editpassword')
         }
 
   },

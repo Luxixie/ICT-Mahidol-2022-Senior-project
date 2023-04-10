@@ -87,6 +87,11 @@ const router = new Router({
         component:()=>import('../pages/userprofile/editprofile.vue')
       },
       {
+        path:'/editpassword',
+        component:()=>import('../pages/userprofile/editpassword.vue')
+      },
+
+      {
         path: '/watchlist',
         component: () => import('../pages/userprofile/wishlistPage.vue')
       },

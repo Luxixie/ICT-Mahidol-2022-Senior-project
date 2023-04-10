@@ -58,8 +58,8 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.params.email);
-    this.form.email = this.$route.params.email;
+    console.log(this.$store.state.email);
+    this.form.email = this.$store.state.email
   },
   methods: {
     validatePassword() {
@@ -74,7 +74,7 @@ export default {
           return false;
         }
 
-        // check the number
+        // check number
         if (!/\d/.test(this.form.password)) {
           //console.log("Passwords do not include number");
           this.$alert('Passwords do not include number', 'Password error', {
@@ -97,7 +97,7 @@ export default {
           !/[a-z]/g.test(this.password) ||
           !/[A-Z]/g.test(this.form.password)
         ) {
-          this.$alert('Passwords do not include at least one uppercase letter and one lowercase letter', 'Password error', {
+        this.$alert('Passwords do not include at least one uppercase letter and one lowercase letter', 'Password error', {
           confirmButtonText: 'Next',
         })
           return false;
@@ -106,7 +106,8 @@ export default {
         // If all conditions are met, the password meets the requirements
         return true;
       } else {
-        //console.log("Passwords do not match");
+        //console.log();
+        //alert("Passwords do not match")
         this.$alert('Passwords do not match', 'Password error', {
           confirmButtonText: 'Next',
       })

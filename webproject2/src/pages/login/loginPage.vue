@@ -53,12 +53,18 @@ export default {
                
                             this.$router.replace('/home');
                         } else {
-                            alert('Incorrect user name or password!');
+                            //alert('Incorrect user name or password!');
+                            this.$alert('Incorrect user name or password!', 'Error', {
+                                confirmButtonText: 'Next',
+                            })
                             return false;
                         }
                     });
                 } else {
-                    console.log('Check failure');
+                    //console.log('Check failure');
+                    this.$alert('Check failure', 'Error', {
+                        confirmButtonText: 'Next',
+                    })
                     return false;
                 }
             });

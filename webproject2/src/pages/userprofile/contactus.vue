@@ -13,7 +13,7 @@
         <h3 style="margin-top:3%; margin-left: 3%; "> PROJECT ADVISOR: ASST, PROF. DR. SONGSRI TANGSRIPAIROJ  </h3>
         <h3 style="margin-top:3%; margin-left: 3%; ">ABSTRACT </h3>
         <h4 style="margin-top:3%; margin-left: 3%;margin-right: 3%; ">Stock is one of the common investment methods which offers a high return on investment. More and more people invest in stock to earn passive income. However, numerous novice investors are lack of knowledge and practical experiences to invest in the stock market safely and sensibly. With this issue in mind, the objective of this research project is to propose the design and development of a web application for virtual stock trading, called “Stock Plenty”. The Stock Plenty application provides several useful features for novice investors to learn and understand basic stock investment knowledge, search and view market information, practice on buy and sell stock in a simulated trading environment, and evaluate user performance. The Stock Plenty application can be beneficial for novice investors to have plenty knowledge, get familiar with stock trading process, and accumulate hands-on experiences. Therefore, they feel ready and more confident to trade stocks in the real market.
-        </h4><h3 style="margin-top:3%; margin-left: 3%; ">Partner</h3>
+        </h4><h3 style="margin-top:3%; margin-left: 3%; ">Developers</h3>
         <ul>
         <li v-for="partner in partners" :key="partner.id">
             <h4>{{ partner.name }}</h4>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -89,13 +90,27 @@ export default {
     },
     methods: {
         submitForm() {
-            console.log('Name: ', this.name)
-            console.log('Email: ', this.email)
-            console.log('Message: ', this.message)
+            console.log('Name: ', this.form.name)
+            console.log('Email: ', this.form.email)
+            console.log('Message: ', this.form.message)
+            var message = {
+                Name: this.form.name,
+                Email:this.form.email,
+                Message:this.form.message
+            }
+            axios.post("http://127.0.0.1:8088/savemessage",message).then((res) => {
+                this.$confirm('Thank you for your suggestions!', 'Thank you', {
+                confirmButtonText: 'Next',
+                type: 'success',
+                center: true
+            });
+            })
         },
         Goposter(){
             this.$router.push('/poster')
         }
-    }
+    },
+    
+
 }
 </script>
