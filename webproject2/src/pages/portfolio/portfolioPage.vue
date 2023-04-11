@@ -98,17 +98,18 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            usingstock:0,
             nowTime: '',
             avilablemoney:'',
             Avilable_money:'',
             myChart: {},
             pieData: [
                 {
-                value: 1000,
+                value: 462029,
                 name: "Avilable_money"
                 },
                 {
-                value: 200,
+                value: 200000,
                 name: "Using_stock"
                 },
 
@@ -176,7 +177,7 @@ export default {
             type: "pie",
             label: {
               show: true,
-              formatter: "{b} : {c}" // b代表名称，c代表对应值，d代表百分比
+              formatter: "{c}" // b代表名称，c代表对应值，d代表百分比
             },
             radius: "50%", //饼图半径
             data: this.pieData
@@ -231,14 +232,39 @@ export default {
         }
         axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
             console.log(res)
-            this.avilablemoney = res.data['Balance']
-
+           
+            this.avilablemoney = parseFloat(res.data['Balance'])
+            console.log('test')
+            console.log(this.avilablemoney)
         })
         axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
             console.log(res)
             this.tableData = res.data
+            //计算当前所有持有股票的总价
+            
+            var totalstockcost = 0
+            this.tableData.forEach(data => {
+                totalstockcost += data['cost']
+            });
+            console.log(totalstockcost)
+            this.usingstock = totalstockcost
 
+            console.log(this.avilablemoney)
+           console.log(this.usingstock)        
+              this.pieData= [
+                {
+                value: this.avilablemoney,
+                name: "Avilable_money"
+                },
+                {
+                value:this.usingstock,
+                name: "Using_stock"
+                },
+
+                ]
+            console.log(this.pieData)
         })
+          
     }
 }
 
