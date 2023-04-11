@@ -104,15 +104,14 @@
                 </el-row>
 
                 <el-row style="margin-left: 10%; margin-top: 10%;">
+                  <el-button round style="background: #203f6f; color: white;"        
+                              @click="Calvolume(0.25)">1/4</el-button>
                   <el-button round style="background: #203f6f; color: white;"
-                              :disabled="balance < parseInt(volumes) / 4"
-                              @click="volumes = balance / 100 * 100 / 4">1/4</el-button>
+                              
+                              @click="Calvolume(0.5)">1/2</el-button>
                   <el-button round style="background: #203f6f; color: white;"
-                              :disabled="balance < parseInt(volumes) / 2"
-                              @click="volumes = Math.floor(balance / 100) * 100 / 2">1/2</el-button>
-                  <el-button round style="background: #203f6f; color: white;"
-                              :disabled="balance < parseInt(volumes)"
-                              @click="volumes = Math.floor(balance / 100) * 100">ALL IN</el-button>
+                      
+                              @click="Calvolume(1)">ALL IN</el-button>
                 </el-row>
                 <el-row>
                   <el-col :span="8" :offset="6" style="margin-top: 10%;">
@@ -177,6 +176,7 @@
           </el-row>
           <el-row style="background: #f5efe1;margin-top: 1%; border-radius: 15px;">
             <el-table
+                    :key="isupdate"
                     :data="tableData2"
                     style="width: 100%"
                     border
@@ -389,7 +389,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      isupdate:true,
       tickerName:'',
+      balance:0,
       companyInfo:{},
       lastprice:'',
       previousclose:'',
@@ -416,6 +418,7 @@ export default {
       showInfo: false,
       AccountData:[],
       tableData2:[],
+      inport:0
     };
   },
   computed: {
@@ -439,6 +442,37 @@ export default {
     this.createCandleChart();
   },
   methods: {
+    Calvolume(percentage){
+       console.log(percentage)
+      if(this.action === "Buy"){
+         var balance = parseFloat(this.balance)
+       console.log(balance)
+       var currentprice = parseFloat(this.lastprice)
+       console.log(currentprice)
+       if(balance < currentprice){
+         this.volumes = 0
+         alert("you dont have  enough balance")
+       }
+       else{
+          var enablevolumes = balance / currentprice
+          console.log(enablevolumes)
+          this.volumes  = parseInt(enablevolumes * percentage)
+       }
+      }
+      else{
+          var inport = this.inport
+          var volumes = this.volumes
+          if(volumes > inport){
+              this.volumes = 0
+              alert("you dont have enough volumes for sell")
+          }
+          else{
+             this.volumes = parseInt(inport * percentage)
+          }
+        
+       }
+       
+    },
     Addwatchlist(tickerName){
       console.log(tickerName)
 
@@ -587,12 +621,25 @@ export default {
         action: action, 
         cost:cost,
       }
+      if(parseFloat(cost) >parseFloat(this.balance)){
+        alert("you dont have enough balance")
+        return
+      }
       console.log(buydata)
+      var id = this.$store.state.accountid
+      console.log(id)
+      var tickerName = this.$route.params.tickerName
+      var req = {
+          accountid:id,
+          ticker: tickerName
+      }
       axios.post("http://127.0.0.1:8088/BuyStock",buydata).then((res) => {
         console.log(res)
         //this.AccountData = res.data
         this.AccountData = []
         var balance = res.data.Balance.toFixed(2);
+        this.balance = balance;
+        this.inport = parseInt(res.data['Inport'])
         var data = {
           "Balance": balance,
           "Order": res.data['Order'],
@@ -602,7 +649,11 @@ export default {
         });
       axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
             console.log(res)
-            this.tableData2 = res.data
+            this.tableData2 = []
+            res.data.forEach(data => {
+              this.tableData2.push(data)
+            });
+            this.isupdate = !this.isupdate
 
         })
       
@@ -629,12 +680,18 @@ export default {
         action: action, 
         cost:cost,
       }
+      if(volume > this.inport){
+        alert("you dont have enough volume for sell")
+        return
+      }
       console.log(selldata)
       axios.post("http://127.0.0.1:8088/SellStock",selldata).then((res) => {
             console.log(res)
             //this.AccountData = res.data
             this.AccountData = []
             var balance = res.data.Balance.toFixed(2);
+            this.balance = balance
+            this.inport = parseInt(res.data['Inport'])
             var data = {
               "Balance": balance,
               "Order": res.data['Order'],
@@ -642,10 +699,17 @@ export default {
             }
             this.AccountData.push(data)
       });
+      var id = this.$store.state.accountid
+      console.log(id)
+      var tickerName = this.$route.params.tickerName
+      var req = {
+          accountid:id,
+          ticker: tickerName
+      }
       axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
             console.log(res)
             this.tableData2 = res.data
-
+             this.isupdate = !this.isupdate
         })
       
     },
@@ -716,6 +780,9 @@ export default {
       axios.post("http://127.0.0.1:8088/GetPurchaseinfor",req).then((res) => {
           var balance = res.data.Balance.toFixed(2);
           console.log(res)
+          this.balance = balance
+          this.inport = parseInt(res.data['Inport'])
+          console.log(this.inport)
           var data = {
               "Balance": balance,
               "Order": res.data['Order'],
@@ -728,18 +795,18 @@ export default {
       var res = {
           ticker: tickerName
       }
-      axios.post("http://127.0.0.1:8088/Getstockprice",res).then((res) => {
-            console.log(res.data)
-            this.high = res.data['dayhigh']
-            this.low = res.data['daylow']
-            this.current = res.data['lastprice']
-            this.previousclose = res.data['previousclose']
-        });
+      // axios.post("http://127.0.0.1:8088/Getstockprice",res).then((res) => {
+      //       console.log(res.data)
+      //       this.high = res.data['dayhigh']
+      //       this.low = res.data['daylow']
+      //       this.current = res.data['lastprice']
+      //       this.previousclose = res.data['previousclose']
+      //   });
 
       axios.post("http://127.0.0.1:8088/GetonelHistory",req).then((res) => {
             console.log(res)
             this.tableData2 = res.data
-
+             this.isupdate = !this.isupdate
         })
 
       
