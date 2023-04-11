@@ -1,3 +1,4 @@
+from calendar import c
 from configparser import MAX_INTERPOLATION_DEPTH
 from symtable import Symbol
 from turtle import update
@@ -448,6 +449,15 @@ def GetSETCurrentPrice():
     return SETInfo
 
 
+@app.route('/GetStockInfo',methods=['POST'])
+def GetStockInfo():
+    sql = f"SELECT ticker as value ,name FROM stockproject.company_profiles;"
+    print(sql)
+    datas = db.query_data(sql)
+    print(datas)
+    return datas
+
+
 @app.route('/GetWatchlist',methods=['POST'])
 def watchlist():
     datas = request.json
@@ -585,8 +595,10 @@ def SellStock():
             print("inome:"+str(income))
             id = buyrecorder['transactionid']
             print(id)
+            newcost = shares * buyrecorder['stockprice']
+            print(newcost)
             #update record 
-            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = {shares} WHERE (`transactionid` = {id})'
+            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = {shares},  `cost` = {newcost} WHERE (`transactionid` = {id}) '
             db.insert_or_update_data(updatesql)
             #update balance 
             getbalance = f'SELECT * FROM stockproject.accounts where AccountId = {accountid}'
@@ -679,10 +691,15 @@ def GetonelHistory():
     print(data)   
     accountid = request.json['accountid']
     ticker = request.json['ticker']
-    buysql = f"SELECT * FROM stockproject.transaction where ticker ='{ticker}' and AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
-    datas = db.query_data(buysql)
-    print(data)
-    return datas
+    historysql = f"SELECT * FROM stockproject.transaction where ticker ='{ticker}' and AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
+    print(historysql)
+    datas = db.query_data(historysql)
+    print(datas)
+    if len(datas)> 0:
+        return datas
+    else:
+        datas = []
+        return datas
 
 @app.route('/GetPurchaseinfor',methods=['POST'])
 def GetPurchaseinfor():
@@ -695,8 +712,18 @@ def GetPurchaseinfor():
     #get ortder 
     getordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['accountid']} and ticker = '{data['ticker']}'ORDER BY timestamp"
     orderinfos = db.query_data(getordersql)
-    
+    print (getordersql)
     ordercount = len(orderinfos)
+    print(ordercount)
+    if ordercount == 0:
+        result = {
+        'Balance':Balance,
+        'Order':0,
+        'Inport':0,
+        }
+        print(result)
+        return result
+
     latestOrderinfo =  orderinfos[0]
     print(ordercount)
     #get ortder 
