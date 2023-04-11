@@ -2,10 +2,10 @@
   <div>
     <el-col :span="10" style=" background:#F5EFE0;
                     border-radius: 30px; 
-                    height: 1250px; 
                     margin-top:3%; 
                     margin-left: 3%; 
                     margin-right: 10%;
+                    padding-bottom: 1%;
                     ">
         <h3 style="margin-top:3%; margin-left: 3%; "> SP2022-39 </h3>
         <h3 style="margin-top:3%; margin-left: 3%; "> A WEB APPLICATION FOR VIRTUAL STOCK TRADING </h3>
@@ -18,7 +18,7 @@
         <li v-for="partner in partners" :key="partner.id">
             <h4>{{ partner.name }}</h4>
             <p>{{ partner.description }}</p>
-            <img  style="width:70px" :src="partner.logo" :alt="partner.name + ' logo'" />
+            <img  style="width:30%" :src="partner.image" :alt="partner.name + ' Image'" />
         </li>
         </ul>
     </el-col>
@@ -71,19 +71,20 @@ export default {
             id: 1,
             name: 'Mr. Viphob Lertkulthum',
             description: 'ID: 6288186, from Computer Network',
-            logo:'https://www.disneyclips.com/images5/images/duffy-the-bear.png'
+            image:require("../userprofile/image/yyq.png")
+            
             },
             {
             id: 2,
             name: 'Miss. Luxi Xie',
             description: 'ID: 6288203, from Computer Network ',
-            logo: 'https://www.disneyclips.com/images6/images/bunny2.gif'
+            image:require("../userprofile/image/xlx.png")
             },
             {
             id: 3,
             name: 'Mr. Yuanqin Yang',
             description: 'ID:6288205, from E-Business',
-            logo: 'https://www.disneyclips.com/images2/images/june2014.gif'
+            image:require("../userprofile/image/yyq.png")
             }
         ]
         }

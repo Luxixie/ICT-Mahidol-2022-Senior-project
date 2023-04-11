@@ -58,11 +58,6 @@ const router = new Router({
         props:true,
         component:()=>import('../pages/stock/submarket.vue')
       },
-
-      {
-        path:'/stockinform',
-        component:()=>import('../pages/stock/stockInfoPage.vue')
-      },
       {
         path:'/buyandsell/:tickerName',
         props:true,
@@ -106,10 +101,6 @@ const router = new Router({
       {
         path:'/Learningprogress',
         component:()=> import('../pages/knowledge/Learningprogress.vue')
-      },
-      {
-        path:'/stockinformation',
-        component:()=>import('../pages/stock/stockInfoPage.vue')
       },
       {
         path:'/starterguide',

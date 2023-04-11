@@ -49,7 +49,7 @@
                 <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Balance</span>
             </el-row>
             <el-row  class="line">
-                    <span class="line-text" >{{ 50000 | numberWithCommas }} BAHT</span>
+                    <span class="line-text" >{{ 100000 | numberWithCommas }} BAHT</span>
             </el-row>
 
             <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
