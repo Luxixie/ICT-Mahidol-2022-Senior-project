@@ -115,7 +115,7 @@ def question(symbol):
     sql = f"SELECT  * FROM stockproject.Multiple_choice where chapterid = {symbol} ORDER by rand() limit 10 "
     datas = db.query_data(sql)
    
-    ##选项+答案
+    ##choice +
     for question in datas: 
         quiz = {
             "text":question["question"],
@@ -598,7 +598,7 @@ def SellStock():
             newcost = shares * buyrecorder['stockprice']
             print(newcost)
             #update record 
-            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = {shares},  `cost` = {newcost} WHERE (`transactionid` = {id}) '
+            updatesql = f'UPDATE `stockproject`.`transaction` SET `shares` = {shares}, `cost` = {newcost}  WHERE (`transactionid` = {id}) '
             db.insert_or_update_data(updatesql)
             #update balance 
             getbalance = f'SELECT * FROM stockproject.accounts where AccountId = {accountid}'

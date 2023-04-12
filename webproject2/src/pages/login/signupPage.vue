@@ -1,3 +1,4 @@
+@@ -1,291 +1,300 @@
 <template>
     <div style="margin-top: 5%;">
         <el-row>
@@ -5,15 +6,15 @@
                 <h1 style="color: #f5efe0;">Register Your Account</h1>
             </el-col>
         </el-row>
-        <el-form id="regist-form" ref="form" :model="form" :rules="rules" >
-            <el-form-item label="First Name" style="font-weight: bold; color: aliceblue;" prop="firstname" >
-                <el-input id="regist-input" placeholder="First Name" v-model="form.firstname" @blur="firstnameLengthValidation"
-                    style="width: 100%;"></el-input>
+        <el-form id="regist-form" ref="form" :model="form" :rules="rules">
+            <el-form-item label="First Name" style="font-weight: bold; color: aliceblue;" prop="firstname" :rules="[{ required: true, message: 'Please enter your first name' }, { min: 4, message: 'First name should be at least 4 characters' }]">
+                <el-input id="regist-input" placeholder="First Name" v-model="form.firstname" style="width: 100%;"></el-input>
             </el-form-item>
-            <el-form-item label="Last Name" style="font-weight: bold; color: aliceblue;" prop="lastname" >
-                <el-input id="regist-input" placeholder="Last Name" v-model="form.lastname" @blur="lastnameLengthValidation" 
-                    prop="lastname" style="width: 100%;"></el-input>
+
+            <el-form-item label="Last Name" style="font-weight: bold; color: aliceblue;" prop="lastname" :rules="[{ required: true, message: 'Please enter your last name' }, { min: 4, message: 'Last name should be at least 4 characters' }]">
+                <el-input id="regist-input" placeholder="Last Name" v-model="form.lastname" prop="lastname" style="width: 100%;"></el-input>
             </el-form-item>
+
             <el-form-item label="Country" style="font-weight: bold; color: aliceblue;">
                 <el-select id="regist-input" v-model="form.region" placeholder="Please select a country" style="width: 35%;">
                     <el-option
@@ -24,31 +25,20 @@
                 </el-select>
                 <!-- <el-input id="regist-input" placeholder="Birth Date" v-model="form.name" ></el-input> -->
                 <span style="color:gray">    Birth Date</span>
-                <!--<el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="Birth Date">
-                </el-date-picker> -->
-                <el-date-picker
-                    id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd"
-                    type="date" placeholder="Birth Date" :disabled-date="disabledDate"
-                ></el-date-picker>
+                <el-date-picker  id="regist-input" style="width: 40%; float: right;" v-model="form.bod" format="yyyy-MM-dd" value-format="yyyy-MM-dd"  type="date" placeholder="Birth Date">
+                </el-date-picker>
             </el-form-item>
             <el-form-item prop="email" label="Email" style="font-weight: bold; color: aliceblue;">
                 <el-input id="regist-input" placeholder="Email" v-model="form.email" type="email"></el-input>
             </el-form-item>
-            <el-form-item label="Password" style="font-weight: bold; color: aliceblue;" prop="password">
-                <el-input id="regist-input" placeholder="Password" show-password v-model="form.password" @blur="passwordValidation"></el-input>
-                    <span v-if="passwordError" class="error">{{ passwordError }}</span>
-
+            <el-form-item label="Password" style="font-weight: bold; color: aliceblue;" >
+                <el-input id="regist-input" placeholder="Password" show-password v-model="form.password" ></el-input>
             </el-form-item>
-
-            <el-form-item label="Confirm Password" style="font-weight: bold; color: aliceblue;" prop="password">
-                <el-input id="regist-input" placeholder="Confirm Password" show-password v-model="form.confirmpassword"  @blur="passwordValidation"></el-input>
-                 <span v-if="confirmPasswordError" class="error">{{ confirmPasswordError }}</span>
+            <el-form-item label="Confirm Password" style="font-weight: bold; color: aliceblue;">
+                <el-input id="regist-input" placeholder="Confirm Password" show-password v-model="form.confirmPassword" />
             </el-form-item>
             <el-form-item>
-
-            </el-form-item>
-            <el-form-item>
-                <el-button round type="warning" @click="submitForm" style="width: 45%; margin-left: 25%;">Create Account </el-button>
+                <el-button round type="warning" @click="submitForm" style="width: 45%; margin-left: 25%;">Create User</el-button>
 
             </el-form-item>
         </el-form>
@@ -184,104 +174,77 @@ export default {
                 bod: '',
                 email: '',
                 password: '',
-                confirmpassword: '',
-                passwordError: '',
-                confirmPasswordError: ''
+                confirmpassword: ''
             },            
             rules:{
                 email: [
                 { required: true, message: "Please input email", trigger: "blur" },
                 { type: "email", message: "Please input correct email format", trigger: "blur" }
-                ],
-                firstname: [
-                { required: true, message: "Please input first name", trigger: "blur" },
-                { validator: this.firstnameLengthValidation, trigger: "blur" }
-                ],
-                lastname: [
-                { required: true, message: "Please input last name", trigger: "blur" },
-                { validator: this.lastnameLengthValidation, trigger: "blur" }
-                ],
-                password: [
-                { required: true, message: "Please input password", trigger: "blur" },
-                { validator: this.passwordValidation, trigger: "blur" }
-                ]
-            }
+                ],}
         }
         
     },
     methods: {
-        disabledDate(date) {
-            // Get today's date
+        /*disabledDate(date) {
             const today = new Date();
-            // Disable dates in the future
+            console.log("error");
             return date > today;
-        },
-        firstnameLengthValidation(rule, value, callback) {
-            if (value.length > 10) {
-                callback(new Error("Firstname length should be less than 10"));
-            } else {
-                callback();
-                }
-        },
-        lastnameLengthValidation(rule, value, callback) {
-            if (value.length > 10) {
-                callback(new Error("Lastname length should be less than 10"));
-            } else {
-                callback();
-                }
-        },
-
+        },*/
         validatePassword() {
         if (this.form.password === this.form.confirmPassword) {
             console.log(this.form.password);
             console.log(this.form.confirmPassword);
             if (this.form.password.length < 8) {
-            console.log("Passwords do not longer than 8");
+            //console.log("Passwords do not longer than 8");
+            this.$alert('Passwords do not longer than 8', 'Password error', {
+            confirmButtonText: 'Next',
+                })
             return false;
             }
 
-   
+            // check the number
             if (!/\d/.test(this.form.password)) {
-            console.log("Passwords do not include number");
+            //console.log("Passwords do not include number");
+            this.$alert('Passwords do not include number', 'Password error', {
+            confirmButtonText: 'Next',
+                })
             return false;
             }
 
-  
+            // check the symbol
             if (!/[!@#$%^&*(),.?":{}|<>]/g.test(this.form.password)) {
-            console.log("Passwords do not include symbol");
+            //console.log("Passwords do not include symbol");
+            this.$alert('Passwords do not include symbol', 'Password error', {
+            confirmButtonText: 'Next',
+                })
             return false;
             }
 
+            // Check whether it contains at least one uppercase letter and one lowercase letter
             if (
             !/[a-z]/g.test(this.password) ||
             !/[A-Z]/g.test(this.form.password)
             ) {
-            console.log(
-                "Passwords do not include at least one uppercase letter and one lowercase letter"
-            );
+            this.$alert('Passwords do not include at least one uppercase letter and one lowercase letter', 'Password error', {
+            confirmButtonText: 'Next',
+            })
             return false;
             }
 
-      
+            // If all conditions are met, the password meets the requirements
             return true;
         } else {
-            console.log("Passwords do not match");
+            //console.log("Passwords do not match");
+            this.$alert('Passwords do not match', 'Password error', {
+            confirmButtonText: 'Next',
+        })
         }
         },
         submitForm() {
             this.$refs.form.validate(valid => {
-            if (valid) {
-            this.CreateUser();
-            this.$confirm('Do you want to learn some stock knowledge first?', 'Open Test', {
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            type: 'info',
-            }).then(() => {
-            this.$router.replace('/opentest'); 
-            }).catch(() => {
-            this.$router.replace('/login');     
-            });
-
+            var checkResult = this.validatePassword();
+            if (checkResult) {
+                this.CreateUser();
             } else {
             this.$message({
                 showClose: true,
@@ -295,11 +258,13 @@ export default {
             axios.post('http://127.0.0.1:8088/signup', this.form).then(res => {
                         console.log(res.data)
                         if (res.data.state == 1) {
+                            validatePassword() 
                             this.$message({
                                 showClose: true,
                                 message: 'Congratulations on your registration and thank you for choosing to belong to Stock Plenty',
                                 type: 'success'
                             });
+                            this.$router.replace('/login');
                           
                         } else {
                             alert('Incorrect user name or password!');
@@ -312,9 +277,7 @@ export default {
 </script>
 
 <style>
-.login-bt {
-    margin-left: 30px;
-}
+
 
 #regist-input {
     background: #1f3d70;

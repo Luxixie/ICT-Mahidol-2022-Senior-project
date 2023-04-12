@@ -8,7 +8,7 @@
                 <span style="float:right;margin-right:2%">{{ nowTime }}</span>
             </el-row>
             <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today‘s profit</span>
+                 <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today's profit</span>
             </el-row>
              <el-row>
                  <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0BAHT</span>
@@ -177,7 +177,7 @@ export default {
             type: "pie",
             label: {
               show: true,
-              formatter: "{c}" // b代表名称，c代表对应值，d代表百分比
+              formatter: " {c}" // b代表名称，c代表对应值，d代表百分比
             },
             radius: "50%", //饼图半径
             data: this.pieData
