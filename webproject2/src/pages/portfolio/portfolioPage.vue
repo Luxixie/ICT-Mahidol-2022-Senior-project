@@ -11,10 +11,10 @@
                  <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today's profit</span>
             </el-row>
              <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0BAHT</span>
+                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0 THB</span>
             </el-row>
             <el-row>
-                <span style="font-weight: bold;margin-left:40%;">Holding profits +0  BAHT</span>
+                <span style="font-weight: bold;margin-left:40%;">Holding profits +0  THB</span>
             </el-row>
             <el-row>
                 <el-col :span="11">
@@ -22,7 +22,7 @@
                         <span style="font-weight: bold;margin-left:46%;">Total money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:45%;">100,000BAHT</span>
+                        <span style="font-weight: bold;margin-left:45%;">100,000.00 THB</span>
                     </el-row>
                 </el-col>
                 <el-col :span="11">
@@ -30,7 +30,7 @@
                         <span style="font-weight: bold;margin-left:44%;">Avilable money</span>
                     </el-row>
                     <el-row>
-                        <span style="font-weight: bold;margin-left:45%;">{{avilablemoney | numberWithCommas }} BAHT</span>
+                        <span style="font-weight: bold;margin-left:45%;">{{avilablemoney | numberWithCommas }} THB</span>
                     </el-row>
                 </el-col>
             </el-row>
@@ -105,11 +105,11 @@ export default {
             myChart: {},
             pieData: [
                 {
-                value: 462029,
+                value: 0,
                 name: "Avilable_money"
                 },
                 {
-                value: 200000,
+                value: '',
                 name: "Using_stock"
                 },
 
@@ -236,8 +236,7 @@ export default {
             this.avilablemoney = parseFloat(res.data['Balance'])
             console.log('test')
             console.log(this.avilablemoney)
-        })
-        axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
+            axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
             console.log(res)
             this.tableData = res.data
             //计算当前所有持有股票的总价
@@ -263,7 +262,10 @@ export default {
 
                 ]
             console.log(this.pieData)
+            this.initEcharts()
         })
+        })
+        
           
     }
 }

@@ -150,13 +150,15 @@ export default {
             axios.post('http://127.0.0.1:8088/quizinput/', result).then((res)=>{
                 console.log(res.data)
             })
-            this.$route.push('/knowledgeHome')
+            this.$router.push('/knowledgeHome')
         },
         selectOption: function (index) {
+
             this.$set(this.userResponses, this.questionIndex, index);
-            //console.log(this.userResponses);
+
         },
         next: function () {
+            
             if (this.questionIndex < this.quiz.questions.length)
                 this.questionIndex++;
         },
@@ -169,14 +171,20 @@ export default {
     
             
             var score = 0;
+            console.log(score)
+             console.log(this.userResponses.length)
             for (let i = 0; i < this.userResponses.length; i++) {
+                console.log( typeof this.quiz.questions[i].responses[this.userResponses[i]])
+                console.log(this.quiz.questions[i].responses[this.userResponses[i]].correct)
                 if (
-                    typeof this.quiz.questions[i].responses[
-                    this.userResponses[i]
-                    ] !== "undefined" &&
+                  
+                    typeof this.quiz.questions[i].responses[this.userResponses[i]] !== "undefined" &&
                     this.quiz.questions[i].responses[this.userResponses[i]].correct
-                ) {
+                )   
+                {
+                  
                     score = score + 1;
+                     console.log(score)
                 }
             }
            
@@ -204,6 +212,7 @@ export default {
 
             this.quiz = quiz
             this.userResponseSkelaton = Array(this.quiz.questions.length).fill(null);
+            this.userResponses = Array(this.quiz.questions.length).fill(null);
             console.log(this.quiz)
             console.log(this.userResponseSkelaton)
         });

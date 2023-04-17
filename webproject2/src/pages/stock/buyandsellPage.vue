@@ -111,7 +111,7 @@
                               @click="Calvolume(0.5)">1/2</el-button>
                   <el-button round style="background: #203f6f; color: white;"
                       
-                              @click="Calvolume(1)">ALL IN</el-button>
+                              @click="Calvolume(1)">ALL</el-button>
                 </el-row>
                 <el-row>
                   <el-col :span="8" :offset="6" style="margin-top: 10%;">
@@ -410,7 +410,7 @@ export default {
         Shares:'',  
       totalprice:'',
       volume: 0.25,
-      volumes:'',
+      volumes:0,
       statistics:[],      
       action:"Buy",
       nowTime: '',

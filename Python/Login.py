@@ -67,6 +67,14 @@ def addNewUser():
     print(bod)
     print(email)
     print(password)
+    searchsql= f"SELECT * FROM stockproject.accounts where Email = '{email[0]}'"
+    print(searchsql)
+    searchresult = db.query_data(searchsql)
+    if len(searchresult) >0 :
+        json_result = {"state": 2, "messate":"Account alreay exists"}
+        return json_result
+    
+
     sql = f"INSERT INTO `stockproject`.`accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `Password`, `LoginToken`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '{bod[0]}', '{email[0]}', '{password[0]}', 'zxcvbnmasdfghjklqwertyuiopasd');"
     db.insert_or_update_data(sql)
     json_result = {"state": 1, "vData":{"token":"asdasdasdasdad","name":"admin"}}
@@ -115,7 +123,7 @@ def question(symbol):
     sql = f"SELECT  * FROM stockproject.Multiple_choice where chapterid = {symbol} ORDER by rand() limit 10 "
     datas = db.query_data(sql)
    
-    ##choice +
+    ##choice + answer
     for question in datas: 
         quiz = {
             "text":question["question"],

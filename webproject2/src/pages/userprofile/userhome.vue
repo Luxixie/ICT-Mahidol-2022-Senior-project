@@ -45,8 +45,8 @@
                          type="primary" icon = "el-icon-star-off"  @click="Gowatchlist">Watch list</el-button>
             </el-row>
 
-            <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 200px; margin-top:5%">
-                <span style="margin-left:25%;font-size: 25px;color: #F5EFE0;">Balance</span>
+            <el-row :span="5" :offset="2" style="background: #1F3D70; border-radius: 50px;width: 310px; margin-top:5%">
+                <span style="margin-left:14%;font-size: 25px;color: #F5EFE0;">Initial virtual capital</span>
             </el-row>
             <el-row  class="line">
                     <span class="line-text" >{{ 100000 | numberWithCommas }} BAHT</span>
