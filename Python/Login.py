@@ -264,6 +264,7 @@ def quizreview(accountid):
     print(sql)
     datas = db.query_data(sql)
     print(datas)
+
     return datas
 
 @app.route("/quizinput/",methods=['POST'])
@@ -361,9 +362,29 @@ def marketinform(ticker):
     
     dayhigh = "{:.2f}".format(msft.fast_info.day_high)
     print(dayhigh)
+    
+    a = int(msft.fast_info.day_high)
+    b = a + 5
+    nums = [i for i in range(a, b) if i % 5 == 0]  
+    chartmax = nums[0]
+    print(chartmax)
    
     daylow = "{:.2f}".format(msft.fast_info.day_low)
     print(daylow)
+
+    a = int(msft.fast_info.day_low)
+    b = a - 5
+    nums = [i for i in range(b, a) if i % 5 == 0]  
+    chartmin = nums[0]
+
+    print(chartmin)
+
+    chartmaxmin = {
+        'max':chartmax,
+        'min':chartmin
+    }
+    
+    print(chartmaxmin)
    
     lastprice = "{:.2f}".format(msft.fast_info.last_price)
     print(lastprice)
@@ -399,6 +420,17 @@ def marketinform(ticker):
 
     Shares = "{:.2f}".format(msft.fast_info.shares)
     print(Shares)
+
+
+    ##Real-time chat info 
+    data = msft.history(period = "1d",interval = "30m")
+    print(data)
+
+
+    listdata = data['Open'].values.tolist()
+    print(listdata)
+    print(len(listdata))
+
     ##data = msft.history(period="1y")
     ##json_str = json.dumps(data.to_dict())
     ##print(json_str)
@@ -424,7 +456,9 @@ def marketinform(ticker):
         'YearHigh':YearHigh,
         'YearLow':YearLow,
         'Shares':Shares,
-        'Company':companyInfo
+        'Company':companyInfo,
+        'realtimechartdata':listdata,
+        'chartmaxmin':chartmaxmin
         }
         return msftinfo
     else:

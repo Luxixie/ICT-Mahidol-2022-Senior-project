@@ -1,8 +1,10 @@
 from cgitb import reset
+from traceback import format_exc, print_tb
 #from pandas_datareader import data as pdr
 import yfinance as yf
+import pandas as pd
 
-msft = yf.Ticker("MSFT")
+msft = yf.Ticker("ADVANC.BK")
 #print(msft.fast_info)
 print("==========currency==================")
 
@@ -73,13 +75,34 @@ print("===========yearLow=================")
 print(msft.major_holders)
 
 print("===========data=================")
-data = msft.history(period="1m")
-print(data['Open'])
+data = msft.history(period = "5d")
+data = data.sort_index()
+print(data)
+print(data.to_dict())
+dictdata = data.to_dict()
+keydata = dictdata.keys()
+print(keydata)
+opendata = dictdata['Open']
+opendatakeys = opendata.keys()
+print(opendatakeys)
 
-#result = msft.history_metadata
-#print(result)
-print("===========data2=================")
-#data1 = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
-#print(data1)
-a=msft.info.update
-print(a)
+json = [{
+    time:"",
+    open:111,
+    high:222,
+    low:222,
+    close:222,
+    volume:123123
+
+},]
+
+
+# data = msft.history(period = "1mo")
+# data = data()
+# print(data)
+# data = msft.history(period = "3mo")
+# data = data.sort_index()
+# print(data)
+
+
+
