@@ -332,7 +332,7 @@
               border
               height="150"
             >
-              <el-table-column prop="transactionid" label="No.">
+              <el-table-column type="index" label="No." width="180">
               </el-table-column>
               <el-table-column prop="shares" label="Vol"> </el-table-column>
               <el-table-column prop="stockprice" label="Price">
@@ -439,45 +439,59 @@
             >Historical Data</span
           >
           <div ref="candleChart" style="height:400px;"></div>
-           <!--  <el-table :data="tableData" border style="width: 100%">
+          <el-row style="margin-left:5%">
+            <el-col :span="3" style="font-size:20px;"> Time Period:</el-col>
+            <el-col :span="1" >
+              <el-button type="primary" icon="el-icon-search" v-model="period" @click="handleButtonClick('1wk')">1 Week</el-button>
+            </el-col>
+            <el-col :span="1" :offset="1">
+              <el-button type="primary" icon="el-icon-search" v-model="period" @click="handleButtonClick('1mo')">1 Month</el-button>
+            </el-col>
+            <el-col :span="1" :offset="1" >
+              <el-button type="primary" icon="el-icon-search" v-model="period" @click="handleButtonClick('3mo')">3 Month</el-button>
+            </el-col>
+            <el-col :span="1" :offset="1">
+              <el-button type="primary" icon="el-icon-search" v-model="period" @click="handleButtonClick('1y')">1 Year</el-button>
+            </el-col>
+            <el-col :span="1" :offset="1">
+              <el-button type="primary" icon="el-icon-search" v-model="period" @click="handleButtonClick('5y')">5 Year</el-button>
+            </el-col>
+          </el-row>
+            <el-table :data="historytabledata" height="500" border style="width: 90%; margin-left:5%;">
               <el-table-column
-                  prop="Datetime"
+                  prop="time"
                   label="Datetime"
                   align="center"
-                  :v-model="tableData.Datetime">
+                  :v-model="historytabledata.Datetime">
               </el-table-column>
               <el-table-column
-                  prop="Open"
+                  prop="open"
                   label="Open"
                   align="center">
-              </el-table-column> -->
+              </el-table-column>
 
-          <!-- <el-table-column
-                  prop="High"
+              <el-table-column
+                  prop="high"
                   label="High"
                   align="center">
               </el-table-column>
               <el-table-column
-                  prop="Low"
+                  prop="low"
                   label="Low"
                   align="center">
               </el-table-column>
               <el-table-column
-                  prop="Close"
+                  prop="close"
                   label="Close"
                   align="center">
               </el-table-column>
               <el-table-column
-                  prop="Adj Close"
-                  label="Adj Close"
-                  align="center">
-              </el-table-column>
-              <el-table-column
-                  prop="Volume"
+                  prop="volume"
                   label="Volume"
-                  align="center">
+                  align="center"
+                  :formatter="numberWithCommas"> 
               </el-table-column>
-              </el-table> -->
+              </el-table>
         </div>
       </el-row>
       <el-row
@@ -541,7 +555,7 @@
 <style>
 .input:focus {
   border: 0;
-  /*这里你可以自己调节边框样式*/
+
 }
 
 .dataSummaryItem {
@@ -623,7 +637,8 @@ export default {
       AccountData: [],
       tableData2: [],
       inport: 0,
-      historytabledata:[]
+      historytabledata:[],
+      period:"5d"
       
     };
   },
@@ -690,13 +705,11 @@ export default {
         xAxis: {
           type: "category",
           data: [
+            "2022/12/16",
+            "2022/12/17",
+            "2022/12/18",
             "2022/12/19",
-            "2022/12/19",
-            "2022/12/19",
-            "2022/12/19",
-            "2022/12/19",
-            "2022/12/19",
-            "2022/12/19",
+            "2022/12/20",
           ],
         },
         yAxis: {
@@ -706,33 +719,6 @@ export default {
           {
             type: "candlestick",
             data: [
-              [2320.26, 2320.26, 2287.3, 2362.94],
-              [2300, 2291.3, 2288.26, 2308.38],
-              [2295.35, 2346.5, 2295.35, 2346.92],
-              [2347.22, 2358.98, 2337.35, 2363.8],
-              [2360.75, 2382.48, 2347.89, 2383.76],
-              [2383.43, 2385.42, 2371.23, 2391.82],
-              [2377.41, 2419.02, 2369.57, 2421.15],
-              [2425.92, 2428.15, 2417.58, 2440.38],
-              [2411, 2433.13, 2403.3, 2437.42],
-              [2432.68, 2434.48, 2427.7, 2441.73],
-              [2430.69, 2418.53, 2394.22, 2433.89],
-              [2416.62, 2432.4, 2414.4, 2443.03],
-              [2441.91, 2421.56, 2415.43, 2444.8],
-              [2420.26, 2427.93, 2414.01, 2440.98],
-              [2425.99, 2406.96, 2404.51, 2426.41],
-              [2405.48, 2391.4, 2365.65, 2405.9],
-              [2397.67, 2397.29, 2370.61, 2397.93],
-              [2378.04, 2425.76, 2376.08, 2436.03],
-              [2433.61, 2434.45, 2419.04, 2452.72],
-              [2432.4, 2446.65, 2429.67, 2450.5],
-              [2446.91, 2440.58, 2420.05, 2448.97],
-              [2440.54, 2465.27, 2440.54, 2468.88],
-              [2445.76, 2448.96, 2439.38, 2457.57],
-              [2447.93, 2448.36, 2432.52, 2458.07],
-              [2433.49, 2434.9, 2427.17, 2435.76],
-              [2429.13, 2416.63, 2414.4, 2429.37],
-              [2418.21, 2415.25, 2406.01, 2419.57],
               [2412.33, 2434.3, 2411.68, 2442.68],
               [2433.89, 2431.04, 2424.06, 2440.1],
               [2432.04, 2416.43, 2407.65, 2432.72],
@@ -766,6 +752,7 @@ export default {
           text: "Stock Real-Time Price",
         },
         xAxis: {
+          name:"Time",
           type: "category",
           data: [
             "10:00",
@@ -781,6 +768,7 @@ export default {
           ],
         },
         yAxis: {
+          name:"Price (THB)",
           type: "value",
           min: this.chartmin,
           max: this.chartmax,
@@ -946,6 +934,21 @@ export default {
         this.SellStock();
       }
     },
+    handleButtonClick(period) {
+      this.period = period;
+      // make axios post request with this.period as data parameter
+      console.log(`Button with period ${period} was clicked`);
+      var tickerName = this.$route.params.tickerName;
+      var req2 = {
+          period : this.period,
+          ticker: tickerName,
+        }
+      console.log(period)
+        axios.post("http://127.0.0.1:8088/gethistorydata", req2).then((res) => {
+          console.log(res);
+          this.historytabledata = res.data;      
+        });
+    },
   },
 
   filters: {
@@ -1026,7 +1029,7 @@ export default {
         });
 
         var req2 = {
-          period : "5d",
+          period : this.period,
           ticker: tickerName,
         }
         axios.post("http://127.0.0.1:8088/gethistorydata", req2).then((res) => {

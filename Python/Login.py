@@ -855,21 +855,21 @@ def GetHistoryData():
         time  = splitresult[0]
     
         #open 
-        opendata =  opendatas[key]
+        opendata =  round(float(opendatas[key]),2)
         print(opendata)
 
 
-        hightdata =  hightdatas[key]
+        hightdata =  round(float(hightdatas[key]), 2)
         print(hightdata)
 
-        lowtdata =  lowdatas[key]
+        lowtdata = round(float(lowdatas[key]),2)
         print(lowtdata)
 
-        closedata =  closedatas[key]
+        closedata =  round(float(closedatas[key]),2)
         print(closedata)
 
 
-        volumedata =  volumedatas[key]
+        volumedata = volumedatas[key]
         print(volumedata)
 
 

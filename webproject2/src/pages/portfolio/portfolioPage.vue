@@ -2,19 +2,16 @@
     <div>
         <el-row style="background:#F5EFE0;; margin-left:10%;margin-right:10%;margin-top:1%; border-radius: 20px;">
             <el-row>
-                <span style="float:right;margin-right:2%">Market Status: Pre-Open2update</span>
+                <span style="float:right;margin-right:8%">Market time:</span>
             </el-row>
             <el-row>
                 <span style="float:right;margin-right:2%">{{ nowTime }}</span>
             </el-row>
             <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Today's profit</span>
+                 <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Holding profits</span>
             </el-row>
              <el-row>
                  <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0 THB</span>
-            </el-row>
-            <el-row>
-                <span style="font-weight: bold;margin-left:40%;">Holding profits +0  THB</span>
             </el-row>
             <el-row>
                 <el-col :span="11">
@@ -60,7 +57,7 @@
                     border
                     height="400">
                     <el-table-column
-                        prop="transactionid"
+                        type="index"
                         label="No."
                         >
                     </el-table-column>
@@ -105,7 +102,7 @@ export default {
             myChart: {},
             pieData: [
                 {
-                value: 0,
+                value: 100000 ,
                 name: "Avilable_money"
                 },
                 {
@@ -121,7 +118,7 @@ export default {
     },
 
     mounted() {
-    //this.getNowTime();
+    this.getNowTime();
     this.initDate(); //数据初始化
     this.initEcharts();
     },
