@@ -1,5 +1,6 @@
 from calendar import c
 from configparser import MAX_INTERPOLATION_DEPTH
+from copyreg import constructor
 from symtable import Symbol
 from turtle import update
 import yfinance as yf
@@ -21,6 +22,7 @@ import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import pandas as pd
 
 
 
@@ -621,6 +623,13 @@ def SellStock():
     accountid = data['accountid']
     print(accountid)
     income = data['cost']
+    # get profit 
+    profitsql =f"SELECT profit FROM stockproject.accounts where AccountId = {accountid}"
+    userprofitdatas = db.query_data(profitsql)
+    userprofitdata = userprofitdatas[0]
+    userprofit = userprofitdata['profit']
+    print(userprofit)
+
     #getbuyrecorder 
     buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and ticker = '{data['ticker']}' and action = 'buy' and shares > 0 ORDER BY timestamp"
     buyrecorders = db.query_data(buysql)
@@ -635,6 +644,17 @@ def SellStock():
            
             income = currentprice * volume
             print("inome:"+str(income))
+
+                               
+            buyprice = buyrecorder['shares'] * buyrecorder['stockprice']
+            
+            profit = income - buyprice
+
+            print(str(profit))
+            userprofit +=profit
+           
+            print("profit"+str(userprofit))
+
             id = buyrecorder['transactionid']
             print(id)
             newcost = shares * buyrecorder['stockprice']
@@ -661,6 +681,14 @@ def SellStock():
             income = buyrecorder['shares']  * currentprice
             print(buyrecorder['shares'])
             print("inome:"+str(income))
+                   
+            buyprice = buyrecorder['shares'] * buyrecorder['stockprice']
+            
+            profit = income - buyprice
+            print(str(profit))
+            userprofit +=profit
+            
+            print("profit"+str(userprofit))
             id = buyrecorder['transactionid']
             print(id)
             #update record 
@@ -697,6 +725,9 @@ def SellStock():
     for order in orderinfos:
         shares -= order["shares"]
 
+
+    updatdateprofitsql = f"UPDATE `stockproject`.`accounts` SET `profit` = '{userprofit}' WHERE (`AccountId` = '{accountid}');"
+    db.insert_or_update_data(updatdateprofitsql)
     result = {
         'Balance':balance,
         'Order':ordercount,
@@ -787,6 +818,75 @@ def GetPurchaseinfor():
     }
     print(result)
     return result
+
+@app.route("/gethistorydata", methods=['POST'])
+def GetHistoryData():
+    period = request.json.get('period')
+    tickername = request.json.get('ticker')
+    print(period)
+    print(tickername)
+
+    tickerdata = yf.Ticker(tickername)
+    data = tickerdata.history(period = f"{period}")
+    data = data.sort_index()
+    print(data)
+    print(data.to_dict())
+    dictdata = data.to_dict()
+    keydata = dictdata.keys()
+    print(keydata)
+    opendatas = dictdata['Open']
+    keys = opendatas.keys()
+
+    hightdatas = dictdata['High']
+
+    lowdatas = dictdata['Low']
+
+    closedatas = dictdata['Close']
+
+    volumedatas = dictdata['Volume']
+
+
+    returndata = []
+    for key in  keys:
+        time = key
+        timestring = str(pd.to_datetime(time))
+        print(type(timestring))
+        splitresult = timestring.split()
+        time  = splitresult[0]
+    
+        #open 
+        opendata =  opendatas[key]
+        print(opendata)
+
+
+        hightdata =  hightdatas[key]
+        print(hightdata)
+
+        lowtdata =  lowdatas[key]
+        print(lowtdata)
+
+        closedata =  closedatas[key]
+        print(closedata)
+
+
+        volumedata =  volumedatas[key]
+        print(volumedata)
+
+
+        rowdata = {
+        'time':time,
+        'open':opendata,
+        'high':hightdata,
+        'low':lowtdata,
+        'close':closedata,
+        'volume':volumedata
+         }
+     
+        print(rowdata)
+         #time 
+        returndata.append(rowdata)
+    print(returndata)
+    return jsonify(returndata)   
 
 
 if __name__ == '__main__':

@@ -623,6 +623,8 @@ export default {
       AccountData: [],
       tableData2: [],
       inport: 0,
+      historytabledata:[]
+      
     };
   },
   computed: {
@@ -1021,6 +1023,15 @@ export default {
           console.log(res);
           this.tableData2 = res.data;
           this.isupdate = !this.isupdate;
+        });
+
+        var req2 = {
+          period : "5d",
+          ticker: tickerName,
+        }
+        axios.post("http://127.0.0.1:8088/gethistorydata", req2).then((res) => {
+          console.log(res);
+          this.historytabledata = res.data;      
         });
       });
 
