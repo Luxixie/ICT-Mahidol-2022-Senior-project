@@ -38,7 +38,7 @@
 
     <el-row style="padding-right: 3%;">
         <el-row class="box">
-            <span style="margin-left:2%;margin-top:1%">{{this.$route.params.industryName}}</span>
+            <span style="margin-left:6%;margin-top:2%; font-size:24px">{{this.$route.params.industryName}}</span>
         </el-row>
         <el-col :span="7" v-for="(item, index) in items"  :offset="1" style="margin-top: 2%;">
             <el-card :body-style="{ padding: '0px' }" style="margin-top: 5%; margin-bottom: 5%; background: #1f3d70;">
@@ -136,15 +136,8 @@
     border-radius: 30px;
     margin-top: 1%;
     margin-left: 3%;
-    width:20%;
+    width: 20%;
     height: 40px;
-}
-.el-dropdown-link {
-    cursor: pointer;
-    color: #000000;
-    font-weight: 700;
-    font-size: 20px;
-    margin-left: 10%;
 }
 </style>
 

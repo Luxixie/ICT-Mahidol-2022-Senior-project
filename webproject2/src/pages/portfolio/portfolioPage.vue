@@ -10,9 +10,11 @@
             <el-row>
                  <span style="font-size:xx-large;font-weight: bold;margin-left:40%">Holding profits</span>
             </el-row>
-             <el-row>
-                 <span style="font-size:xx-large;font-weight: bold;margin-left:43%;color: red">+0 THB</span>
+            <el-row>
+              <span :style="{ fontSize: 'xx-large', fontWeight: 'bold', marginLeft: '40%', color: profits > 0 ? 'red' : 'green' }">{{profits.toFixed(2) | numberWithCommas}} THB</span>
             </el-row>
+
+
             <el-row>
                 <el-col :span="11">
                     <el-row>
@@ -71,13 +73,10 @@
                         label="Vol">
                     </el-table-column>
                     <el-table-column
-                        prop="stockprice"
-                        label="Price">
+                        prop="average_stock_price"
+                        label="Avg.Price">
                     </el-table-column>
-                    <el-table-column
-                        prop="cost"
-                        label="Cost">
-                    </el-table-column>
+
                     </el-table>
             </el-col>
 
@@ -114,6 +113,7 @@ export default {
             pieName: [],
             myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
             tableData: [],
+            profits:'',
             }
     },
 
@@ -229,24 +229,31 @@ export default {
         }
         axios.post("http://127.0.0.1:8088/GetBalance",req).then((res) => {
             console.log(res)
-           
+            this.profits = parseFloat(res.data['profit'])
             this.avilablemoney = parseFloat(res.data['Balance'])
             console.log('test')
             console.log(this.avilablemoney)
+            console.log(this.profits)
+            
             axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
             console.log(res)
-            this.tableData = res.data
-            //计算当前所有持有股票的总价
-            
+            this.tableData = res.data.data
+
+            })
+
+            axios.post("http://127.0.0.1:8088/Gettotal",req).then((res) => {
+            //Calculate the total value of all shares currently held
+            var responseData = res.data;
+
             var totalstockcost = 0
-            this.tableData.forEach(data => {
+            responseData.forEach(data => {
                 totalstockcost += data['cost']
             });
             console.log(totalstockcost)
             this.usingstock = totalstockcost
 
             console.log(this.avilablemoney)
-           console.log(this.usingstock)        
+            console.log(this.usingstock)        
               this.pieData= [
                 {
                 value: this.avilablemoney,
@@ -260,7 +267,7 @@ export default {
                 ]
             console.log(this.pieData)
             this.initEcharts()
-        })
+            })
         })
         
           

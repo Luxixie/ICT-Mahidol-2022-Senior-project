@@ -107,23 +107,7 @@
             </el-dropdown>
           </el-col>
 
-          <el-col :span="4" :offset="1" class="box">
-          <el-dropdown @command="handleCommand">
-            <span class="el-dropdown-link">Financial Services<i class="el-icon-arrow-down el-icon--right"></i></span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="case52">Asset Management</el-dropdown-item>
-              <el-dropdown-item command="case54">Banks—Regional</el-dropdown-item>
-              <el-dropdown-item command="case56">Capital Markets</el-dropdown-item>
-              <el-dropdown-item command="case58">Insurance—Life</el-dropdown-item>
-              <el-dropdown-item command="case59">Insurance—Property & Casualty</el-dropdown-item>
-              <el-dropdown-item command="case60">Insurance—Reinsurance</el-dropdown-item>
-              <el-dropdown-item command="case62">Insurance Brokers</el-dropdown-item>
-              <el-dropdown-item command="case63">Insurance—Diversified</el-dropdown-item>
-              <el-dropdown-item command="case65">Financial Conglomerates</el-dropdown-item>
-              <el-dropdown-item command="case66">Credit Services</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </el-col>
+
         </el-row>
 
         <el-row :gutter="20" style="margin-top:1%">
@@ -202,6 +186,41 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
+
+        </el-row>
+
+        <el-row :gutter="20" style="margin-top:1%">
+          <el-col :span="4" :offset="1" class="box">
+          <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">Utilities<i class="el-icon-arrow-down el-icon--right"></i></span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="case142">Utilities—Independent Power Producers</el-dropdown-item>
+            <el-dropdown-item command="case143">Utilities—Renewable</el-dropdown-item>
+            <el-dropdown-item command="case144">Utilities—Regulated Water</el-dropdown-item>
+            <el-dropdown-item command="case145">Utilities—Regulated Electric</el-dropdown-item>           
+            <el-dropdown-item command="case146">Utilities—Regulated Gas</el-dropdown-item>
+            <el-dropdown-item command="case147">Utilities—Diversified</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          </el-col>
+
+          <el-col :span="4" :offset="1" class="box">
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">Financial Services<i class="el-icon-arrow-down el-icon--right"></i></span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="case52">Asset Management</el-dropdown-item>
+              <el-dropdown-item command="case54">Banks—Regional</el-dropdown-item>
+              <el-dropdown-item command="case56">Capital Markets</el-dropdown-item>
+              <el-dropdown-item command="case58">Insurance—Life</el-dropdown-item>
+              <el-dropdown-item command="case59">Insurance—Property & Casualty</el-dropdown-item>
+              <el-dropdown-item command="case60">Insurance—Reinsurance</el-dropdown-item>
+              <el-dropdown-item command="case62">Insurance Brokers</el-dropdown-item>
+              <el-dropdown-item command="case63">Insurance—Diversified</el-dropdown-item>
+              <el-dropdown-item command="case65">Financial Conglomerates</el-dropdown-item>
+              <el-dropdown-item command="case66">Credit Services</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-col>
           <el-col :span="4" :offset="1" class="box">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Real estate<i class="el-icon-arrow-down el-icon--right"></i></span>
@@ -219,22 +238,8 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
-        </el-row>
 
-        <el-row :gutter="20" style="margin-top:1%">
-          <el-col :span="4" :offset="1" class="box">
-          <el-dropdown @command="handleCommand">
-          <span class="el-dropdown-link">Utilities<i class="el-icon-arrow-down el-icon--right"></i></span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="case142">Utilities—Independent Power Producers</el-dropdown-item>
-            <el-dropdown-item command="case143">Utilities—Renewable</el-dropdown-item>
-            <el-dropdown-item command="case144">Utilities—Regulated Water</el-dropdown-item>
-            <el-dropdown-item command="case145">Utilities—Regulated Electric</el-dropdown-item>           
-            <el-dropdown-item command="case146">Utilities—Regulated Gas</el-dropdown-item>
-            <el-dropdown-item command="case147">Utilities—Diversified</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          </el-col>
+
         </el-row>
     
 
@@ -1012,25 +1017,22 @@ export default {
 
 <style >
 .el-dropdown-link {
-    cursor: pointer;
-    color: #000000;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 30px;
+  align-items: center;
+  color: #000000;
+  font-weight: 800;
+  font-size: 25px;
 
 
 }
 .box{
     background: #F5EFE0;
     border-radius: 30px;
-    width: 220px;
+    width: 20%;
     height: 100px;
-
-
-
 }
 
   .el-icon-arrow-down {
     font-size: 12px;
+    margin-left: 5px;
   }
 </style>

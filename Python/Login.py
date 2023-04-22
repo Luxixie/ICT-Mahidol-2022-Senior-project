@@ -334,11 +334,11 @@ def Savemessage():
 def GetStockByIndustry(name):
     print(name)
     returndatas = []
-    sql = f"SELECT * FROM stockproject.stock where industry = '{name}'"
+    sql = f"SELECT * FROM stockproject.company_profiles where industry = '{name}'"
     print (sql)
     datas = db.query_data(sql)
     for  data in datas:
-        symbol = data['symbol']
+        symbol = data['ticker']
         sql=f"SELECT * FROM stockproject.company_profiles where ticker = '{symbol}'"
         stockdatas = db.query_data(sql)
         
@@ -546,7 +546,7 @@ def GetBalance():
     data= request.json
     print(data)
     accountid = data['accountid']
-    sql = f"SELECT AccountId , Balance  FROM stockproject.accounts where AccountId = {accountid}"
+    sql = f"SELECT AccountId , Balance, profit FROM stockproject.accounts where AccountId = {accountid}"
     sqlresult = db.query_data(sql)
     print (sqlresult[0])
     if len(sqlresult)== 1:
@@ -746,6 +746,36 @@ def GetBuyHistory():
     buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
     datas = db.query_data(buysql)
     print(data)
+    # Create a dictionary to store ticker, total shares, and average stock price
+    ticker_dict = {}
+    
+    for row in datas:
+        ticker = row['ticker']
+        shares = row['shares']
+        stock_price = row['stockprice']
+        
+        if ticker not in ticker_dict:
+            # Add new ticker to dictionary with initial values
+            ticker_dict[ticker] = {'shares': shares, 'stock_price': stock_price}
+        else:
+            # Update existing ticker with new values
+            ticker_dict[ticker]['shares'] += shares
+            ticker_dict[ticker]['stock_price'] = ((ticker_dict[ticker]['stock_price'] * (ticker_dict[ticker]['shares'] - shares)) + (stock_price * shares)) / ticker_dict[ticker]['shares']
+    
+    # Convert dictionary to list of merged results
+    merged_results = [{'ticker': ticker, 'shares': ticker_dict[ticker]['shares'], 'average_stock_price': ticker_dict[ticker]['stock_price']} for ticker in ticker_dict]
+    print(merged_results)
+    return {'data': merged_results}
+
+
+@app.route('/Gettotal',methods=['POST'])
+def Gettaotal():
+    data= request.json
+    print(data)   
+    accountid = request.json['accountid']
+    buysql = f"SELECT * FROM stockproject.transaction where AccountId = {accountid} and action = 'Buy' and shares > 0 ORDER BY timestamp"
+    datas = db.query_data(buysql)
+    print(datas)
     return datas
 
 @app.route('/GetSellHistory',methods=['POST'])

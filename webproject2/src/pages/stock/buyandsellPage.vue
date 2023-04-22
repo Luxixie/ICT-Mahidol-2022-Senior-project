@@ -318,7 +318,7 @@
               </el-table-column>
               <el-table-column prop="Order" label="Order" align="center">
               </el-table-column>
-              <el-table-column prop="Inport" label="In Port" align="center">
+              <el-table-column prop="Inport" label="Volumes" align="center">
               </el-table-column>
             </el-table>
           </el-row>
@@ -334,7 +334,7 @@
             >
               <el-table-column type="index" label="No." width="180">
               </el-table-column>
-              <el-table-column prop="shares" label="Vol"> </el-table-column>
+              <el-table-column prop="shares" label="Volumes"> </el-table-column>
               <el-table-column prop="stockprice" label="Price">
               </el-table-column>
               <el-table-column prop="cost" label="Cost"> </el-table-column>
@@ -706,10 +706,9 @@ export default {
           type: "category",
           data: [
             "2022/12/16",
-            "2022/12/17",
-            "2022/12/18",
-            "2022/12/19",
-            "2022/12/20",
+            "2022/12/16",
+            "2022/12/16",
+            "2022/12/16",
           ],
         },
         yAxis: {
