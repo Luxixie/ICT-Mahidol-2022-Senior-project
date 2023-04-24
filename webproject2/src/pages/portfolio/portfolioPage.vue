@@ -179,7 +179,7 @@ export default {
             type: "pie",
             label: {
               show: true,
-              formatter: " {c}:{d}" // b代表名称，c代表对应值，d代表百分比
+              formatter: "{c}" // b represents the name, c represents the corresponding value, and d represents the percentage
             },
             radius: "50%", //饼图半径
             data: this.pieData
