@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :offset="9" style="margin-top: 5%;">
-            <section class="container">
+            <section class="container3">
             <!--questionBox-->
             <div class="questionBox" id="app">
 
@@ -245,7 +245,7 @@ $primary_color: #3D5AFE;
     transition-duration: $trans_duration/2;
 }
 
-.container {
+.container3 {
     margin: 0 0.5rem;
 }
 

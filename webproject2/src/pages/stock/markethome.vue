@@ -37,7 +37,7 @@
     </el-row>
     <el-row style="margin-top:1%;margin-left:2%; margin-right:2%">
         <el-row :gutter="20" >
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Communication Services<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -51,7 +51,7 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
             <el-dropdown  @command="handleCommand">
             <span class="el-dropdown-link">Consumer Cyclical<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
@@ -76,7 +76,7 @@
             </el-dropdown>
           </el-col>
 
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">Consumer Defensive<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
@@ -92,7 +92,7 @@
             </el-dropdown>
           </el-col>
 
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">Energy<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
@@ -111,7 +111,7 @@
         </el-row>
 
         <el-row :gutter="20" style="margin-top:1%">
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Healthcare<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -122,7 +122,7 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown  @command="handleCommand">
           <span class="el-dropdown-link">Industrials<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -154,7 +154,7 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown  @command="handleCommand">
           <span class="el-dropdown-link">Technology<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -170,7 +170,7 @@
             </el-dropdown-menu>
           </el-dropdown>
           </el-col>
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Basic Materials<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -190,7 +190,7 @@
         </el-row>
 
         <el-row :gutter="20" style="margin-top:1%">
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Utilities<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -204,7 +204,7 @@
           </el-dropdown>
           </el-col>
 
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">Financial Services<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown">
@@ -221,7 +221,7 @@
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
-          <el-col :span="4" :offset="1" class="box">
+          <el-col :span="4" :offset="1" class="box1">
           <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">Real estate<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
@@ -1024,7 +1024,7 @@ export default {
 
 
 }
-.box{
+.box1{
     background: #F5EFE0;
     border-radius: 30px;
     width: 20%;

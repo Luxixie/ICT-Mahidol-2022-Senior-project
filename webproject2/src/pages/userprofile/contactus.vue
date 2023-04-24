@@ -34,12 +34,9 @@
         <h3 style="margin-top:3%;margin-left:3%">Contact Us</h3>
         <h3 style="margin-top:3%;margin-left:3%">We can help. Our team will give you the beat sugesstion! Leave you idea and problem.</h3>
 
-        <el-form  :label-position="labelPosition" label-width="80px" :model="form">
-            <el-form-item label="Name:">
-                <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item label="Email:">
-                <el-input v-model="form.email"></el-input>
+        <el-form  :label-position="labelPosition" label-width="90px" :model="form">
+            <el-form-item label="Account ID:">
+                <el-input v-model="form.id"></el-input>
             </el-form-item>
             <el-form-item label="Message:">
                 <el-input type="textarea" v-model="form.message"></el-input>
@@ -71,7 +68,7 @@ export default {
             id: 1,
             name: 'Mr. Viphob Lertkulthum',
             description: 'ID: 6288186, from Computer Network',
-            image:require("../userprofile/image/yyq.png")
+            image:require("../userprofile/image/VIPHOB.png")
             
             },
             {
@@ -91,12 +88,10 @@ export default {
     },
     methods: {
         submitForm() {
-            console.log('Name: ', this.form.name)
-            console.log('Email: ', this.form.email)
+            console.log('userid: ', this.form.id)
             console.log('Message: ', this.form.message)
             var message = {
-                Name: this.form.name,
-                Email:this.form.email,
+                userid: this.form.id,
                 Message:this.form.message
             }
             axios.post("http://127.0.0.1:8088/savemessage",message).then((res) => {

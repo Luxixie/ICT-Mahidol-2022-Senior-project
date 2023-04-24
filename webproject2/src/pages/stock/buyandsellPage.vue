@@ -638,7 +638,9 @@ export default {
       tableData2: [],
       inport: 0,
       historytabledata:[],
-      period:"5d"
+      period:"5d",
+      Candlechartdate:[],
+      candleChartdata:[]
       
     };
   },
@@ -704,26 +706,15 @@ export default {
       let option2 = {
         xAxis: {
           type: "category",
-          data: [
-            "2022/12/16",
-            "2022/12/16",
-            "2022/12/16",
-            "2022/12/16",
-          ],
+          data: this.Candlechartdate,
         },
         yAxis: {
-          type: "value",
+       
         },
         series: [
           {
             type: "candlestick",
-            data: [
-              [2412.33, 2434.3, 2411.68, 2442.68],
-              [2433.89, 2431.04, 2424.06, 2440.1],
-              [2432.04, 2416.43, 2407.65, 2432.72],
-              [2416.93, 2416.93, 2407.7, 2430.57],
-              [2417.63, 2417.29, 2405.08, 2425.93],
-            ],
+            data: this.candleChartdata,
             itemStyle: {
               normal: {
                 color: "#f7a35c",
@@ -945,7 +936,30 @@ export default {
       console.log(period)
         axios.post("http://127.0.0.1:8088/gethistorydata", req2).then((res) => {
           console.log(res);
-          this.historytabledata = res.data;      
+          this.historytabledata = res.data; 
+           console.log(res);
+
+           var candledate = [];
+           var candledata = [];
+
+           this.historytabledata.forEach(history => {
+             console.log(history)
+             var historydata = [];
+             candledate.push(history['time'])
+
+             //data 
+            historydata.push(history["open"])
+            historydata.push(history["close"])
+            historydata.push(history["low"])
+            historydata.push(history["high"])
+
+            candledata.push(historydata)
+           }); 
+           console.log(candledate)
+           console.log(candledata)
+           this.candleChartdata = candledata
+           this.Candlechartdate = candledate
+            this.createCandleChart();     
         });
     },
   },
@@ -993,7 +1007,7 @@ export default {
         console.log(this.chartmax);
         console.log(this.chartmin);
         this.initChart();
-        this.createCandleChart();
+       
         var id = this.$store.state.accountid;
         console.log(id);
         var tickerName = this.$route.params.tickerName;
@@ -1033,7 +1047,29 @@ export default {
         }
         axios.post("http://127.0.0.1:8088/gethistorydata", req2).then((res) => {
           console.log(res);
-          this.historytabledata = res.data;      
+          this.historytabledata = res.data;  
+           var candledate = [];
+           var candledata = [];
+
+           this.historytabledata.forEach(history => {
+             console.log(history)
+             var historydata = [];
+             candledate.push(history['time'])
+
+             //data 
+            historydata.push(history["open"])
+            historydata.push(history["close"])
+            historydata.push(history["low"])
+            historydata.push(history["high"])
+
+            candledata.push(historydata)
+           }); 
+           console.log(candledate)
+           console.log(candledata)
+           this.candleChartdata = candledata
+           this.Candlechartdate = candledate
+            this.createCandleChart();
+           
         });
       });
 

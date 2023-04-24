@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="24" class="container">
+      <el-col :span="24" class="container1">
                 <img src="./imges/backgroud.png" class="image" />
            
         </el-col>
@@ -71,7 +71,7 @@ export default {
   height: 150px;
   border-radius: 100px;
 }
-.container {
+.container1 {
     width: 100%;
     height: 350px;
 }

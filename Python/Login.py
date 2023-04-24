@@ -63,12 +63,14 @@ def addNewUser():
     bod = request.json.get('bod'),
     email = request.json.get('email'),
     password = request.json.get('password'),
+    currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print(firstname)
     print(lastname)
     print(region)
     print(bod)
     print(email)
     print(password)
+    print(currentime)
     searchsql= f"SELECT * FROM stockproject.accounts where Email = '{email[0]}'"
     print(searchsql)
     searchresult = db.query_data(searchsql)
@@ -77,7 +79,7 @@ def addNewUser():
         return json_result
     
 
-    sql = f"INSERT INTO `stockproject`.`accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `Password`, `LoginToken`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '{bod[0]}', '{email[0]}', '{password[0]}', 'zxcvbnmasdfghjklqwertyuiopasd');"
+    sql = f"INSERT INTO `stockproject`.`accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `Password`, `LoginToken`,`timestamp`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '{bod[0]}', '{email[0]}', '{password[0]}', 'zxcvbnmasdfghjklqwertyuiopasd','{currentime}');"
     db.insert_or_update_data(sql)
     json_result = {"state": 1, "vData":{"token":"asdasdasdasdad","name":"admin"}}
     return jsonify(json_result)
@@ -298,7 +300,7 @@ def forgetpassword(email):
     print(email)
 
 
-    fromaddr = 'StockPlentyoffice@gmail.com'
+    fromaddr = 'stockplentyoffice@gmail.com'
     toaddr = email
     subject = 'Reset Password'
     body = f'Dear User,\n\nPlease click this link to reset your password.\n\nLink: http://localhost:8080/newpassword/{email} \n\nThank you for using our service.\n\nBest Regards,\nStockPlenty'
@@ -308,8 +310,8 @@ def forgetpassword(email):
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
 
-    username = 'StockPlentyoffice@gmail.com'
-    password = 'blnouavopulnhgxt'
+    username = 'stockplentyoffice@gmail.com'
+    password = 'ohywriuejqzdghsx'
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
@@ -325,7 +327,8 @@ def forgetpassword(email):
 def Savemessage():
     datas= request.json
     print(datas)
-    sql = f"INSERT INTO `stockproject`.`Savemessage` (`Name`, `Email`, `Message`) VALUES ('{datas['Name']}', '{datas['Email']}', '{datas['Message']}')"
+    currentime  = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+    sql = f"INSERT INTO `stockproject`.`Savemessage` (`AccountId`, `timestamp`, `Message`) VALUES ('{datas['userid']}', '{currentime}', '{datas['Message']}')"
     datas = db.insert_or_update_data(sql)
     print(datas)
     return jsonify(status = "Success")
@@ -755,15 +758,19 @@ def GetBuyHistory():
         stock_price = row['stockprice']
         
         if ticker not in ticker_dict:
+            msft = yf.Ticker(f"{ticker}")
+            current = round(msft.fast_info.last_price, 2)
             # Add new ticker to dictionary with initial values
-            ticker_dict[ticker] = {'shares': shares, 'stock_price': stock_price}
+            ticker_dict[ticker] = {'shares': shares, 'stock_price': stock_price,'currentprice': current}
         else:
+            msft = yf.Ticker(f"{ticker}")
+            current = round(msft.fast_info.last_price, 2)
             # Update existing ticker with new values
             ticker_dict[ticker]['shares'] += shares
             ticker_dict[ticker]['stock_price'] = ((ticker_dict[ticker]['stock_price'] * (ticker_dict[ticker]['shares'] - shares)) + (stock_price * shares)) / ticker_dict[ticker]['shares']
     
     # Convert dictionary to list of merged results
-    merged_results = [{'ticker': ticker, 'shares': ticker_dict[ticker]['shares'], 'average_stock_price': ticker_dict[ticker]['stock_price']} for ticker in ticker_dict]
+    merged_results = [{'ticker': ticker, 'shares': ticker_dict[ticker]['shares'], 'currentprice':format(ticker_dict[ticker]['currentprice'], '.2f'),'average_stock_price': format(ticker_dict[ticker]['stock_price'], '.2f')}for ticker in ticker_dict]
     print(merged_results)
     return {'data': merged_results}
 

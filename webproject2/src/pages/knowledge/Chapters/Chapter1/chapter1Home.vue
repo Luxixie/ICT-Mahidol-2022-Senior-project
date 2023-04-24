@@ -150,6 +150,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
 .image {
     max-width: 100%;
     max-height: 100%;

@@ -53,11 +53,12 @@
                 <div class="echart" id="mychart" :style="myChartStyle"></div>
             </el-col>
             <el-col :span="11" :offset="1" style="background:#D9D9D9;;float:right;border-radius: 20px;">
+              <span style="font-size:25px; margin-left:5%;">Stock holdings</span>
                 <el-table
                     :data="tableData"
                     style="width: 100%"
                     border
-                    height="400">
+                    height="360">
                     <el-table-column
                         type="index"
                         label="No."
@@ -71,6 +72,10 @@
                     <el-table-column
                         prop="shares"
                         label="Vol">
+                    </el-table-column>
+                    <el-table-column
+                        prop="currentprice"
+                        label="Current Price">
                     </el-table-column>
                     <el-table-column
                         prop="average_stock_price"
@@ -174,7 +179,7 @@ export default {
             type: "pie",
             label: {
               show: true,
-              formatter: " {c}" // b代表名称，c代表对应值，d代表百分比
+              formatter: " {c}:{d}" // b代表名称，c代表对应值，d代表百分比
             },
             radius: "50%", //饼图半径
             data: this.pieData
@@ -238,6 +243,7 @@ export default {
             axios.post("http://127.0.0.1:8088/GetBuyHistory",req).then((res) => {
             console.log(res)
             this.tableData = res.data.data
+
 
             })
 
