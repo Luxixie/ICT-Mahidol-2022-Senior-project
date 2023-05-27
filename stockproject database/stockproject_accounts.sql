@@ -31,10 +31,11 @@ CREATE TABLE `accounts` (
   `Email` varchar(45) NOT NULL,
   `Password` varchar(45) NOT NULL,
   `LoginToken` varchar(45) NOT NULL,
-  `Balance` float NOT NULL DEFAULT '20000',
-  `profit` float NOT NULL,
+  `Balance` float NOT NULL DEFAULT '100000',
+  `profit` float NOT NULL DEFAULT '0',
+  `timestamp` varchar(100) NOT NULL,
   PRIMARY KEY (`AccountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'admin','admin','test','2023-02-06','test@hotmail.com','admin123','zxcvbnmasdfghjklqwertyuiop',20000,0),(2,'test1','test2','TH','2023-02-07','test@123.com','123454321','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(9,'','','','2023-02-07','123@qq.com','123456789o0p','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(10,'','','','2023-02-07','345@qq.com','11234567','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(11,'test4','test4','AF','2023-02-07','test4@qq.com','13245?!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(12,'234sd','12ges','','2023-02-07','123@qq.com','123456?!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(13,'1223333','ertg','','2023-02-07','123@123.com','22!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(14,'12','2e','','2023-02-07','1234@ca.com','12!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(15,'sa','1d','','2023-02-07','123@qq.com','1!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(16,'12e','d','','2023-02-07','123@qq.com','2e!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(17,'ww','ww','','2023-02-07','33@qq.com','ww1@','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(18,'sdd','ss1','','2023-02-07','1234@qq.com','1!2','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(19,'s','1','','2023-02-07','444@qq.com','11!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(20,'vcjs','22s','','2023-02-07','1224@qq.com','74!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(21,'xcvhgj','hbhsb','TH','2023-02-07','653@example.com','12334!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(22,' fdr','gsg','','2023-02-07','q2w@xx.com','123!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(23,'test5','test5','DZ','2023-02-14','test5@example.com','123!','zxcvbnmasdfghjklqwertyuiopasd',20000,0),(24,'xixi','XIE','CN','2023-03-13','2906848483@qq.com','njbhgv!A1','zxcvbnmasdfghjklqwertyuiopasd',19448.6,0),(25,'n','nnn','','2026-04-28','2906848483@qq.com','njbhgv!A1','zxcvbnmasdfghjklqwertyuiopasd',20000,0);
+INSERT INTO `accounts` VALUES (1,'admin','admin','test','2023-02-06','test@hotmail.com','Admin123?','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(2,'test1','test2','TH','2023-02-07','test@123.com','123454321','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(24,'xixi','XIE','CN','2023-03-13','2906848483@qq.com','njbhgv!A1','zxcvbnmasdfghjklqwertyuiopasd',84710,0,''),(25,'n','nnn','','2026-04-28','2906848483@qq.com','njbhgv!A1','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(26,'dd','ww','CN','2020-04-28','112233@qq.com','dscdc13','zxcvbnmasdfghjklqwertyuiopasd',52610,0,''),(27,'d','s','CN','2020-04-27','sxac@qq.com','sddsn12','zxcvbnmasdfghjklqwertyuiopasd',99110,0,''),(28,'Acccc','Bccccc','AF','2020-04-07','Acccc@qq.com','assjA1?11','zxcvbnmasdfghjklqwertyuiopasd',74606,0,''),(29,'Acccc','Bccccc','AF','2020-04-07','Acccc@qq.com','assjA1?11','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(30,'saafs','dsvadf','AL','2023-04-02','saafs@qq.com','Asadnjeda1!','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(31,'njbhgv','jbkhgvb','AF','2023-04-17','njbhgv@qq.com','Adsmknjkbhf!1','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(32,'dsfe','dswfe','AL','2023-03-26','dsfe@qq.com','dssdA1!1w','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(33,'dsdk','sejlw','AL','2023-04-02','dsdk@qq.com','Bbjuoaeiqw!1','zxcvbnmasdfghjklqwertyuiopasd',100000,0,''),(42,'yyq2','YANG','CN','2018-04-16','yyq2@qq.com','sdnA!1ww','zxcvbnmasdfghjklqwertyuiopasd',99802,0,'2023-04-23 11:07:36'),(45,'cfffcdx','sdefgb','AR','2023-05-28','2eew3@qq.com','rdsgshr1!Q','zxcvbnmasdfghjklqwertyuiopasd',100000,0,'2023-05-01 23:36:44');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-09 14:32:15
+-- Dump completed on 2023-05-27 10:10:54

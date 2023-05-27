@@ -16,32 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Quiz_review`
+-- Table structure for table `Savemessage`
 --
 
-DROP TABLE IF EXISTS `Quiz_review`;
+DROP TABLE IF EXISTS `Savemessage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Quiz_review` (
-  `quiz_review id` int NOT NULL AUTO_INCREMENT,
-  `Time` varchar(100) NOT NULL,
-  `chapter_id` int NOT NULL,
-  `Score` int NOT NULL,
+CREATE TABLE `Savemessage` (
+  `SavemessageId` int NOT NULL AUTO_INCREMENT,
   `AccountId` int NOT NULL,
-  PRIMARY KEY (`quiz_review id`),
-  KEY `chapter_id_idx` (`chapter_id`),
-  KEY `accountid_idx` (`AccountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `timestamp` varchar(100) NOT NULL,
+  `Message` varchar(1000) NOT NULL,
+  PRIMARY KEY (`SavemessageId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Quiz_review`
+-- Dumping data for table `Savemessage`
 --
 
-LOCK TABLES `Quiz_review` WRITE;
-/*!40000 ALTER TABLE `Quiz_review` DISABLE KEYS */;
-INSERT INTO `Quiz_review` VALUES (9,'2023-03-20 19:57:10.382196',1,2,1),(41,'2023-03-23 21:06',4,0,1),(42,'2023-03-23 21:07:15',4,4,1),(43,'2023-03-24 14:33:18',2,0,1),(45,'2023-04-12 16:30:34',2,0,2),(46,'2023-04-12 16:35:18',3,0,2),(57,'2023-04-23 11:12:42',2,3,42);
-/*!40000 ALTER TABLE `Quiz_review` ENABLE KEYS */;
+LOCK TABLES `Savemessage` WRITE;
+/*!40000 ALTER TABLE `Savemessage` DISABLE KEYS */;
+INSERT INTO `Savemessage` VALUES (1,0,'','dxccm s'),(2,0,'','ss'),(3,0,'','ss'),(4,0,'','sd'),(5,0,'','sd'),(6,1,'2023-04-23 10:46:41','edcq');
+/*!40000 ALTER TABLE `Savemessage` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-27 10:10:53
+-- Dump completed on 2023-05-27 10:10:54

@@ -28,7 +28,7 @@ CREATE TABLE `watchlist` (
   `ticker` varchar(45) NOT NULL,
   `timestamp` varchar(100) NOT NULL,
   PRIMARY KEY (`watchlistid`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `watchlist` (
 
 LOCK TABLES `watchlist` WRITE;
 /*!40000 ALTER TABLE `watchlist` DISABLE KEYS */;
-INSERT INTO `watchlist` VALUES (19,24,'CCET.BK','2023-04-06 23:13:38');
+INSERT INTO `watchlist` VALUES (19,24,'CCET.BK','2023-04-06 23:13:38'),(21,1,'CRC.BK','2023-04-10 16:41:58'),(22,28,'CBG.BK','2023-04-12 15:35:43'),(23,42,'AQUA.BK','2023-04-23 11:09:52'),(24,24,'M.BK','2023-04-24 13:36:55');
 /*!40000 ALTER TABLE `watchlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-09 14:32:14
+-- Dump completed on 2023-05-27 10:10:53
