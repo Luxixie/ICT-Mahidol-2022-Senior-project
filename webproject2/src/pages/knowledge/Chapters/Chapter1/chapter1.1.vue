@@ -69,7 +69,6 @@ export default {
       }
   },
   created(){
-            //检查学习记录
       var userid = this.$store.state.accountid;
       var chapterid = 1;
       var subchapterindex = 1;

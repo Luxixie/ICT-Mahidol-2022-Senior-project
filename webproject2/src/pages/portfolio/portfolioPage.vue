@@ -158,18 +158,15 @@ export default {
       }
     },
     initEcharts() {
-      // 饼图
-
       const option = {
         legend: {
-          // 图例
+         
           data: this.pieName,
           right: "10%",
           top: "90%",
           orient: "vertical"
         },
         title: {
-          // 设置饼图标题，位置设为顶部居中
           text: "Balance Proportion",
           top: "8%",
           left: "center"
@@ -179,9 +176,9 @@ export default {
             type: "pie",
             label: {
               show: true,
-              formatter: "{c}" // b represents the name, c represents the corresponding value, and d represents the percentage
+              formatter: "{c}" //c represents the corresponding value
             },
-            radius: "50%", //饼图半径
+            radius: "50%", 
             data: this.pieData
           }
         ]
@@ -200,12 +197,11 @@ export default {
       };
       this.myChart = echarts.init(document.getElementById("mychart"));
       this.myChart.setOption(option);
-      //随着屏幕大小调节图表
       window.addEventListener("resize", () => {
         this.myChart.resize();
       });
-
     },
+
     Gobuyandsell(){
           this.$router.push('/markethome')
     },

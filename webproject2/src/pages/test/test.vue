@@ -74,7 +74,7 @@
 
                         <!--resultTitleBlock-->
                         <h2 class="title">
-                            You did {{ (score() > 7 ? 'an amazing' : (score()< 4 ? 'a poor' : 'a good')) }} job! </h2>
+                            You did {{ (score() > 8 ? 'an amazing' : (score()< 4 ? 'a poor' : 'a good')) }} job! </h2>
                                 <p class="subtitle">
                                     Total score: {{ score() }} / {{ quiz.questions.length }}
                                 </p>

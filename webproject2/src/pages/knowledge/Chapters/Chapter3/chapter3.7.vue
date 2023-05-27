@@ -16,7 +16,7 @@
                 <el-button  @click="Goback" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Back</el-button>
             </el-col>
             <el-col :span="12" style="text-align: right; " >
-                <el-button @click="Gotest" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Done</el-button>
+                <el-button @click="Gotest" type="warning" style="color: black; font-size:25px; border-radius: 50px; width:150px;height:60px" >Gotest</el-button>
             </el-col>
         </el-row>
 

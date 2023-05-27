@@ -276,7 +276,6 @@ export default {
           });
           return false;
         }
-
         // check the number
         if (!/\d/.test(this.form.password)) {
           //console.log("Passwords do not include number");
@@ -285,7 +284,6 @@ export default {
           });
           return false;
         }
-
         // check the symbol
         if (!/[!@#$%^&*(),.?":{}|<>]/g.test(this.form.password)) {
           //console.log("Passwords do not include symbol");
@@ -294,7 +292,6 @@ export default {
           });
           return false;
         }
-
         // Check whether it contains at least one uppercase letter and one lowercase letter
         if (
           !/[a-z]/g.test(this.password) ||
@@ -309,7 +306,6 @@ export default {
           );
           return false;
         }
-
         // If all conditions are met, the password meets the requirements
         return true;
       } else {

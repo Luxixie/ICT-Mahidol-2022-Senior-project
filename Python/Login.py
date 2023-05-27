@@ -98,9 +98,6 @@ def edituser():
     print(region)
     print(bod)
     print(email)
-    ##sql = f"UPDATE stockproject SET `accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `LoginToken`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '2023-2-7', '{email[0]}', 'zxcvbnmasdfghjklqwertyuiopasd' WHERE AccountId = {accountid[0]};"
-    ##sql = f"UPDATE `stockproject`.`accounts` SET `FirstName` = '{firstname[0]}', `LastName` = '{lastname[0]}', `Region` = '{region[0]}', `BOD` = '{bod[0]}', `Email` = '{email[0]}', `LoginToken` = 'asdasdasdasd' WHERE (`AccountId` = '{accountid[0]}');"
-    ##sql = f"UPDATE `stockproject`.`accounts` (`FirstName`, `LastName`, `Region`, `Bod`, `Email`, `LoginToken`) VALUES ('{firstname[0]}', '{lastname[0]}', '{region[0]}', '{bod[0]}', '{email[0]}', 'zxcvbnmasdfghjklqwertyuiopasd' WHERE AccountId = {accountid[0]});"
     sql = f"UPDATE `stockproject`.`accounts` SET `FirstName` = '{firstname[0]}', `LastName` = '{lastname[0]}', `Region` = '{region[0]}', `Bod` = '{bod[0]}', `Email` = '{email[0]}', `LoginToken` = 'zxcvbnmasdfghjklqwertyuiopasd' WHERE `AccountId` = {accountid[0]};"
     print(sql)
     db.insert_or_update_data(sql)
@@ -126,17 +123,13 @@ def question(symbol):
     quizzes = []
     sql = f"SELECT  * FROM stockproject.Multiple_choice where chapterid = {symbol} ORDER by rand() limit 10 "
     datas = db.query_data(sql)
-   
     ##choice + answer
     for question in datas: 
         quiz = {
             "text":question["question"],
             "responses":[] 
-
         }
-        
         correctAnswer = question["answer"]
-        
         responsees = quiz["responses"]
         ##A
         A = question["option_a"]
@@ -146,7 +139,6 @@ def question(symbol):
         else:
             AnswerA= {"text":f"{A}"}
             responsees.append(AnswerA)
-        
          ##B
         B = question["option_b"]
         if correctAnswer == "B":
@@ -155,7 +147,6 @@ def question(symbol):
         else:
             AnswerB= {"text":f"{B}"}
             responsees.append(AnswerB)
-
          ##C
         C = question["option_c"]
         if correctAnswer == "C":
@@ -164,7 +155,6 @@ def question(symbol):
         else:
             AnswerC= {"text":f"{C}"}
             responsees.append(AnswerC)
-
          ##D
         D = question["option_d"]
         if correctAnswer == "D":
@@ -173,9 +163,7 @@ def question(symbol):
         else:
             AnswerD= {"text":f"{D}"}
             responsees.append(AnswerD)
-        
         quizzes.append(quiz)
-
     return quizzes
 
 
@@ -208,7 +196,8 @@ def createRecord():
          if len(datas) == 0:
             print("insert")
             
-            sql = f"INSERT INTO `stockproject`.`Learning_process` (`AccountId`, `chapter_id`, `subchapters_id`,`isLearned`,`Time`) VALUES ({userid},{chapterid},{subchapterindex},'1','{currentime}');"
+            sql = f"INSERT INTO `stockproject`.`Learning_process` (`AccountId`, `chapter_id`, `subchapters_id`,`isLearned`,`Time`) 
+            VALUES ({userid},{chapterid},{subchapterindex},'1','{currentime}');"
             print(sql)
             db.insert_or_update_data(sql)
          elif len(datas) == 1:
@@ -425,20 +414,13 @@ def marketinform(ticker):
 
     Shares = "{:.2f}".format(msft.fast_info.shares)
     print(Shares)
-
-
     ##Real-time chat info 
     data = msft.history(period = "1d",interval = "30m")
     print(data)
 
-
     listdata = data['Open'].values.tolist()
     print(listdata)
     print(len(listdata))
-
-    ##data = msft.history(period="1y")
-    ##json_str = json.dumps(data.to_dict())
-    ##print(json_str)
 
     sql = f"SELECT * FROM stockproject.company_profiles where ticker = '{ticker}'"
     company_profiles = db.query_data(sql)
@@ -584,7 +566,7 @@ def BuyStock():
     updatebalancesql = f"UPDATE stockproject.accounts SET Balance = {balance} where AccountId = {data['AccountId']}"
     db.insert_or_update_data(updatebalancesql)
     
-    
+
     #get ortder 
     getordersql = f"SELECT * FROM stockproject.transaction where AccountId = {data['AccountId']} and ticker = '{data['ticker']}'ORDER BY timestamp"
     orderinfos = db.query_data(getordersql)
@@ -655,7 +637,7 @@ def SellStock():
 
             print(str(profit))
             userprofit +=profit
-           
+
             print("profit"+str(userprofit))
 
             id = buyrecorder['transactionid']
@@ -684,13 +666,13 @@ def SellStock():
             income = buyrecorder['shares']  * currentprice
             print(buyrecorder['shares'])
             print("inome:"+str(income))
-                   
+
             buyprice = buyrecorder['shares'] * buyrecorder['stockprice']
-            
+
             profit = income - buyprice
             print(str(profit))
             userprofit +=profit
-            
+
             print("profit"+str(userprofit))
             id = buyrecorder['transactionid']
             print(id)
